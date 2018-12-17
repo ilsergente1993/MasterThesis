@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6880 64-bit) (preloaded format=pdflatex 2018.11.30)  3 DEC 2018 18:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6880 64-bit) (preloaded format=pdflatex 2018.11.30)  17 DEC 2018 16:02
 entering extended mode
 **./tesi.tex
 (tesi.tex
@@ -42,24 +42,51 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
  [1
 
-{C:/Users/Jey/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (tesi.aux) ) 
+{C:/Users/Jey/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 43.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
+ [2] [3] [4]
+Overfull \hbox (4.3895pt too wide) in paragraph at lines 133--137
+\OT1/cmr/m/n/10 Attualmente Sen-tinel si ap-pog-gia a Cos-mos, pi-attaforma che
+ con-sente la creazione
+ []
+
+[5]
+Overfull \hbox (5.74165pt too wide) in paragraph at lines 154--154
+[]\OT1/cmr/bx/n/12 Proposte per la va-l-u-tazione della rep-utazione dell'agent
+
+ []
+
+
+Overfull \hbox (5.74165pt too wide) in paragraph at lines 167--167
+[]\OT1/cmr/bx/n/12 Proposte per la va-l-u-tazione della rep-utazione dell'agent
+
+ []
+
+[6] [7] (tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 234 strings out of 492969
- 2638 string characters out of 3135852
- 60742 words of memory out of 3000000
- 4182 multiletter control sequences out of 15000+200000
- 8194 words of font info for 29 fonts, out of 3000000 for 9000
+ 259 strings out of 492969
+ 2996 string characters out of 3135852
+ 63742 words of memory out of 3000000
+ 4203 multiletter control sequences out of 15000+200000
+ 8502 words of font info for 30 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 23i,6n,18p,158b,187s stack positions out of 5000i,500n,10000p,200000b,50000s
-<
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb>
-Output written on tesi.pdf (1 page, 54462 bytes).
+ 23i,6n,19p,388b,233s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tesi.pdf (7 pages, 107559 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
+ 54 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
