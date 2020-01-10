@@ -59,7 +59,7 @@
 	Generalizing, we can assume that bigger is the network and better are all of those aspects we are striving to get, such as anonymisation, anti-sniffing and anti-crafting solutions and so on.\\
 	In this context another actor stands watching everything happening. He has a black hat, glasses and a cup of coffee close to him. His name is Mallory and, as we'll describe later, he's trying to find ways to use the system in a manner the system has not been designed. In other words, he's hacking the system. At least, tryin' to.\\
 	
-	It is natural that concepts as "consensus" and as "distributed" gain value and it's undoubted the main technology to manage such kind of situation is the blockchain in the Ethereum variant thanks to its contract mechanism.
+	It is natural that concepts as "consensus" and as "distributed" gain value and it's undoubted the main technology to manage such kind of situation is the blockchain in the Ethereum variant thanks to its contract mechanism.\\
 	
 
 	\subsection{concetti introduttivi}
@@ -72,20 +72,22 @@
 	
 	
 	\section{Players}
-	Chi sono i player, come e quando nascono, dettagli sui tempi di realizzazione, sul modello di business.
+	At the time we are writing, the main projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they have to reach the goal of building a distributed network based on blockchain, a discovering system, a crypt payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development, design. Furthermore it's 100\% open source, that for this kind of project is an important quality conditioning the users adoption.
+	Therefore, we decide to use Mysterium Project to implement our proof of concepts.\\
+	All of the projects have in common the idea behind the business model based on the users' abilities to sell their internet or to use a VPN service, depending on their needs and, accordingly, on their role into the network.
 	
-	\subsection{Mysterium}
+	
+	\subsection{Mysterium Network}
 	Mysterium Network è un progetto open source per la realizzazione di un network P2P decentralizzato che usa multi-hops, relays e micropagamenti integrati basati su token.	
 	
-	\subsubsection{Contesto}
+	\subsubsection{Context}
 	Nel contesto che si vuole descrivere si identificano due entità: un Client A che usa il servizio ed un Agent B che lo fornisce.	
-	\subsubsection{Gestione dei pagamenti}
+	\subsubsection{Payment Management}
 	Mysterium utilizza un Service Provider, basato su blackchain ethereum, che registra le intenzioni del Client A di pagare l’Agent B per il servizio che B offre ad A.	
 	
-	\subsubsection{Introduzione del concetto di promessa}
+	\subsubsection{Caratteristiche di una promessa P}
 	Una promessa è una quadrupla contenente i seguenti elementi:
 	
-	\subsubsection{Caratteristiche di una promessa P}
 	\begin{itemize}
 	\item P è firmato da A
 	\item Una promessa P può essere aggiornata in caso di prosecuzione del servizio
