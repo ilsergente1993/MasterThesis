@@ -16,6 +16,12 @@
 	
 	\begin{enumerate}
 			\item Introduction
+				\begin{enumerate}
+					\item The world, now (contesto del mondo, attacchi hacker, etc)
+					\item The needing of trust (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici)
+					\item trust is in ourself (come funziona blockchain, perchè in contesti come dvpn serve decentralizzazione e consenso)
+					\item 
+				\end{enumerate}
 			\item Analyze malicious contexts.
 				\begin{enumerate}
 					\item Basic sniffic (Wireshark, tcpdump)
@@ -38,7 +44,7 @@
 				\end{enumerate}
 			\item Design solutions for malicious context.
 				\begin{itemize}
-					\item invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: porte diverse?!?!?!)
+					\item invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: porte diverse?!?!?!) usare docker e script che invia a due o più docker container (che sono in locale su porte diverse) e compara i risultati
 					\item come precedente ma con la gestione degli hash invece che di tutto il dato
 				\end{itemize}
 			\item Design integration with reputation systems.
@@ -46,6 +52,7 @@
 	\end{enumerate}
 	
 	\section{Introduction}
+	
 	A virtual private network (VPN) allows to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. The data passed inside the tunnel is usually encrypted and this quality has been on the ground for its widely diffusion.\\
 	
 	Currently, there are many commercial solutions that allow users to have a private connection between their computer and the company servers across the world. In this way the user can have access to the internet resources from the country he prefers, skipping firewalls and other censure methods applied by some countries, such as China with the Great Fire Wall.\\
@@ -53,11 +60,13 @@
 	Starting by these problems, some open source projects have, lately, been born. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect to each others through a VPN. The Network provides technical solutions to avoid data sniffing or crafting, ensure identity anonymisation and secure payments.\\
 	
 	Before to deep into the technical aspects why such a projects haven't been developed before, it's important to understand the scenario and the needs of the actors. We use an example to explain it clearly.\\
-	Alice wants to freely surf on social networks but her country blocks the major of them. Technically speaking, what she needs is to exit into internet with an IP address from some other country where those service are not blocked, exactly what a VPN service provides, and she welcome to pay for it. 
+	Alice wants to freely surf on social networks but her country blocks the major of them. Technically speaking, what she needs is to exit into internet with an IP address coming from some countries where those service are not blocked, exactly what a VPN service provides, and she is in favour to pay for it. 
 	The exit point, in our example, is Bob who agrees to let Alice connect to him to exit into internet, and he wants to be paid for it.\\
 	The Networks presented before create the ideal network platform where a consumer, Alice, and a producer, Bob, can meet each other, deal with a contract and rate the opposite quality at the contract closing.\\
 	Generalizing, we can assume that bigger is the network and better are all of those aspects we are striving to get, such as anonymisation, anti-sniffing and anti-crafting solutions and so on.\\
 	In this context another actor stands watching everything happening. He has a black hat, glasses and a cup of coffee close to him. His name is Mallory and, as we'll describe later, he's trying to find ways to use the system in a manner the system has not been designed. In other words, he's hacking the system. At least, tryin' to.\\
+	
+	INTRODUZIONE DI CONSENSO 
 	
 	It is natural that concepts as "consensus" and as "distributed" gain value and it's undoubted the main technology to manage such kind of situation is the blockchain in the Ethereum variant thanks to its contract mechanism.\\
 	
