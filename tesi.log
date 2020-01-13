@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.11.2)  12 JAN 2020 18:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050) (preloaded format=pdflatex 2019.7.15)  10 JAN 2020 18:52
 entering extended mode
 **./tesi.tex
 (tesi.tex
-LaTeX2e <2019-10-01> patch level 1
-("C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls"
-Document Class: article 2019/08/27 v1.4j Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex/latex/base\size10.clo"
-File: size10.clo 2019/08/27 v1.4j Standard LaTeX file (size option)
+LaTeX2e <2018-12-01>
+(/usr/local/share/miktex-texmf/tex/latex/base/article.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/local/share/miktex-texmf/tex/latex/base/size10.clo
+File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -40,14 +40,18 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-4.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
 
-("C:\Program Files\MiKTeX 2.9\tex/latex/base\omscmr.fd"
+(/usr/local/share/miktex-texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+
+Overfull \hbox (8.97829pt too wide) in paragraph at lines 35--36
+\OT1/cmr/m/n/10 (ad esempio sostituzione di tutte le immagini con una immagine
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
@@ -55,9 +59,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
 [1
 
-{C:/Users/Jacopo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{/home/ja/.miktex/texmfs/data/pdftex/config/pdftex.map}]
 Underfull \hbox (badness 10000) in paragraph at lines 51--54
 
+ []
+
+
+Overfull \hbox (12.88939pt too wide) in paragraph at lines 55--61
+\OT1/cmr/m/n/10 The Networks presented before create the ideal network platform
+ where a consumer,
  []
 
 
@@ -66,82 +76,133 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--61
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+
+ []
+
+[2]
 Underfull \hbox (badness 10000) in paragraph at lines 66--72
 
  []
 
-[2] [3] [4] [5]
-Overfull \hbox (4.3895pt too wide) in paragraph at lines 166--170
-\OT1/cmr/m/n/10 Attualmente Sen-tinel si ap-pog-gia a Cos-mos, pi-attaforma che
- con-sente la creazione
+[3]
+Overfull \hbox (15.5562pt too wide) in paragraph at lines 120--121
+[]\OT1/cmr/m/n/10 PSC: Privatix Service Contract e usato per immagazzinare bal
+ance (depositare
+ []
+
+[4]
+Overfull \hbox (3.7784pt too wide) in paragraph at lines 140--141
+\OT1/cmr/m/n/10 Sybil ma cercano, con i sistemi sopra descritti, di limitare al
+ massimo le possibilita
+ []
+
+[5]
+Overfull \hbox (5.93584pt too wide) in paragraph at lines 155--160
+\OT1/cmr/m/n/10 ai servizi. C'e un meccanismo di guadagno di denaro in funzion
+e della reputazione. 
+ []
+
+
+Overfull \hbox (4.3895pt too wide) in paragraph at lines 167--171
+\OT1/cmr/m/n/10 Attualmente Sentinel si appoggia a Cosmos, piattaforma che cons
+ente la creazione
+ []
+
+
+Overfull \hbox (10.79692pt too wide) in paragraph at lines 167--171
+\OT1/cmr/m/n/10 di una blockchain decentralizzata di criptovaluta. Cosmos e co
+struito su Tendermin
  []
 
 [6]
-Overfull \hbox (5.74165pt too wide) in paragraph at lines 187--187
-[]\OT1/cmr/bx/n/12 Proposte per la va-l-u-tazione della rep-utazione dell'agent
-
- []
-
-[7]
-Overfull \hbox (5.74165pt too wide) in paragraph at lines 202--202
-[]\OT1/cmr/bx/n/12 Proposte per la va-l-u-tazione della rep-utazione dell'agent
-
- []
-
-[8]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 228.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 228.
-
-Underfull \hbox (badness 10000) in paragraph at lines 237--240
-
+Overfull \hbox (5.74165pt too wide) in paragraph at lines 188--188
+[]\OT1/cmr/bx/n/12 Proposte per la valutazione della reputazione dell'agent
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 242--244
-
+Overfull \hbox (14.46245pt too wide) in paragraph at lines 192--193
+\OT1/cmr/m/n/10 dell'agent. []E necessario avere delle risorse distribuite e di
+sponibili: potrebbero
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--246
+Overfull \hbox (13.4173pt too wide) in paragraph at lines 193--194
+[]\OT1/cmr/m/n/10 Dati duplicati: modifiche al client che implementa la possibi
+lita di connessione
+ []
 
+[7] [8]
+Overfull \hbox (5.74165pt too wide) in paragraph at lines 203--203
+[]\OT1/cmr/bx/n/12 Proposte per la valutazione della reputazione dell'agent
+ []
+
+
+Overfull \hbox (3.58467pt too wide) in paragraph at lines 217--219
+\OT1/cmr/bx/n/10 Aspetti negativi: \OT1/cmr/m/n/10 questa soluzione non e appl
+icabile in caso di connessioni
+ []
+
+
+Overfull \hbox (3.58467pt too wide) in paragraph at lines 219--223
+\OT1/cmr/bx/n/10 Aspetti negativi: \OT1/cmr/m/n/10 questa soluzione non e appl
+icabile in caso di connessioni
  []
 
 [9]
-Overfull \hbox (43.30646pt too wide) in paragraph at lines 254--255
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 229.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 229.
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--241
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 243--245
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
+
+ []
+
+[10]
+Overfull \hbox (43.30646pt too wide) in paragraph at lines 255--256
 []\OT1/cmr/m/n/10 http://www.naturalborncoder.com/virtualization/2014/10/17/und
 erstanding-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
-[10] (tesi.aux) ) 
+[11] (tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 277 strings out of 492453
- 3207 string characters out of 3129817
- 66443 words of memory out of 3000000
- 4704 multiletter control sequences out of 15000+200000
+ 263 strings out of 494857
+ 2961 string characters out of 3178526
+ 59676 words of memory out of 3000000
+ 3991 multiletter control sequences out of 15000+200000
  8848 words of font info for 31 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 25i,6n,19p,579b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb
->
-Output written on tesi.pdf (10 pages, 158943 bytes).
+ 0 hyphenation exceptions out of 8191
+ 23i,6n,19p,579b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/lo
+cal/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/sha
+re/miktex-texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/share/mikt
+ex-texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/share/miktex-texm
+f/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/share/miktex-texmf/fonts
+/type1/public/amsfonts/cm/cmr7.pfb></usr/local/share/miktex-texmf/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/local/share/miktex-texmf/fonts/type1/public/
+amsfonts/cm/cmti10.pfb>
+Output written on tesi.pdf (11 pages, 160559 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 82 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
