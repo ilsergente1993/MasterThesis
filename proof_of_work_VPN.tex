@@ -22,7 +22,7 @@
 	
 	\paragraph{Soluzione problema 2}
 	L'originalità della soluzione proposta è l'operazione di Proof of Work da far compiere al nuovo utente. Si propone come prova di lavoro che l'utente, prima di entrare attivamente a far parte della rete o durante la sua partecipazione, consumi della banda internet.\\
-	La Proof of Work, quindi, consiste nello sfruttare la sua banda internet per ottenere una risorsa internet, sulla quale viene verificata l'integrità, come descritto nella soluzione \textit{Dato Hash} proposta nella soluzione al problema 1.\\ 
+	La Proof of Work consiste quindi nello sfruttare la sua banda di rete per ottenere una risorsa internet, sulla quale viene verificata l'integrità, come descritto nella soluzione \textit{Dato Hash} del problema 1.\\ 
 	Più specificatamente, nel caso d'uso si identificano un Agent A, un Client C ed un nuovo utente X che vuole entrare nella rete e deve dimostrare \textit{la prova di lavoro}.\\
 	La situazione iniziale prevede una connessione tra A e C. Per verificare che A fornisca dato $d^A$ originale, C richiede a X di ottenere lo stesso dato $d^X$ e di eseguirne la funzione hash così da ottenere  $H(d^X)=h_1$. $h_1$ sarà restituito a C che ha già effettuato la stessa funzione hash su $d^A$ proveniente da A ed ha ottenuto $H(d^A) = h_2$.\\
 	Il test di integrità verifica che $h_1 = h_2$.\\
@@ -35,7 +35,7 @@
 	\paragraph{Considerazioni}
 	In un contesto di rete distribuita si possono ipotizzare $n$ attori nel ruolo di X e $n$ test di integrità che C effettua per verificare l'integrità del dato ottenuto da A. \textit{riferimento al consenso BFT}\\
 	Il risultato dei test condiziona la reputazione di ogni attore nel ruolo di $X$.\\
-	Si può ipotizzare l'applicazione della soluzione $m$ volte, tante quante sono le entità per cui effettuare la proof of work, e considere vincoli come tempo $t$ minimo di esecuzione della proof of work o la quantità minima di dati $q$ che $X$ deve ottenere su cui applicare la funzione hash.\\
+	Si può ipotizzare l'applicazione della soluzione $m$ volte, tante quante sono le entità per cui effettuare la proof of work, e considerare vincoli come tempo $t$ minimo di esecuzione della proof of work o la quantità minima di dati $q$ che $X$ deve ottenere su cui applicare la funzione hash.\\
 	
 	
 	Considerando una costo ipotetico $c$ associato al consumo di una quantità $q$ di dati per un'unità di tempo $t$ si può impostare una soglia $S = c*q*t$ superata la quale la proof of work si può considerare eseguita.\\

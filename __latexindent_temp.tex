@@ -4,27 +4,17 @@
 \title{VPN Decentralizzate}
 \author{Jacopo Federici}
 
-
-\usepackage{imakeidx}
-\makeindex
-
 \begin{document}
-	\maketitle	
-	\clearpage
+	
+	\maketitle
 	
 	\begin{abstract}
-		\textbf{Work structure}\\
-		
-		\textbf{Outline}\\
-		
-		\textbf{Goal}\\
 		
 	\end{abstract}
-	\clearpage
 	
-	\tableofcontents{}
-
-	\subsection{Note}
+	\section{Index}
+	
+	\subsection{Impostazione del lavoro}
 	parlare di:
 	\begin{itemize}
 		\item docker (cosa è, comandi base per fare cosa)
@@ -32,11 +22,52 @@
 		\begin{itemize}
 			\item openvpn
 			\item http://www.naturalborncoder.com/virtualization/2014/10/17/understanding-tun-tap-interfaces/
+		
 		\end{itemize}
 	\end{itemize}
 	
-	\textbf{Some text}
-	A virtual private network (VPN) allows to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. The data passed inside the tunnel is usually encrypted and this quality has been on the ground for its widely diffusion.\\\
+	
+	\begin{enumerate}
+			\item Introduction
+				\begin{enumerate}
+					\item the world, now (stato attuale, attacchi etc)
+					\item the needing of having privacy, what the world can offer (soluzioni e stato dell'arte)
+					\item just more, we are our trust (concetti di consenso, fiducia)
+					\item The world, now (contesto del mondo, attacchi hacker, etc)
+					\item The needing of trust (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici)
+					\item trust is in ourself (come funziona blockchain, perchè in contesti come dvpn serve decentralizzazione e consenso)
+				\end{enumerate}
+			\item Analyze malicious contexts.
+				\begin{enumerate}
+					\item Basic sniffic (Wireshark, tcpdump)
+					\item Craftberry, a demo tool
+					\begin{itemize}
+						\item liv 2: arp, vlan tagging
+						\item liv 3: ip, icmp
+						\item liv 4: tcp/udp
+						\begin{itemize}
+							\item copia x volte dei pacchetti (TCP/UDP)
+							\item gonfiamento dei pacchetti nei campi che poi verranno corretti dai check (TCP/UDP)
+							\item modifica del payload se in chiaro (TCP/UDP)
+							\item azione positiva sul payload (UDP), ad esempio cifratura
+						\end{itemize}
+						\item liv 5+: http/imap/dns/ntp/etc
+						\begin{itemize}
+							\item analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
+						\end{itemize}
+					\end{itemize}	
+				\end{enumerate}
+			\item Design solutions for malicious context.
+				\begin{itemize}
+					\item invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
+					\item come precedente ma con la gestione degli hash invece che di tutto il dato
+				\end{itemize}
+			\item Design integration with reputation systems.
+			
+	\end{enumerate}
+	
+	\section{Introduction}
+	A virtual private network (VPN) allows to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. The data passed inside the tunnel is usually encrypted and this quality has been on the ground for its widely diffusion.\\
 	
 	Currently, there are many commercial solutions that allow users to have a private connection between their computer and the company servers across the world. In this way the user can have access to the internet resources from the country he prefers, skipping firewalls and other censure methods applied by some countries, such as China with the Great Fire Wall.\\
 	There are many security concerns about those commercial solutions, such as the ability of the company to keep logs, inspect the traffic or sell statistic data obtained by the users.\\
@@ -49,80 +80,28 @@
 	Generalizing, we can assume that bigger is the network and better are all of those aspects we are striving to get, such as anonymisation, anti-sniffing and anti-crafting solutions and so on.\\
 	In this context another actor stands watching everything happening. He has a black hat, glasses and a cup of coffee close to him. His name is Mallory and, as we'll describe later, he's trying to find ways to use the system in a manner the system has not been designed. In other words, he's hacking the system. At least, tryin' to.\\
 	
-	\section{State of art}
-	
-	\subsection{The world, now (stato attuale, attacchi etc)}
-	https://www.geeksforgeeks.org/need-of-information-security/
-	\subsection{the needing of trust and privacy (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici) dell’arte)}
-	
-	\begin{verbatim}
-	https://www.howtogeek.com/133680/htg-explains-what-is-a-vpn/
-	https://www.forbes.com/sites/tjmccue/2019/06/20/why-use-a-vpn/#3f08d7105859
-	https://www.investopedia.com/terms/b/blockchain.asp
-	https://www.howtogeek.com/350322/what-is-ethereum-and-what-are-smart-contracts/
-	
-	https://en.wikipedia.org/wiki/Proof_of_work
-	https://en.wikipedia.org/wiki/Proof_of_stake
-	\end{verbatim}
 	
 	It is natural that concepts as "consensus" and as "distributed" gain value and it's undoubted the main technology to manage such kind of situation is the blockchain in the Ethereum variant thanks to its contract mechanism.\\
 	
-	\subsection{just more, we are our trust (come funziona blockchain, perchè in contesti come dvpn serve decentralizzazione e consenso)}
 	
-	\section{My work, steps}
-	
-	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
-	\subsection{Craftberry, a demo tool}
-	
-			\subsubsection{liv 2: arp, vlan tagging}
-			\subsubsection{liv 3: ip, icmp}
-			\subsubsection{liv 4: tcp/udp}
-			
-			\begin{itemize}
-				\item copia x volte dei pacchetti (TCP/UDP)
-				\item gonfiamento dei pacchetti nei campi che poi verranno corretti dai check (TCP/UDP)
-				\item modifica del payload se in chiaro (TCP/UDP)
-				\item azione positiva sul payload (UDP), ad esempio cifratura chacha20
-			\end{itemize}
-		 	\subsubsection{liv 5+: http/imap/dns/ntp/etc}
-				analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
-			
-	\subsection{Design solutions for malicious context}
-		\subsubsection{comparing}
-		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
-		\subsubsection{comparing hashes}
-		come precedente ma con la gestione degli hash invece che di tutto il dato
-	\section{Design integration with reputation systems}
-	
+	\section{Projects}
+	At the time we are coding, the main projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they have to reach the goal of building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.
+
 	\subsection{concetti introduttivi}
-	- blockchain in linea di massima\\
-	- ethereum in linea di massima e descrizione degli smart contracts\\
-	- proof of work, proof of stake\\
-	- reputazione in una net (Eigentrust)\\
-	- - cercare applicazione pratica di Eigentrust\\
-	- descrizione di BFT\\
+	 - blockchain in linea di massima\\
+	 - ethereum in linea di massima e descrizione degli smart contracts\\
+	 - proof of work, proof of stake\\
+	 - reputazione in una net (Eigentrust)\\
+	 - - cercare applicazione pratica di Eigentrust\\
+	 - descrizione di BFT\\
 	
-	At the time we are coding, the main projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they have to reach the goal of building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.\\
 	Therefore, we decide to use Mysterium Project to implement our proof of concepts.\\
 	All of the projects have in common the idea behind the business model based on the users' abilities to sell their internet or to use a VPN service, depending on their needs and, accordingly, on their role into the network.
 	
 	
-	\textbf{Mysterium Network}
+	\subsection{Mysterium Network}
+	Mysterium Network è un progetto open source per la realizzazione di un network P2P decentralizzato che usa multi-hops, relays e micropagamenti integrati basati su token.\\
 	
-	\textbf{Architecture}
-	Mysterium Network in an open source project. The main goal is to realize a decentralized infrastructure made up of layered VPN protocols, blockchain and smart contracts. It's the baseline for all kind of world-first service to build on top of it.\\
-	There are four core components:
-	\begin{enumerate}
-		\item \textbf{Ethereum} allows to run decentralized code with smart contracts, enabling reliable
-		services and payment handling.
-		\item \textbf{Identity service and database of registered identities} ensures the proper identity
-		acknowledgement between client and service provider.
-		\item \textbf{Discovery service and database of available services} provide means to announce
-		VPN services availability and pick the most suitable VPN service.
-		\item \textbf{Payment service and database of balances} allows secure promise-based
-		micropayments for services.
-	\end{enumerate}
-
 	Nel contesto che si vuole descrivere si identificano due entità: un Client A che usa il servizio ed un Agent B che lo fornisce.\\
 	Mysterium utilizza un Service Provider, basato su blackchain ethereum, che registra le intenzioni del Client A di pagare l’Agent B per il servizio che B offre ad A.\\
 	
@@ -146,12 +125,14 @@
 	\item La condivisione consente di evitare situazioni in cui un Client A con pochi denari instauri molteplici promesse (false) con diversi Agents B: [DA CAPIRE MEGLIO]
 	\end{itemize}
 	\item Gli Agents B possono decidere il grado di rischio a cui esporsi (ovvero al rischio che i Clients non paghino)
-	\end{itemize}
+	\end{itemize}	
 
 	La promessa non garantisce, di per sé, il pagamento: infatti se A non ha abbastanza MYST nell'account per il pagamento, la sua promessa non viene mantenuta e la sua identità, in successive promesse, viene compromessa.
 	Si utilizza quindi un registro, chiamato Identity Registry (IR) che tiene traccia delle identità [capire meglio che dati dell’identità vengono usati] che usano il servizio, attraverso il quale scoraggiare l’emissione di promesse non mantenibili.
-		
-	\textbf{Privatix}
+	
+	
+	
+	\subsection{Privatix}	
 	Privatix utilizza due tipi diversi di smart contract con due funzionalità diverse.	
 	\begin{itemize}
 	\item PTC: Privatix Token Contract è usato per scambiare token, upgrade o nuovi contratti di servizio
@@ -173,7 +154,9 @@
 	Il sistema blockchain consente di analizzare le chiusure Cooperative e Uncooperative di tutti così da verificare la reputazione a cascata.	\\
 	Quindi: Fondamentalmente non hanno trovato un modo per eliminare al 100\% attacchi Sybil ma cercano, con i sistemi sopra descritti, di limitare al massimo le possibilità di azione e la loro efficacia.
 	
-	\textbf{Sentinel}
+	\subsection{Sentinel}
+	
+	\subsubsection{Architettura}
 	\begin{itemize}
 	\item Identity Chain: Anonymous User ID (AUID) creati e memorizzati in una blockchain ad hoc.
 	\item Service Chain: Rete sicura su cui si appoggiamo le operazioni di gestione e sono usati i token \$SENT/\$SST per le transazioni (\$SENT sono usati esternamente e sono usati comprare \$SST che sono usati internamente, rapporto 1:1)
@@ -184,38 +167,29 @@
 	Il consenso distribuito riconosce e mitiga velocemente cattivi attori.\\
 	La soluzione adottata per mitigare il problema di attori cattivi sul nodo di uscita è la stessa adottata dalle reti come TOR, ovvero l’uso di un tecniche di routing e ritrasmissione dei pacchetti per assicurare che sia la sorgente che la destinazione non siano rilevati.\\
 	Si sta attualmente sviluppando la rete di ritrasmissione nella quale i partecipanti posso decidere il ruolo (perché?).	
-	\textbf{Idee di Sentinel}	
+	\subsubsection{Idee di Sentinel}	
 	Al contrario delle altre soluzioni loro vogliono creare una piattaforma su cui appoggiare una serie di prodotti e servizi oltre alla dVPN: dChat, dVoIP, dFiles, dCDN, dDNS, dCompute, chiamate dAPPs.
 	Hanno intenzione di realizzare un internet box hardware da posizionare tra l’accesso ad internet (gateway) ed il router.\\	
 	Attualmente Sentinel si appoggia a Cosmos, piattaforma che consente la creazione di una blockchain decentralizzata di criptovaluta. Cosmos è costruito su Tendermin che fornisce il livello networking e consensus di una blockchain (quindi Cosmos è l’application di cryptocurrencies)\\	
 	Quindi, per quanto riguarda Sentinel, il problema del consenso BFT è risolto dalla piattaforma su cui si appoggia.
 	
-	\textbf{Tendermint}
+	\subsubsection{Tendermint}
 	Tendermint è un software per la replicazione in modo sicuro e consistente di una applicazione su una moltitudine di macchine. Con in modo sicuro si intende che Tendermint funziona anche se 1/3 delle macchine fallisce arbitrariamente.
 	https://tendermint.com/docs/introduction/what-is-tendermint.html
 	
-	\textbf{Substratum}
-	\textbf{caratteristiche comuni}
-	\textbf{BTF}
-	\textbf{Attacchi di tipo...}
+	\subsection{Substratum}
+	\subsection{caratteristiche comuni}
+	\subsection{BTF}
+	\subsection{Attacchi di tipo...}
 		
-	
-		
-\section{Conclusions}
-	\subsection{Tests}
-	\subsection{Future development}
-	\subsection{Considerations}
-
-	\pagebreak
-
-	\textbf{problemi individuati}
+	\section{problemi individuati}
 	\begin{enumerate}
 		\item valutazione della reputazione dell'agent da parte del client
 		\item valutazione della reputazione dell'agent da parte della Net
 	\end{enumerate}
 	
-	\textbf{soluzioni proposta}
-	\textbf{Proposte per la valutazione della reputazione dell'agent da parte del client}
+	\section{soluzioni proposta}
+	\subsection{Proposte per la valutazione della reputazione dell'agent da parte del client}
 	
 	Le seguenti proposte sono metodi di verifica del corretto comportamento ed hanno come scopo finale la valutazione della reputazione degli agent
 	\begin{itemize}
@@ -227,7 +201,7 @@
 		\end{itemize}
 		\item Applicazione di modelli di reputazione (Eigentrust): attualmente non studiato
 	\end{itemize}
-	
+
 	\pagebreak
 	
 	\input{proof_of_work_VPN.tex}
