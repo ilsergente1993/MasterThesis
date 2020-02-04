@@ -30,6 +30,7 @@
 		\item docker (cosa è, comandi base per fare cosa)
 		\item robe di networking per dev mode del progetto:
 		\begin{itemize}
+			\item https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture
 			\item openvpn
 			\item http://www.naturalborncoder.com/virtualization/2014/10/17/understanding-tun-tap-interfaces/
 		\end{itemize}
@@ -52,7 +53,10 @@
 	\section{State of art}
 	
 	\subsection{The world, now (stato attuale, attacchi etc)}
+	\begin{verbatim}
 	https://www.geeksforgeeks.org/need-of-information-security/
+	https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
+	\end{verbatim}
 	\subsection{the needing of trust and privacy (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici) dell’arte)}
 	
 	\begin{verbatim}
@@ -72,11 +76,21 @@
 	\section{My work, steps}
 	
 	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
-	\subsection{Craftberry, a demo tool (snippets of code here)}
-	
+	\subsection{Craftberry, a demo tool}
+			\subsection{useful tips}
+			\begin{verbatim}
+				http://unixwiz.net/techtips/gnu-c-attributes.html
+				https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
+				https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
+				https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
+			\end{verbatim}
+			
 			\subsubsection{liv 2: arp, vlan tagging}
 			\subsubsection{liv 3: ip, icmp}
 			\subsubsection{liv 4: tcp/udp}
+			\subsubsection{side attacks}
+				- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
+				- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 			
 			\begin{itemize}
 				\item copia x volte dei pacchetti (TCP/UDP)

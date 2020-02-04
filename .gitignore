@@ -3,3 +3,9 @@
 *.aux
 *.log
 *.out
+tesi.toc
+tstex_modules/_api.ts
+tesi.ind
+tesi.ilg
+tesi.fls
+tesi.fdb_latexmk
