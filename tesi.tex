@@ -6,9 +6,11 @@
 
 
 \usepackage{imakeidx}
+\usepackage{setspace}
 \makeindex
 
 \begin{document}
+	\setstretch{1.0}
 	\maketitle	
 	\clearpage
 	
@@ -21,14 +23,13 @@
 		\item robe di networking per dev mode del progetto:
 		\begin{itemize}
 			\item https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture
-			\item openvpn
 			\item http://www.naturalborncoder.com/virtualization/2014/10/17/understanding-tun-tap-interfaces/
 		\end{itemize}
 	\end{itemize}
 	
 	\textbf{Some text to check and use here and there}
 	
-	Before to deep into the technical aspects why such a projects haven't been developed before, it's important to understand the scenario and the needs of the actors. We use an example to explain it clearly.\\
+	Before deeping into the technical aspects why such a projects haven't been developed before, it's important to understand the scenario and the needs of the actors. We use an example to explain it clearly.\\
 	Alice wants to freely surf on social networks but her country blocks the major of them. Technically speaking, what she needs is to exit into internet with an IP address coming from some countries where those service are not blocked, exactly what a VPN service provides, and she is in favour to pay for it.
 	The exit point, in our example, is Bob who agrees to let Alice connect to him to exit into internet, and he wants to be paid for it.\\
 	The Networks presented before create the ideal network platform where a consumer, Alice, and a producer, Bob, can meet each other, deal with a contract and rate the opposite quality at the contract closing.\\
@@ -37,15 +38,15 @@
 	
 	\section{parte introduttiva}
 	
-	The needing of privacy is being more important day after day. The heavily digitalization of many aspects of our life implicitly exposes our self and our data. The basic actions performed on a computer which involve an internet connection, as a majority of them, are becoming unsafe.\\
+	The need for privacy is becoming more important day after day. The heavily digitalization of many aspects of our life implicitly exposes  us and our data. The basic actions performed on a computer which involve an internet connection, as a majority of them, are becoming unsafe.\\
 	In the last years we have seen security solutions integration in popular applications, such as browsers or mobile apps, following the increasing of security attacks. For instance, in 2017 the popular Chrome browser announced it would mark as non-secure any website using the HTTP protocol instead of HTTPS. This move was to encourage website to use SSL/TLS certificates and make secure the communication between client and server. It's interesting to discover the first HTTPS version has been made by Netscape Navigator browser, a pioneer browser at the beginning of internet, around 1990 and the official RFC publication has been released in May 2000 \ref{https://tools.ietf.org/html/rfc2818}. ((Why this solution has been largely used only fifteen years later?))\\	
-	Similar scenario for the VPN: abbreviation for virtual private network, it's a technical solution to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. Many of the VPN implementations encrypt the traffic between the two points. A first VPN specification proposal can be dated around 2000 \ref{https://tools.ietf.org/html/rfc2764}. In the last years, this feature is making the use of VPN very large because it solves privacy problems the VPN wasn't intentionally design for, such as crossing a censored network rather than use services available only in certain countries.\\
+	Similar scenario for the VPN: abbreviation for virtual private network, it's a technical solution to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. Many of the VPN implementations encrypt the traffic between the two points. A first VPN specification proposal can be dated around 2000 \ref{https://tools.ietf.org/html/rfc2764}. In the last years, this feature is making the use of VPN very large because it solves privacy problems the VPN was not intentionally design for, such as crossing a censored network rather than use services available only in certain countries.\\
 	Currently, there are many commercial solutions that allow users to have a private connection between their computer and the company servers across the world. In this way the user can have access to the internet resources from the geoposition he prefers, skipping firewalls and other censure methods applied by some countries, for instance China with the Great Fire Wall.\\
 	There are many security concerns about those commercial solutions, such as the ability of the company to keep logs, inspect the traffic or sell statistic data obtained by the users.\\
-	Starting by these problems, some open source projects have, lately, been born. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect to each others through a VPN. The Network provides technical solutions to avoid data sniffing or crafting, ensure identity anonymisation and secure crypto payments.\\
+	Starting from these problems, some open source projects were, lately, born. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect to each other through a VPN. The project provides a platform including all the components needed to have a efficient, fast and easy to use system, from the discovering to the payment.\\
 	
 	In this research document we analyzed the most developed project, Mysterium by Mysterium Network, as case of study. As we write, Mysterium offers a working network composed by hundreds of nodes around the world and it's the best project where to investigate malicious contexts and design vulnerabilities owns by the decentralized architecture, more than the Mysterium project itself.\\We even discover how secondary aspects are pivotal to guide attacks to the system.\\
-	The second step focuses on the solutions can be implemented in the system to patch those critical aspects. A comparing between different solutions is provided with an eye on the practical prospective.
+	The second step focuses on the solutions can be implemented in the system to patch those critical aspects. A comparing between different solutions is provided with an eye on the practical prospective.\\
 		
 	
 	\subsection{Abstract}
@@ -63,8 +64,8 @@
 	https://www.geeksforgeeks.org/need-of-information-security/
 	https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
 	\end{verbatim}
-	\subsection{the needing of trust and privacy (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici) dell’arte)}
 	
+	\subsection{the need of trust and privacy (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici)}
 	\begin{verbatim}
 	https://www.howtogeek.com/133680/htg-explains-what-is-a-vpn/
 	https://www.forbes.com/sites/tjmccue/2019/06/20/why-use-a-vpn/#3f08d7105859
@@ -80,10 +81,76 @@
 	\subsection{just more, we are our trust (come funziona blockchain, perchè in contesti come dvpn serve decentralizzazione e consenso)}
 	
 	\section{My work, steps}
+	\subsection{Decentralized VPNs}
+	\subsubsection{Introduction}
+		
+	concetti introduttivi
+	- blockchain in linea di massima\\
+	- ethereum in linea di massima e descrizione degli smart contracts\\
+	- proof of work, proof of stake\\
+	- reputazione in una net (Eigentrust)\\
+	- - cercare applicazione pratica di Eigentrust\\
+	- descrizione di BFT\\
+	
+	The main open source projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they implement to reach the goal: building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.\\
+	Therefore, we decide to use Mysterium Network as test case to implement our proof of concepts.\\
+	
+	\subsubsection{The business idea}
+	As a business project, which aim to earn money, every project has a specific business plan but the common idea is the same: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. Each couple of entities, consumer and provider, agree on a transaction paid in cripto coin in the face of the used service. This transaction is ruled by an Ethereum smart contract signed by both of the sides. To close the transaction a fee to the system must be paid. This fees is not the Ethereum smart contract fee, called gas, but the Mysterium source of earnings. For this reason Mysterium and other projects realized an internal market with a private coin (for Mysterium is called MYST) used to buy and sell internet bandwidth inside the network. It's possible to convert MYST to ETH like normal crypto coin exchange.\\
+	The type of market is called two-sides market where supply and demand respectively grow on the other side growth. It's the typical market for digital goods and usually only one actor tends to dominate more than half of the market.
+		
+	\subsubsection{Mysterium Network}
+	
+	\textbf{Architecture}
+	Mysterium Network in an open source project. The main goal is to realize a decentralized infrastructure made up of layered VPN protocols, blockchain and smart contracts.\\
+	There are four core components composing the infrastructure:
+	\begin{enumerate}
+		\item \textbf{Ethereum Blockchain} allows to run decentralized code with smart contracts, enabling reliable
+		services and payment handling.
+		\item \textbf{Identity service and database of registered identities} ensures the proper identity
+		acknowledgement between client and service provider.
+		\item \textbf{Discovery service and database of available services} provide means to announce
+		VPN services availability and pick the most suitable VPN service.
+		\item \textbf{Payment service and database of balances} allows secure promise-based
+		micropayments for services.
+	\end{enumerate}
+	
+	Mysterium collects all the agents service proposals and presents them to the clients, register the client's intention to pay for the agent's service choosed by the user and create the VPN connection between the two points.\\
+	It is saved in the blockchain the outcome of each transaction. In this manner it's possible to rebuild the transaction history for any specific user, be it a consumer or a producer.
+	
+	Una promessa è una quadrupla contenente i seguenti elementi:
+	
+	\begin{itemize}
+		\item P è firmato da A
+		\item Una promessa P può essere aggiornata in caso di prosecuzione del servizio
+		\item B può bloccare l’aggiornamento della promessa P
+		\item P è valida se è firmata da A e se non è stata aggiornata dopo essere stata bloccata
+		\item L’attributo SN incrementa ad ogni modifica
+		\item Per identificare uno stato non valido basta verificare il SN se è maggiore del SN nel momento del blocco
+		\item La chiusura di un contratto P, con P valido, termina con il pagamento della somma MYST da A a B
+		\item Ogni transazione ethereum per il pagamento di MYST, generata a seguito della chiusura di un contratto, comporta il pagamento di fees e gas
+		\item Si crea un equilibrio tra trasferimento di poco denaro ma frequente e trasferimento di molto denaro ma poco frequente
+		\begin{itemize}
+			\item Il primo comporta un totale di fees maggiore rispetto al secondo ma corrisponde ad una più alta garanzia di pagamento rispetto al secondo (se un client A non paga, non paga poco denaro, invece che tanto) [merita di essere analizzato meglio]
+		\end{itemize}
+		\item Le promesse possono essere condivise con più Agents B senza perdita di valore
+		\begin{itemize}
+			\item La condivisione consente di evitare situazioni in cui un Client A con pochi denari instauri molteplici promesse (false) con diversi Agents B: [DA CAPIRE MEGLIO]
+		\end{itemize}
+		\item Gli Agents B possono decidere il grado di rischio a cui esporsi (ovvero al rischio che i Clients non paghino)
+	\end{itemize}
+	
+	La promessa non garantisce, di per sé, il pagamento: infatti se A non ha abbastanza MYST nell'account per il pagamento, la sua promessa non viene mantenuta e la sua identità, in successive promesse, viene compromessa.
+	Si utilizza quindi un registro, chiamato Identity Registry (IR) che tiene traccia delle identità [capire meglio che dati dell’identità vengono usati] che usano il servizio, attraverso il quale scoraggiare l’emissione di promesse non mantenibili.
+	
+	\textbf{Substratum}
+	\textbf{caratteristiche comuni}
+	\textbf{BTF}
+	\textbf{Attacchi di tipo...}
 	
 	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
 	\subsection{Craftberry, a demo tool}
-			\subsection{useful tips}
+			useful tips
 			\begin{verbatim}
 				http://unixwiz.net/techtips/gnu-c-attributes.html
 				https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
@@ -114,113 +181,7 @@
 		come precedente ma con la gestione degli hash invece che di tutto il dato
 	\section{Design integration with reputation systems}
 	
-	\subsection{concetti introduttivi}
-	- blockchain in linea di massima\\
-	- ethereum in linea di massima e descrizione degli smart contracts\\
-	- proof of work, proof of stake\\
-	- reputazione in una net (Eigentrust)\\
-	- - cercare applicazione pratica di Eigentrust\\
-	- descrizione di BFT\\
-	
-	At the time we are coding, the main projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they have to reach the goal of building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.\\
-	Therefore, we decide to use Mysterium Network to implement our proof of concepts.\\
-	All of the projects have in common the idea behind the business model based on the users' abilities to sell their internet or to use a VPN service, depending on their needs and, accordingly, on their role into the network.
-	
-	\textbf{Mysterium Network}
-	
-	\textbf{Architecture}
-	Mysterium Network in an open source project. The main goal is to realize a decentralized infrastructure made up of layered VPN protocols, blockchain and smart contracts. It's the baseline for all kind of world-first service to build on top of it.\\
-	There are two entities. the Client, A, which use the service and the Agent, B, which provide it. Those roles and not necessary fixed since a client can become agent and vice versa.\\
-	There are four core components:
-	\begin{enumerate}
-		\item \textbf{Ethereum} allows to run decentralized code with smart contracts, enabling reliable
-		services and payment handling.
-		\item \textbf{Identity service and database of registered identities} ensures the proper identity
-		acknowledgement between client and service provider.
-		\item \textbf{Discovery service and database of available services} provide means to announce
-		VPN services availability and pick the most suitable VPN service.
-		\item \textbf{Payment service and database of balances} allows secure promise-based
-		micropayments for services.
-	\end{enumerate}
-
-	Mysterium collects all the agents service proposals and presents them to the clients, register the client's intention to pay for the agent's service and provide the 
-
-	Nel contesto che si vuole descrivere si identificano due entità: un Client A che usa il servizio ed un Agent B che lo fornisce.\\
-	Mysterium utilizza un Service Provider, basato su blackchain ethereum, che registra le intenzioni del Client A di pagare l’Agent B per il servizio che B offre ad A.\\
-	
-	Una promessa è una quadrupla contenente i seguenti elementi:
-	
-	\begin{itemize}
-	\item P è firmato da A
-	\item Una promessa P può essere aggiornata in caso di prosecuzione del servizio
-	\item B può bloccare l’aggiornamento della promessa P
-	\item P è valida se è firmata da A e se non è stata aggiornata dopo essere stata bloccata
-	\item L’attributo SN incrementa ad ogni modifica
-	\item Per identificare uno stato non valido basta verificare il SN se è maggiore del SN nel momento del blocco
-	\item La chiusura di un contratto P, con P valido, termina con il pagamento della somma MYST da A a B
-	\item Ogni transazione ethereum per il pagamento di MYST, generata a seguito della chiusura di un contratto, comporta il pagamento di fees e gas
-	\item Si crea un equilibrio tra trasferimento di poco denaro ma frequente e trasferimento di molto denaro ma poco frequente
-	\begin{itemize}
-	\item Il primo comporta un totale di fees maggiore rispetto al secondo ma corrisponde ad una più alta garanzia di pagamento rispetto al secondo (se un client A non paga, non paga poco denaro, invece che tanto) [merita di essere analizzato meglio]
-	\end{itemize}
-	\item Le promesse possono essere condivise con più Agents B senza perdita di valore
-	\begin{itemize}
-	\item La condivisione consente di evitare situazioni in cui un Client A con pochi denari instauri molteplici promesse (false) con diversi Agents B: [DA CAPIRE MEGLIO]
-	\end{itemize}
-	\item Gli Agents B possono decidere il grado di rischio a cui esporsi (ovvero al rischio che i Clients non paghino)
-	\end{itemize}
-
-	La promessa non garantisce, di per sé, il pagamento: infatti se A non ha abbastanza MYST nell'account per il pagamento, la sua promessa non viene mantenuta e la sua identità, in successive promesse, viene compromessa.
-	Si utilizza quindi un registro, chiamato Identity Registry (IR) che tiene traccia delle identità [capire meglio che dati dell’identità vengono usati] che usano il servizio, attraverso il quale scoraggiare l’emissione di promesse non mantenibili.
-		
-	\textbf{Privatix}
-	Privatix utilizza due tipi diversi di smart contract con due funzionalità diverse.	
-	\begin{itemize}
-	\item PTC: Privatix Token Contract è usato per scambiare token, upgrade o nuovi contratti di servizio
-	\item PSC: Privatix Service Contract è usato per immagazzinare balance (depositare e ritirare) e per la gestione del channel...
-	\end{itemize}	
-	I coin PRIX possono essere acquistati e venduti sono con PTC. I servizi Privatix, invece, possono essere pagati solo usando PSC.
-	L’idea quindi è quella di usare lo smart contract PSC per le operazioni interne e lo smart contract PTC per le operazioni con l’esterno, con il fine ultimo di aumentare la sicurezza.\\	
-	Attacchi Sybil: Attualmente non esistono tecnologie per mitigare l’attacco che non prevedano l’introduzione di qualche svantaggio: così dicono loro.
-	Separano l’attacco in due categorie, in base all’entità malevola.	\\
-	Agents Malevoli: A tutti gli agenti è richiesto di registrare il servizio offerto nella blockchain Ethereum e di depositare una somma di denaro che è possibile ritirare in seguito così da diminuire la presenza di Smart Operation (SO) fasulle. Il deposito è proporzionale alla quantità di servizio offerto.
-	Se l’Agent malevolo posiziona SO fasulle, gli sarà richiesto di posizionare la stessa quantità di denaro che il Client ha posizionato quando ha accettato l’offerta dell’Agent.
-	Le SO hanno associata una età e quindi gli Agents devono mantenere la loro SO viva, altrimenti i Clients la considereranno irrilevante.
-	Ad ogni ri-notifica degli Agents, essi devono bloccare (posizionare) nuovamente la stessa quantità di denaro.\\	
-	Quando un Client crea uno state channel con un Agent e non riceve il servizio accordato, allora chiuderà lo state channel con lo stato Uncooperative. In questo caso l’Agent sarà notificato da un evento blockchain così da intaccare la sua reputazione e forzare l’Agent malevolo a creare una nuova identità.\\	
-	Se l’Agent malevolo opera sia come Client che come Agent per incrementare il numero operazioni Cooperative, si troverà di fronte al pagamento di fees ed ogni volta che opera come Client diminuirà la quantità di servizio a disposizione come Agent.\\	
-	Client Malevoli:	Un Client può creare uno state channel e non inviare la prova di possesso della quantità di denaro necessaria a pagare il servizio. Ma al Client è richiesto di depositare quella cifra che sarà bloccata per tutto il periodo del channel. Per ottenere il denaro indietro è necessario chiudere il channel, ma la transazione consuma Ethere e quindi costa.
-	Quindi se un Client vuole danneggiare un Agent le sue possibilità sono ridotte e costose, inoltre sarà segnata Uncooperative, a suo sfavore, una chiusura di un channel.\\	
-	Sia i Client che gli Agent ottengono la chiusura del channel in modo Cooperative o Uncooperative e la chiusura viene registrata in blockchain con associati gli indirizzi di entrambi.
-	Il sistema blockchain consente di analizzare le chiusure Cooperative e Uncooperative di tutti così da verificare la reputazione a cascata.	\\
-	Quindi: Fondamentalmente non hanno trovato un modo per eliminare al 100\% attacchi Sybil ma cercano, con i sistemi sopra descritti, di limitare al massimo le possibilità di azione e la loro efficacia.
-	
-	\textbf{Sentinel}
-	\begin{itemize}
-	\item Identity Chain: Anonymous User ID (AUID) creati e memorizzati in una blockchain ad hoc.
-	\item Service Chain: Rete sicura su cui si appoggiamo le operazioni di gestione e sono usati i token \$SENT/\$SST per le transazioni (\$SENT sono usati esternamente e sono usati comprare \$SST che sono usati internamente, rapporto 1:1)
-	\item Transaction Chain: gestisce i pagamenti ed i relativi processi di invio delle transazioni al Sentinel Transaction Pool.
-	\end{itemize}	
-	L’unico punto di accesso ai servizi di Sentinel è l’AUID.\\
-	Il sistema è basato sulla reputazione tale per cui più è alta e maggiore è l’accesso ai servizi. C’è un meccanismo di guadagno di denaro in funzione della reputazione.\\
-	Il consenso distribuito riconosce e mitiga velocemente cattivi attori.\\
-	La soluzione adottata per mitigare il problema di attori cattivi sul nodo di uscita è la stessa adottata dalle reti come TOR, ovvero l’uso di un tecniche di routing e ritrasmissione dei pacchetti per assicurare che sia la sorgente che la destinazione non siano rilevati.\\
-	Si sta attualmente sviluppando la rete di ritrasmissione nella quale i partecipanti posso decidere il ruolo (perché?).	
-	\textbf{Idee di Sentinel}	
-	Al contrario delle altre soluzioni loro vogliono creare una piattaforma su cui appoggiare una serie di prodotti e servizi oltre alla dVPN: dChat, dVoIP, dFiles, dCDN, dDNS, dCompute, chiamate dAPPs.
-	Hanno intenzione di realizzare un internet box hardware da posizionare tra l’accesso ad internet (gateway) ed il router.\\	
-	Attualmente Sentinel si appoggia a Cosmos, piattaforma che consente la creazione di una blockchain decentralizzata di criptovaluta. Cosmos è costruito su Tendermin che fornisce il livello networking e consensus di una blockchain (quindi Cosmos è l’application di cryptocurrencies)\\	
-	Quindi, per quanto riguarda Sentinel, il problema del consenso BFT è risolto dalla piattaforma su cui si appoggia.
-	
-	\textbf{Tendermint}
-	Tendermint è un software per la replicazione in modo sicuro e consistente di una applicazione su una moltitudine di macchine. Con in modo sicuro si intende che Tendermint funziona anche se 1/3 delle macchine fallisce arbitrariamente.
-	https://tendermint.com/docs/introduction/what-is-tendermint.html
-	
-	\textbf{Substratum}
-	\textbf{caratteristiche comuni}
-	\textbf{BTF}
-	\textbf{Attacchi di tipo...}
-		
+	\subsection{something here}
 	
 		
 \section{Conclusions}
