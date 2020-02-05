@@ -1,7 +1,7 @@
 \documentclass[]{article}
 
 %opening
-\title{VPN Decentralizzate}
+\title{Malicious context and workaround analysis of decentralized VPN:\\the case of Mysterium Network}
 \author{Jacopo Federici}
 
 
@@ -10,16 +10,6 @@
 
 \begin{document}
 	\maketitle	
-	\clearpage
-	
-	\begin{abstract}
-		\textbf{Work structure}\\
-		
-		\textbf{Outline}\\
-		
-		\textbf{Goal}\\
-		
-	\end{abstract}
 	\clearpage
 	
 	\tableofcontents{}
@@ -36,12 +26,7 @@
 		\end{itemize}
 	\end{itemize}
 	
-	\textbf{Some text}
-	A virtual private network (VPN) allows to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. The data passed inside the tunnel is usually encrypted and this quality has been on the ground for its widely diffusion.\\\
-	
-	Currently, there are many commercial solutions that allow users to have a private connection between their computer and the company servers across the world. In this way the user can have access to the internet resources from the country he prefers, skipping firewalls and other censure methods applied by some countries, such as China with the Great Fire Wall.\\
-	There are many security concerns about those commercial solutions, such as the ability of the company to keep logs, inspect the traffic or sell statistic data obtained by the users.\\
-	Starting by these problems, some open source projects have, lately, been born. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect to each others through a VPN. The Network provides technical solutions to avoid data sniffing or crafting, ensure identity anonymisation and secure payments.\\
+	\textbf{Some text to check and use here and there}
 	
 	Before to deep into the technical aspects why such a projects haven't been developed before, it's important to understand the scenario and the needs of the actors. We use an example to explain it clearly.\\
 	Alice wants to freely surf on social networks but her country blocks the major of them. Technically speaking, what she needs is to exit into internet with an IP address coming from some countries where those service are not blocked, exactly what a VPN service provides, and she is in favour to pay for it.
@@ -50,9 +35,30 @@
 	Generalizing, we can assume that bigger is the network and better are all of those aspects we are striving to get, such as anonymisation, anti-sniffing and anti-crafting solutions and so on.\\
 	In this context another actor stands watching everything happening. He has a black hat, glasses and a cup of coffee close to him. His name is Mallory and, as we'll describe later, he's trying to find ways to use the system in a manner the system has not been designed. In other words, he's hacking the system. At least, tryin' to.\\
 	
+	\section{parte introduttiva}
+	
+	The needing of privacy is being more important day after day. The heavily digitalization of many aspects of our life implicitly exposes our self and our data. The basic actions performed on a computer which involve an internet connection, as a majority of them, are becoming unsafe.\\
+	In the last years we have seen security solutions integration in popular applications, such as browsers or mobile apps, following the increasing of security attacks. For instance, in 2017 the popular Chrome browser announced it would mark as non-secure any website using the HTTP protocol instead of HTTPS. This move was to encourage website to use SSL/TLS certificates and make secure the communication between client and server. It's interesting to discover the first HTTPS version has been made by Netscape Navigator browser, a pioneer browser at the beginning of internet, around 1990 and the official RFC publication has been released in May 2000 \ref{https://tools.ietf.org/html/rfc2818}. ((Why this solution has been largely used only fifteen years later?))\\	
+	Similar scenario for the VPN: abbreviation for virtual private network, it's a technical solution to extend a \textit{private} network across a \textit{public} network. It is created by establishing a virtual point-to-point connection through the use of dedicated circuits or with tunneling protocols over existing networks. Many of the VPN implementations encrypt the traffic between the two points. A first VPN specification proposal can be dated around 2000 \ref{https://tools.ietf.org/html/rfc2764}. In the last years, this feature is making the use of VPN very large because it solves privacy problems the VPN wasn't intentionally design for, such as crossing a censored network rather than use services available only in certain countries.\\
+	Currently, there are many commercial solutions that allow users to have a private connection between their computer and the company servers across the world. In this way the user can have access to the internet resources from the geoposition he prefers, skipping firewalls and other censure methods applied by some countries, for instance China with the Great Fire Wall.\\
+	There are many security concerns about those commercial solutions, such as the ability of the company to keep logs, inspect the traffic or sell statistic data obtained by the users.\\
+	Starting by these problems, some open source projects have, lately, been born. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect to each others through a VPN. The Network provides technical solutions to avoid data sniffing or crafting, ensure identity anonymisation and secure crypto payments.\\
+	
+	In this research document we analyzed the most developed project, Mysterium by Mysterium Network, as case of study. As we write, Mysterium offers a working network composed by hundreds of nodes around the world and it's the best project where to investigate malicious contexts and design vulnerabilities owns by the decentralized architecture, more than the Mysterium project itself.\\We even discover how secondary aspects are pivotal to guide attacks to the system.\\
+	The second step focuses on the solutions can be implemented in the system to patch those critical aspects. A comparing between different solutions is provided with an eye on the practical prospective.
+		
+	
+	\subsection{Abstract}
+	\subsection{Work structure}
+	\subsection{Outline}
+	\subsection{Goal}
+	
+	
 	\section{State of art}
 	
-	\subsection{The world, now (stato attuale, attacchi etc)}
+	\subsection{The world, now}
+	(stato attuale, attacchi etc)
+	
 	\begin{verbatim}
 	https://www.geeksforgeeks.org/need-of-information-security/
 	https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
@@ -117,14 +123,14 @@
 	- descrizione di BFT\\
 	
 	At the time we are coding, the main projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they have to reach the goal of building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application. We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.\\
-	Therefore, we decide to use Mysterium Project to implement our proof of concepts.\\
+	Therefore, we decide to use Mysterium Network to implement our proof of concepts.\\
 	All of the projects have in common the idea behind the business model based on the users' abilities to sell their internet or to use a VPN service, depending on their needs and, accordingly, on their role into the network.
-	
 	
 	\textbf{Mysterium Network}
 	
 	\textbf{Architecture}
 	Mysterium Network in an open source project. The main goal is to realize a decentralized infrastructure made up of layered VPN protocols, blockchain and smart contracts. It's the baseline for all kind of world-first service to build on top of it.\\
+	There are two entities. the Client, A, which use the service and the Agent, B, which provide it. Those roles and not necessary fixed since a client can become agent and vice versa.\\
 	There are four core components:
 	\begin{enumerate}
 		\item \textbf{Ethereum} allows to run decentralized code with smart contracts, enabling reliable
@@ -136,6 +142,8 @@
 		\item \textbf{Payment service and database of balances} allows secure promise-based
 		micropayments for services.
 	\end{enumerate}
+
+	Mysterium collects all the agents service proposals and presents them to the clients, register the client's intention to pay for the agent's service and provide the 
 
 	Nel contesto che si vuole descrivere si identificano due entità: un Client A che usa il servizio ed un Agent B che lo fornisce.\\
 	Mysterium utilizza un Service Provider, basato su blackchain ethereum, che registra le intenzioni del Client A di pagare l’Agent B per il servizio che B offre ad A.\\
