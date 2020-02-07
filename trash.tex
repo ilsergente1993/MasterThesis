@@ -1,0 +1,57 @@
+\documentclass[]{article}
+
+%opening
+\title{Malicious context and workaround analysis of decentralized VPN:\\the case of Mysterium Network}
+\author{Jacopo Federici}
+
+
+\usepackage{imakeidx}
+\usepackage{setspace}
+\makeindex
+
+\\
+
+\begin{document}
+		
+	\textbf{Some text to check and use here and there}
+	
+	Before deeping into the technical aspects why such a projects haven't been developed before, it's important to understand the scenario and the needs of the actors. We use an example to explain it clearly.\\
+	Alice wants to freely surf on social networks but her country blocks the major of them. Technically speaking, what she needs is to exit into internet with an IP address coming from some countries where those service are not blocked, exactly what a VPN service provides, and she is in favour to pay for it.
+	The exit point, in our example, is Bob who agrees to let Alice connect to him to exit into internet, and he wants to be paid for it.\\
+	The Networks presented before create the ideal network platform where a consumer, Alice, and a producer, Bob, can meet each other, deal with a contract and rate the opposite quality at the contract closing.\\
+	Generalizing, we can assume that bigger is the network and better are all of those aspects we are striving to get, such as anonymisation, anti-sniffing and anti-crafting solutions and so on.\\
+	In this context another actor stands watching everything happening. He has a black hat, glasses and a cup of coffee close to him. His name is Mallory and, as we'll describe later, he's trying to find ways to use the system in a manner the system has not been designed. In other words, he's hacking the system. At least, tryin' to.\\
+	
+	
+	
+	
+	
+	Una promessa è una quadrupla contenente i seguenti elementi:
+	
+	\begin{itemize}
+		\item P è firmato da A
+		\item Una promessa P può essere aggiornata in caso di prosecuzione del servizio
+		\item B può bloccare l’aggiornamento della promessa P
+		\item P è valida se è firmata da A e se non è stata aggiornata dopo essere stata bloccata
+		\item L’attributo SN incrementa ad ogni modifica
+		\item Per identificare uno stato non valido basta verificare il SN se è maggiore del SN nel momento del blocco
+		\item La chiusura di un contratto P, con P valido, termina con il pagamento della somma MYST da A a B
+		\item Ogni transazione ethereum per il pagamento di MYST, generata a seguito della chiusura di un contratto, comporta il pagamento di fees e gas
+		\item Si crea un equilibrio tra trasferimento di poco denaro ma frequente e trasferimento di molto denaro ma poco frequente
+		\begin{itemize}
+			\item Il primo comporta un totale di fees maggiore rispetto al secondo ma corrisponde ad una più alta garanzia di pagamento rispetto al secondo (se un client A non paga, non paga poco denaro, invece che tanto) [merita di essere analizzato meglio]
+		\end{itemize}
+		\item Le promesse possono essere condivise con più Agents B senza perdita di valore
+		\begin{itemize}
+			\item La condivisione consente di evitare situazioni in cui un Client A con pochi denari instauri molteplici promesse (false) con diversi Agents B: [DA CAPIRE MEGLIO]
+		\end{itemize}
+		\item Gli Agents B possono decidere il grado di rischio a cui esporsi (ovvero al rischio che i Clients non paghino)
+	\end{itemize}
+	
+	La promessa non garantisce, di per sé, il pagamento: infatti se A non ha abbastanza MYST nell'account per il pagamento, la sua promessa non viene mantenuta e la sua identità, in successive promesse, viene compromessa.
+	Si utilizza quindi un registro, chiamato Identity Registry (IR) che tiene traccia delle identità [capire meglio che dati dell’identità vengono usati] che usano il servizio, attraverso il quale scoraggiare l’emissione di promesse non mantenibili.
+	
+	
+	
+	
+\end{document}
