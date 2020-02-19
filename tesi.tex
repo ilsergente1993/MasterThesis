@@ -28,11 +28,6 @@
 			\item http://linux-training.be/networking/ch14.html
 		\end{itemize}
 	\end{itemize}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 1e9914980e1e833f17d04c51e08b2bc543555790
 	\section{parte introduttiva}
 		
 	\subsection{Abstract}
@@ -75,11 +70,7 @@
 	https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
 	\end{verbatim}
 	
-<<<<<<< HEAD
-	\subsection{the need for trust and privacy}
-=======
-	\subsection{the need for trust and privacy (vpn, blockchain, decentralizzazione, fiducia in sistemi democratici)}
->>>>>>> 1e9914980e1e833f17d04c51e08b2bc543555790
+	\subsection{the need for trust and privacy}=
 	\begin{verbatim}
 		https://www.howtogeek.com/133680/htg-explains-what-is-a-vpn/
 		https://www.forbes.com/sites/tjmccue/2019/06/20/why-use-a-vpn/#3f08d7105859
@@ -159,13 +150,22 @@
 
 
 	Architecture: the core application is called "node". It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium does not implement its version of VPN but laid on famous VPN applications, which are OpenVPN and Wireguard VPN. 
-	It can be run in two modes, as a client or as a server.
-	Is is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI, that are used by the client application to manage the connection. Mysterium developed a client desktop application written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.
+	It can be run in two modes, as a client or as a server, and is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI, that are used by the client application to manage the connection. Mysterium developed a client desktop application written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.
 	The node is also available as Docker image ready-to-use and published on the Docker Hub. 
 	On the mobile side, Mysterium developed a multiplatform app that works only as a client.
 
-	Hereinafter, we refer to the consumer as the client and to the producer as the server of the VPN connection.
+	Note: from now on, we refer to the consumer as the client and the producer as the server, both of the VPN connection.
+	Note: the platform used for our research is Linux based, and even if some details are different they share the same logic, and so the VPN used implementation is OpenVPN, but similar deduction can be made on Wireguard or other VPN applications.
 
+	When the promise is created, the communication between the two nodes starts. The client node begins the connection to the server node with the chosen VPN application. The server forwards all the data comes from the VPN tunnel to the internet, and tunnels back all the data from the internet to the VPN.
+
+	The VPN server application creates a virtual interface where to encrypt and decrypt the traffic.
+
+	SCHEMA FOCUSED ON THE VIRTUAL INTERFACE
+
+	The client, on the other side of the tunnel, performs the same operations, but inverted. 
+
+	GENERAL SCHEMA WITH CLIENT AND SERVER AND THE TUNNEL
 
 	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
 	\subsection{Craftberry, a demo tool}
