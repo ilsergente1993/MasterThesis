@@ -104,78 +104,79 @@
 		- descrizione di BFT\\
 	\end{verbatim}
 
-	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a centralized entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.
-	First of all, the user creates an identity into the system, linked to the payment wallet, using a client application. Then, it connects to the network providing its availability such as consumer or provider. The consumer user chooses the provider node he prefers based on the node's region, its quality, or its cost and asks for a new connection to that node. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, even called client and server, is established. When the connection correctly ends, the network closes the smart contract, and a result of the transaction is registered in the blockchain. 
-	We have outlined the main steps from which we can deduce a decentralized VPN is more a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the functionalities a decentralized system like this can have. (EXPLAIN BETTER THE IDEA)  
+	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a centralized entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
+	First of all, the user creates an identity into the system, linked to the payment wallet, using a client application. Then, it connects to the network providing its availability such as consumer or provider. The consumer user chooses the provider he prefers based on different features such as the node's region, its quality, or its cost, and asks for a new connection to that server. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, even called client and server, is established. When it correctly ends, the network closes the smart contract, and a result of the transaction is registered in the blockchain. \\
+	We have outlined the main steps from which we can deduce a decentralized VPN is more a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the features a decentralized system so composed can have. (EXPLAIN BETTER THE IDEA)  
 		          
 	\subsubsection{The business idea}
-	As a business project, which aims to earn money, it has a specific business plan shared with similar projects: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. Each couple of entities, a consumer and a provider, agree on a transaction paid using cryptocurrency in the face of the used service. This transaction is ruled by an Ethereum smart contract signed by both of the sides. To close the transaction, a fee to the system must be paid. This fee is not the Ethereum smart contract fee, generally called gas, but the Mysterium source of earnings. For this reason Mysterium and other projects realized an internal market with a private coin (for Mysterium is called MYST) used to buy and sell internet bandwidth between the nodes inside the network. It's possible to convert MYST to ETH like a regular cryptocurrency.
-	Altought the consumer can be the provider and vice-versa, the two entities a clearly different. This makes the type of market a two-sided market where bid and ask respectively grow on the other side growth. 
+	As a business project, which aims to earn money, it has a specific business plan shared with similar projects: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. Substantially, they want to create a market to manage.\\
+	Each couple of entities, a consumer and a provider, agree on a transaction paid using cryptocurrency in the face of the used service. This transaction is ruled by an Ethereum smart contract signed by both of the sides and fee is required to close it. This fee is not the Ethereum fee, generally called gas, but the Mysterium one, its source of earnings. For this reason, Mysterium and other projects created its coin used to buy and sell internet bandwidth between the nodes inside the network. Its name is MYST for Mysterium Network and, as a regular cryptocurrency, it is possible to convert MYST to ETH and vice versa.\\
+	Although a node can decide to be a consumer or a provider at any moment, the two entities a different and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth. (EXPLAIN BETTER)\\
+	\\
 
+	\subsection{Mysterium Network}
 	
-	(It's the typical market for digital goods and usually only one actor tends to dominate more than half of the market.)
-		
-	The main open-source projects are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we discovered the four different approaches they implement to reach the goal: building a distributed network based on blockchain with a discovering system, a crypto coin payment method, a mobile and desktop application.
-	We can safely say the most advanced project is Mysterium Network, in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.
-	Therefore, we decide to use Mysterium Network as a test case to implement our proof of concepts.
+	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum and Sentinel. We explored all of them and we can safely say the most advanced project, at the time we are writing this research document, is Mysterium Network. It is the most completed in terms of development and design. Furthermore it's 100\% open source, that for this kind of project is an important quality which conditions the users adoption and market diffusion.\\
+	Therefore, we decided to use Mysterium Network as a test case to analyze the malicious context the project can face and propose our proof of concepts for solutions.
 	
-	\subsubsection{Mysterium Network}
-	
-	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.
-
-	As a general workflow description, Mysterium starts by collecting all the agents' service proposals and presents them to the clients. Then registers the client's intention to pay for the agent's service chosen by the user and creates the VPN connection between the two points.
-	The outcome of each transaction is saved in the blockchain. In this manner, it's possible to rebuild the transaction history for any specific user, be it a consumer or a producer.
-	
-	The architecture is composed of four core components:
-	Ethereum Blockchain allows running decentralized code with smart contracts, enabling reliable and payment handling.
-	Identity service and database of registered identities ensures the proper identity acknowledgment between client and service provider.
-	Discovery service and database of available services provide means to announce VPN services availability and pick the most suitable VPN service.
-	Payment service and database of balances allow secure promise-based micropayments for services.
+	\subsection{Architecture}
+	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
+	As described in figure X, we can distinguish a service client block that uses the service provided by the service provider block. Both of them lean on the Ethereum blockchain block, which is the distributed database where are recorder all the network operations, the identities, and the service proposals. 
 
 	\begin{figure}
-		\includegraphics[width=\linewidth]{"images/mysterium_architecture.png"}
+		\includegraphics[width=0.5\linewidth]{"images/mysterium_architecture.png"}
 		\caption{A boat.}
 		\label{fig:boat1}
 	\end{figure}
 
-	The Identity Service: the identity represents that every node needs can create one identity or more. Each identity consists of a public and a private key, and the last 20 bytes of the hash function, applied on the public key, is the unique public ids. To publish it so that other network members can reach it, Mysterium uses the smart contract mechanism. In such a way, identities are registered in the blockchain after the miners elaborate it. The private and public keys are used to validate the signature for the communication between the nodes. 
+	As a general workflow description, Mysterium starts by collecting all the agents' service proposals and presents them to the clients. Then registers the client's intention to pay for the agent's service chosen by the user and creates the VPN connection between the two points. The outcome of each transaction is saved in the blockchain.\\
+	
+	To realize all the functionalities just said, Mysterium has four core components inside its architecture:
+	\begin{itemize}
+		\item \textbf{Ethereum Blockchain} allows running decentralized code with smart contracts, enabling reliable and payment handling.
+		\item \textbf{Identity service and database of registered identities} ensures the proper identity acknowledgment between client and service provider.
+		\item \textbf{Discovery service and database of available services} provide means to announce VPN services availability and pick the most suitable VPN service.
+		\item \textbf{Payment service and database of balances} allow secure promise-based micropayments for services.
+	\end{itemize}
 
-	The mining process appends the public key and the unique id to the Ethereum blockchain and takes fees the nodes must pay to the network. 
-	This amount of money has the purpose of giving value to the identity. In such a way, it is unattractive to abandon it, expensive, but not impossible. 
-	We will discuss those aspects later, but we can surely say this is the first barrier to make prohibitive in mass identity creation. 
-	Furthermore, the user benefits using the same identity because it is possible to rebuild its transaction history and its balance from the Ethereum blockchain, making him more predictable and thus trustworthy for service providers. 
+	The \textbf{identity service} manages the network identities that every node needs. A single node can create one or more, and each of them consists of a public and a private key The last 20 bytes of the hash function, applied on the public key, is the unique id used to identify the node into the network. To publish a new identity so that other network members can reach it, Mysterium uses the smart contract mechanism. The private and public keys are used to validate the signature for the communication between the nodes.\\
+	The blockchain mining process appends the public key and the unique id to the Ethereum blockchain and takes fees the nodes must pay to the network for this operation. This amount of money has the purpose of giving value to the identity. In such a way, it is unattractive to abandon it, expensive, but not impossible.\\ 
+	We will discuss those aspects later, but we can surely say this is the first barrier to make prohibitive in mass identity creation.\\
+	Furthermore, the user benefits using the same identity because it is possible to rebuild its transaction history and its balance from the Ethereum blockchain, making him more predictable and thus trustworthy for service providers.\\
 
 	\begin{figure}
-		\includegraphics[width=\linewidth]{"images/mysterium_identity_creation.png"}
-		\caption{A boat.}
-		\label{fig:boat1}
+		\includegraphics[width=0.5\linewidth]{"images/mysterium_identity_creation.png"}
+		\caption{The Mysterium identity creation steps}
 	\end{figure}
 
-	The Service Discovery: it provides the list of service proposals available in the network. The service needs to announce its availability posting the proposal characterized by service parameters depending on proposed services. The parameters can be the VPN application it supports, the server's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append it to the blockchain, making it publicly available for everyone.
+	The \textbf{service discovery} provides the list of service proposals available in the network. The service posts its service offer characterized by some service parameters: those parameters can be the VPN application the provider supports, the provider's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append it to the blockchain, making it publicly available for everyone.\\
 
-	
 	\begin{figure}
-		\includegraphics[width=\linewidth]{"images/mysterium_service_announcement.png"}
-		\caption{A boat.}
-		\label{fig:boat1}
+		\includegraphics[width=0.5\linewidth]{"images/mysterium_service_announcement.png"}
+		\caption{The Mysterium service announcement steps}
 	\end{figure}
-
 	
-	Payments Handling: Ethereum blockchain holds all the mechanisms for the payment steps, and everyone needs an account managed by the smart contracts to operate in the Mysterium Network. To advance a request, the consumer has to have enough cryptocurrency in his wallet. If so, he can ask for a connection to a producer who has previously published a service proposal. Mysterium calls this step a promise creation because the client effectively promises he will pay when the service ends.  Positively clearing a promise is the interest of everybody, producer, and consumer, since a canceled promise marks the consumer's history hitting his reputation for future connections.
-
-
-	Architecture: the core application is called "node". It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium does not implement its version of VPN but leans on famous VPN applications, which are OpenVPN and Wireguard. 
-	It can be run in two modes, as a client or as a server, and is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI. TequilaAPI is used by the client application to manage the connection and for diagnostic operations. Mysterium developed a desktop client written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.
+	Ethereum blockchain holds all the mechanisms for the \textbf{payments handling}. Therefore everyone needs an account to operate in the Mysterium Network. To advance a request, the consumer has to deposit currency in his wallet. If so, he can ask for a connection to a provider who has previously published a service proposal. Mysterium calls this step a promise creation because the client effectively promises he will pay when the service ends. Positively clearing a promise is the interest of everybody, producer and consumer, since a canceled promise marks the consumer's history hitting his reputation for future connections.\\
+	From what we have described seems the consumer can decide to avoid paying for the used service: technically, it is possible, but realistically there are some considerations to note.\\
+	First of all, as previously described, identity creation takes money to be completed, and for any new connection, the user's balance has to be positive. In any case, the blockchain records any connection result so that everybody can rebuild the user's history at any moment. Therefore, it is possible to deduct the user's reputation based on its history.\\
+	Using this reputation, the provider can decide to block its service to all users that have a low reputation caused by an unpaid precedent. On the other hand, other providers allow new users' connections with a low reputation but with a high price, accepting the risk of having an unpaid transaction.\\
+	
+	The core application is called \textbf{node}. It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium does not implement its version of VPN but leans on famous VPN applications, which are OpenVPN and Wireguard. \\
+	It can be run in two modes, as a client or as a server, and is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI. TequilaAPI is used by the client application to manage the connection and for diagnostic operations. Mysterium developed a desktop client written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.\\
 	The node is also available as Docker image ready-to-use and published on the Docker Hub. 
-	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.
+	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
+
+	\subsubsection*{Project setup}
+
+	We have chosen the Linux platform and OpenVPN as the VPN application, but the similar deductions can be made with different configurations.
+
+	When the Mysterium application starts, it calls the OpenVPN, which setups its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back. They can be of two types, TUN or TAP.\\
+	The TAP type is used to simulate a link layer device. That means the corresponding ISO model level it refers to is the number 2. Therefore, a TAP interface handles the transmission of data frames between two nodes on the same physical layer. The behavior is the equal to a bridge: to connect two separates networks as if they were one.\\
+	On the other hand, the TUN type is one layer up on the ISO model, working at level 3. A TUN interface handles packets, such as Internet Protocol packets. The main functions include host addressing and traffic control, for example. The behavior is, in this case, equal to a router: to connect two separates networks keeping them independents.
 
 
-	Project setup: 
-	Note: from now on, we refer to the consumer even as the client and the producer even as the server, both of them related to the VPN connection.
-    Note: the platform used for our research is Linux based, and even if some details are different, they share the same logic, and so the VPN used implementation is OpenVPN, but similar deductions can be made on Wireguard or other VPN applications.
+	
 
-
-    When the promise is created, the communication between the two nodes starts. The client node begins the connection to the server node with the chosen VPN application. 
 
 	OPENVPN WORKING EXPLANATION: 
 	
@@ -183,10 +184,11 @@
 		https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals
 	\end{verbatim}
 
-	The VPN server application creates a virtual interface where to encrypt and decrypt the traffic.
+	The VPN server application creates a virtual interface that encrypts and decrypts the traffic.
 
 	\begin{figure}
-		\includegraphics[width=\linewidth]{"images/openvpn_tun_interface.jpg"}
+		\centering
+		\includegraphics{"images/openvpn_tun_interface.jpg"}
 		\caption{A boat.}
 		\label{fig:boat1}
 	\end{figure}
