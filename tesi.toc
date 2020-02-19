@@ -14,19 +14,19 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Introduction}{5}% 
 \contentsline {subsubsection}{\numberline {3.1.2}The business idea}{6}% 
 \contentsline {subsubsection}{\numberline {3.1.3}Mysterium Network}{7}% 
-\contentsline {subsection}{\numberline {3.2}Basic sniffing to catch content (Wireshark, tcpdump)}{8}% 
-\contentsline {subsection}{\numberline {3.3}Craftberry, a demo tool}{8}% 
-\contentsline {subsubsection}{\numberline {3.3.1}liv 2: arp, vlan tagging}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.2}liv 3: ip, icmp}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.3}liv 4: tcp/udp}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.4}side attacks}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.5}liv 5+: http/imap/dns/ntp/etc}{9}% 
-\contentsline {subsection}{\numberline {3.4}Design solutions for malicious context}{9}% 
-\contentsline {subsubsection}{\numberline {3.4.1}comparing}{9}% 
-\contentsline {subsubsection}{\numberline {3.4.2}comparing hashes}{9}% 
-\contentsline {section}{\numberline {4}Design integration with reputation systems}{10}% 
-\contentsline {subsection}{\numberline {4.1}something here}{10}% 
-\contentsline {section}{\numberline {5}Conclusions}{10}% 
-\contentsline {subsection}{\numberline {5.1}Tests}{10}% 
-\contentsline {subsection}{\numberline {5.2}Future development}{10}% 
-\contentsline {subsection}{\numberline {5.3}Considerations}{10}% 
+\contentsline {subsection}{\numberline {3.2}Basic sniffing to catch content (Wireshark, tcpdump)}{11}% 
+\contentsline {subsection}{\numberline {3.3}Craftberry, a demo tool}{11}% 
+\contentsline {subsubsection}{\numberline {3.3.1}liv 2: arp, vlan tagging}{11}% 
+\contentsline {subsubsection}{\numberline {3.3.2}liv 3: ip, icmp}{11}% 
+\contentsline {subsubsection}{\numberline {3.3.3}liv 4: tcp/udp}{11}% 
+\contentsline {subsubsection}{\numberline {3.3.4}side attacks}{11}% 
+\contentsline {subsubsection}{\numberline {3.3.5}liv 5+: http/imap/dns/ntp/etc}{13}% 
+\contentsline {subsection}{\numberline {3.4}Design solutions for malicious context}{13}% 
+\contentsline {subsubsection}{\numberline {3.4.1}comparing}{13}% 
+\contentsline {subsubsection}{\numberline {3.4.2}comparing hashes}{13}% 
+\contentsline {section}{\numberline {4}Design integration with reputation systems}{13}% 
+\contentsline {subsection}{\numberline {4.1}something here}{13}% 
+\contentsline {section}{\numberline {5}Conclusions}{13}% 
+\contentsline {subsection}{\numberline {5.1}Tests}{13}% 
+\contentsline {subsection}{\numberline {5.2}Future development}{13}% 
+\contentsline {subsection}{\numberline {5.3}Considerations}{13}% 
