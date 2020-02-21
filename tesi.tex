@@ -10,6 +10,8 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{array,multirow,graphicx}
+\usepackage{float}
 \makeindex
 
 \begin{document}
@@ -70,10 +72,19 @@
 	A similar design is used with decentralized VPN: there is no central entity to control the system, but a significant number of peers, the network, we can choose to connect.
 
 	\subsection{We are our trust}
+	
+	\subsubsection{Decentralized VPNs}
 
+	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
+	First of all, the user creates an identity into the system, linked to the payment wallet, using a client application. Then, he connects to the network providing his availability to be a consumer or a provider.\\
+	The consumer user chooses the provider he prefers based on different features such as the region, quality, or cost of the node, and asks for a new connection to that server. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, otherwise called client and server, is established. When the connection correctly ends, the network closes the smart contract, that registers the result of the transaction in the blockchain.\\
+	We outlined the main steps from which we can think of a decentralized VPN more as a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the features a decentralized system so composed can have. (EXPLAIN BETTER THE IDEA)  
+		          
+	\subsubsection{The business idea}
+	As a business project, which aims to earn money, the project has a specific business plan: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. For every cryptocurrency transaction, the network applies a fee that wants, substantially, to create a market to manage.\\
+	Each couple of entities, a consumer and a provider, agree on a transaction paid using cryptocurrency in the face of the used service. This transaction is regulated by an Ethereum smart contract signed by both sides and requires a fee to be closed. This fee is not the Ethereum fee, generally called gas, but the precisely Mysterium source of earnings. For this reason, Mysterium and other projects created their coins used to buy and sell internet bandwidth between the nodes inside the network. The coin name is MYST for Mysterium Network and, as a regular cryptocurrency, it is possible to convert MYST to ETH and vice versa.\\
+	Although a node can decide to be a consumer or a provider at any moment, the two entities are different, and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth. (EXPLAIN BETTER)\\
 
-	\section{My work, steps}
-	\subsection{Decentralized VPNs}
 	\begin{verbatim}
 		concetti introduttivi
 		- blockchain in linea di massima\\
@@ -83,25 +94,15 @@
 		- - cercare applicazione pratica di Eigentrust\\
 		- descrizione di BFT\\
 	\end{verbatim}
-
-	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
-	First of all, the user creates an identity into the system, linked to the payment wallet, using a client application. Then, he connects to the network providing his availability to be a consumer or a provider.\\
-	The consumer user chooses the provider he prefers based on different features such as the region, quality, or cost of the node, and asks for a new connection to that server. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, otherwise called client and server, is established. When the connection correctly ends, the network closes the smart contract, that registers the result of the transaction in the blockchain.\\
-	We outlined the main steps from which we can think of a decentralized VPN more as a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the features a decentralized system so composed can have. (EXPLAIN BETTER THE IDEA)  
-		          
-	\subsubsection{The business idea}
-	As a business project, which aims to earn money, the project has a specific business plan: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. For every cryptocurrency transaction, the network applies a fee that wants, substantially, to create a market to manage.\\
-	Each couple of entities, a consumer and a provider, agrees on a transaction paid using cryptocurrency in the face of the used service. This transaction is regulated by an Ethereum smart contract signed by both sides and requires a fee to be closed. This fee is not the Ethereum fee, generally called gas, but the precisely Mysterium source of earnings. For this reason, Mysterium and other projects created their coins used to buy and sell internet bandwidth between the nodes inside the network. The coin name is MYST for Mysterium Network and, as a regular cryptocurrency, it is possible to convert MYST to ETH and vice versa.\\
-	Although a node can decide to be a consumer or a provider at any moment, the two entities are different, and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth. (EXPLAIN BETTER)\\
-
-	\subsection{Mysterium Network}
 	
-	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research document.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open source, that for this kind of project is a requirement which conditions the users adoption and market diffusion.\\
+	\section{Mysterium Network}
+	
+	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research document.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
 	Therefore, we decided to use the Mysterium Network as a test case to analyze the malicious context the project is exposed to and propose our proof of concepts as solutions.
 	
 	\subsection{Architecture}
 	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
-	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is the distributed database where all the network operations, the identities, and the service proposals are recorder.\\
+	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
 
 	\includegraphics[width=0.5\linewidth]{"images/mysterium_architecture.png"}
 		
@@ -111,12 +112,14 @@
 	\begin{itemize}
 		\item \textbf{Ethereum Blockchain} allows running decentralized code with smart contracts, enabling reliable services and payment handling.
 		\item \textbf{Identity service and database of registered identities} ensure the proper identity acknowledgment between client and service provider.
-		\item \textbf{Discovery service and database of available services} provide means to announce VPN services availability and to pick the most suitable VPN service.
+		\item \textbf{Discovery service and database of available services} provide means to announce the availability of VPN services and to pick the most suitable VPN service.
 		\item \textbf{Payment service and database of balances} allow secure promise-based micropayments for services.
 	\end{itemize}
 
+	\subsubsection{Identity Service}
+
 	The \textbf{identity service} manages the network identities that every node needs. A single node can create one identity or more, and each of them consists of a public and a private key. The last 20 bytes of the hash function, applied on the public key, is the unique id used to identify the node into the network. To publish a new identity so that other network members can reach it, Mysterium uses the smart contract mechanism. The private and public keys are used to validate the signature for the communication between the nodes.\\
-	The blockchain mining process appends the public key and the unique id to the Ethereum blockchain. To complete this operation, the nodes must pay a fee to the network. This amount of money has the purpose of giving value to the identity. In such a way,  to abandon the identity to create a new one is unattractive, because it is expensive, but not impossible.\\ 
+	The blockchain mining process appends the public key and the unique id to the Ethereum blockchain after the node pays a fee to the network. This amount of money has the purpose of giving value to the identity. In such a way,  to abandon the identity to create a new one is unattractive, because it is expensive, but not impossible.\\ 
 	We will discuss those aspects later, but we can surely say this is the first barrier to block in mass identity creation.\\
 	Furthermore, the user benefits in using the same identity because it is possible to rebuild his transaction history and his balance from the Ethereum blockchain, making the user more predictable and thus trustworthy for service providers.\\
 
@@ -125,6 +128,8 @@
 		\caption{The Mysterium identity creation steps}
 	\end{figure}
 
+	\subsubsection{Service Discovery}
+
 	The \textbf{service discovery} provides the list of service proposals available in the network. The service posts its service offer characterized by some service parameters: those parameters can be the VPN application the provider supports, the provider's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append the proposal to the blockchain, making it publicly available for everyone.\\
 
 	\begin{figure}
@@ -132,33 +137,40 @@
 		\caption{The Mysterium service announcement steps}
 	\end{figure}
 	
+	\subsubsection{Payments Handling}
+
 	Ethereum blockchain holds all the mechanisms for the \textbf{payments handling}. Therefore everyone needs an account to operate in the Mysterium Network. To advance a request, the consumer has to deposit currency in his wallet. Then, he can ask for a connection to a provider who has previously published a service proposal. Mysterium describes this step as a promise creation because the client effectively promises he will pay when the service ends. Positively clearing a promise is the everybody's best interest, the producer and the consumer, since a canceled promise marks the consumer's history hitting his reputation for future connections.\\
 	From what we have described so far, it seems the consumer can decide to avoid paying for the used service: technically, it is possible, but realistically there are some considerations to be made.\\
 	First of all, as previously described, identity creation takes money to be completed, and for any new connection, the user's balance has to be positive. In any case, the blockchain records any connection result so that everybody can rebuild the user's history at any moment. Therefore, it is possible to deduct the user's reputation based on its history.\\
 	Using this reputation, the provider can decide to block his service to all users that have a low reputation caused by an unpaid precedent. On the other hand, other providers allow new users' connections with a low reputation but at a high price, accepting the risk of having an unpaid transaction.\\
 	
+	\subsection{Components}
+
 	The core application is called \textbf{node}. It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium does not implement its version of VPN but leans on famous VPN applications, which are OpenVPN and Wireguard.\\
 	The node can be run in two modes, as a client or as a server, and it is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI. TequilaAPI is used by the client's application to manage the connection and for diagnostic operations. Mysterium developed a desktop client written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.\\
 	The node is also available as a ready-to-use Docker image and published on the Docker Hub. 
 	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
 
-	\subsubsection{Project setup}
+	\subsection{setup}
 
-	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.
+	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.\\
 
 	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\They can be of two types, TAP or TUN.\\
 	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is the number 2. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
 	On the other hand, the TUN type is, in the ISO model, one layer above, working at level 3. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
 	Usually, the TUN type is the most used, since the TAP type brings some limitations such as it cannot be used with Android or iOS devices, causes higher overhead on the VPN tunnel, and scales poorly.\\
-	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal. The `tun0` is the virtual TUN interface created by OpenVPN.\\
+	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
+	The virtual TUN interface created by OpenVPN is tun0, the public interface is eth0, and the internal interface is eth1.\\
 
 	\includegraphics[width=1\textwidth]{"images/openvpn_routing_setup.PNG"}
 
 	When a packet arrives at the eth1 interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\On the other direction, when a packet arrives at eth0 interface, ``iptables'' and the routing engine apply their rules to filter and masquerade and then forward it to tun0 interface. Then, OpenVPN picks it up, encrypts the data, and sends it to the public eth1 interface.\\
 	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port the traffic that its OpenVPN client decrypts. \\
 
-	IMAGE TO EDIT AS BEFORE DESCRIBED
 	\includegraphics{"images/openvpn_tun_interface.jpg"}
+	IMAGE TO EDIT AS BEFORE DESCRIBED\\
+
+	\subsubsection{iptables}
 
 	The ``iptables'' is a framework to manage the network decisions. It is based on the ``Netfilter'' kernel component, which exposes a set of hooks that are triggered at specific points of the network stack. Every packet that enters the networking system will trigger these hooks as it proceeds through the stack so all the programs that register with these hooks can interact with the traffic.\\
 	Five different hooks correspond to different points of the stack:\\
@@ -170,28 +182,26 @@
 		\item \lstinline{NF_IP_LOCAL_OUT}
 		\item \lstinline{NF_IP_POST_ROUTING}
 	\end{itemize}
+
+	IMAGE OF THE POINTS IN THE FLOW WHERE THE HOOKS ARE
 	
 	Iptables is substantially a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
 	The available tables are the filter table, the NAT table, the Mangle table, the Raw table, and the Security table.\\
-	The chains correspond to the available hooks, then Iptbales has the pre-routing, input, forward, output, and post-routing chains.
+	The chains correspond to the available hooks, then Iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
 	The following table explains the triggering logic and execution precedence.\\
 
-	IPTABLES TABLE
-
-	\begin{table}[]
-		\begin{tabular}{lccccc}
-		\textbf{\begin{tabular}[c]{@{}l@{}}Chains\\ Tables\end{tabular}} & \textbf{PREROUTING}    & \textbf{INPUT}         & \textbf{FORWARD}       & \textbf{OUTPUT}        & \textbf{POSTROUTING}   \\
-		\textit{ruoting decision}                                        &                        &                        &                        & \bullet 				 &                        \\
-		\textbf{raw}                                                     & \bullet 				  &                        &                        & \bullet 				 &                        \\
-		\textit{connection tracking enabled}                             & \bullet                &                        &                        & \bullet 				 &                        \\
-		\textbf{mangle}                                                  & \bullet 				  & \bullet 			   & \bullet 				& \bullet  				 & \bullet 				  \\
-		\textbf{DNAT (NAT)}                                              & \bullet 				  &                        &                        & \bullet 				 &                        \\
-		\textit{routing decision}                                        & \bullet 				  &                        &                        & \bullet 				 &                        \\
-		\textbf{filter}                                                  &                        & \bullet 			   & \bullet 				& \bullet 				 &                        \\
-		\textbf{security}                                                &                        & \bullet				   & \bullet 				& \bullet 				 &                        \\
-		\textbf{SNAT (NAT)}                                              &                        & \bullet 			   &                        &                        & \bullet
-		\end{tabular}
-	\end{table}
+	\begin{tabular}{|l|c|c|c|c|c|}
+	\textbf{\begin{tabular}[c]{@{}l@{}}Chains\\ Tables\end{tabular}} & \rotatebox[origin=c]{90}{\textbf{PREROUTING}}    & \rotatebox[origin=c]{90}{\textbf{INPUT}}         & \rotatebox[origin=c]{90}{\textbf{FORWARD}}       & \rotatebox[origin=c]{90}{\textbf{OUTPUT}}        & \rotatebox[origin=c]{90}{\textbf{POSTROUTING}}   \\\hline
+	\textit{ruoting decision} & & & & X & \\\hline
+	\textbf{raw} & X & & & X & \\ \hline
+	\textit{connection tracking enabled} & X & & & X & \\\hline
+	\textbf{mangle} & X & X & X & X & X \\\hline
+	\textbf{DNAT (NAT)} & X & & & X & \\ \hline
+	\textit{routing decision} & X & & & X & \\ \hline
+	\textbf{filter} & & X & X & X & \\ \hline
+	\textbf{security} & & X & X & X & \\ \hline
+	\textbf{SNAT (NAT)} & & X & & & X
+	\end{tabular}
 
 	The packet triggers the hooks from the first row going down to the bottom of the row. It enters the chain depending on the routing decisions that are made, on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
 
@@ -202,16 +212,62 @@
 		\item Locally generated packets: OUTPUT -> POSTROUTING
 	\end{itemize}
 	
-
 	Every chain is a list of rules. Every packet is checked against each rule and, if the matching component checks, an action is executed.\\
-	The rule can match the packet depending on the protocol type, the source or destination address or packet, among other criteria.
+	The rule can match the packet depending on the protocol type, the source or destination address, or packet, among other criteria.\\
 	The action called target, which is triggered if the rule matches, can be of terminating or non-terminating type.\\
 	The terminating type target causes the packet to exit the chain after a verdict that can be to allow or to drop the packet.
 	The non-terminating type target causes the packet to continue its evaluation in the chain. There can be any number of non-terminating targets before a terminating one.\\
-	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain and when that chain finishes the rule check, the execution is back to the previous chain. This is a useful way to organize the rules in chains based on their purposes.\\
+	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain, and when that chain finishes the rule check, the execution is back to the previous chain. This way is useful to organize the rules in chains based on their purposes.\\
+
+	\subsection{Design vulnerabilities}
+
+	There are several aspects that on a project like Mysterium must be considered to evaluate its design vulnerabilities.\\
+	We classify them based on:
+	\begin{itemize}
+		\item the position in the network: the starting point, the endpoint or the middle point;
+		\item the step of the complete flow: the service proposals, the promise issuing, the transaction closing, and others;
+		\item the type of traffic manipulation: sniffing, filtering or crafting the data;
+		\item side channels attack and other particular scenarios.
+	\end{itemize}
+	
+	\subsubsection{The position in the network}
+
+	In the simplest configuration, the network includes a starting point that is the service consumer node and an endpoint, which is the service provider node. The VPN tunnel connects the two nodes and encrypts the traffic. The service node, as previously described, is the consumer's exit point to the internet. The provider's internet side is, for now, considered not secured.\\
+	In this configuration, as described by the following image, the provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions to exploit, but, at first glance, this design vulnerability is unavoidable. If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.\\
+	
+	An improved configuration has one or more middle points between the consumer and the provider. Those points are called hops, and they are similar to the provider node since they act as traffic forwarder.\\
+	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that regard the traffic shape, with no abilities to understand it. The actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
+	For example, a middle node can slow down the data speed that it forwards. This operation is as simple as fast and does not need to understand the content. It can be made with a Linux package called tc \cite{tc} that stands for Traffic Control.\\
+
+	\begin{verbatim}
+		sudo tc qdisc add dev eth0 root netem delay 500ms
+		# and turn it off with
+		sudo tc qdisc del dev eth0 root netem
+	\end{verbatim}
+
+	With this command every packet sent to the interface eth0 has a delay of 500 milliseconds.\\
+	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down operation. From the consumer side, this poor connection is a quality agreement breach and it affects the service provider reputation. Since the provider can detect the slow speed connection, he can suppose it is packet path problem and can propose to the network to change one or more middle nodes. This is a remediation.
+
+	
+	\subsubsection{The flow steps}
+	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network, has a positive balance to the cryptocurrency wallet, and look for a service proposal. They agree on the service cost and issue a payment promise. If the user does not respect the promise...
+
+
+
+
+	
+
+
+
+	\subsubsection{Traffic manipulation}
+
+
+	\subsubsection{Side channels attack and particular scenarios}
 
 
 	\includegraphics[width=\linewidth]{"images/client_server_vpn_connection.png"}
+
+
 
 	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
 	Note:
@@ -250,6 +306,8 @@
 		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
 		\subsubsection{comparing hashes}
 		come precedente ma con la gestione degli hash invece che di tutto il dato
+
+
 	\section{Design integration with reputation systems}
 	
 	\subsection{something here}
@@ -292,6 +350,9 @@
 			manually managing references, 
 			\url{https://en.wikibooks.org/wiki/LaTeX/Manually_Managing_References}
 			2016
+		\bibitem{tc}
+			traffic control
+			https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/
 	\end{thebibliography}
 		
 	\pagebreak
