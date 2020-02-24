@@ -21,13 +21,18 @@
 	\clearpage
 	
 	\tableofcontents{}
+	\pagebreak
 
-	\subsection{Abstract}
+	\begin{abstract}
+		
+	\end{abstract}
+	\pagebreak
+
+
 	\subsection{Work structure}
 	\subsection{Outline}
 	\subsection{Goal}
-	
-	
+
 	\section{State of the art}
 
 	\subsection{Introduction}
@@ -64,7 +69,7 @@
 		https://en.wikipedia.org/wiki/Proof_of_work
 		https://en.wikipedia.org/wiki/Proof_of_stake
 	\end{verbatim}
-	
+
 	Anonymization: in every network systems, anonymization is a tough challenge. Even more, if privacy is a crucial point. In some countries, the VPN is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country ISPs.\\There are countries, the People's Republic of China for example, where censorship is present and where identity obfuscation is, therefore, necessary to protect yourself. In these cases, the use of a VPN is a solution, as long as a safe company provides it. With the adjective `safe' we mean a company that does not make you or your traffic detectable or even worsts sniffs and crafts your data for malicious actions.\\
 
 	The decentralized VPN completely changes the paradigma, the design of the infrastructure.\\
@@ -72,7 +77,7 @@
 	A similar design is used with decentralized VPN: there is no central entity to control the system, but a significant number of peers, the network, we can choose to connect.
 
 	\subsection{We are our trust}
-	
+
 	\subsubsection{Decentralized VPNs}
 
 	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
@@ -146,15 +151,28 @@
 	
 	\subsection{Components}
 
-	The core application is called \textbf{node}. It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium does not implement its version of VPN but leans on famous VPN applications, which are OpenVPN and Wireguard.\\
-	The node can be run in two modes, as a client or as a server, and it is managed via command-line interface or via RESTful API exposed in the localhost, called TequilaAPI. TequilaAPI is used by the client's application to manage the connection and for diagnostic operations. Mysterium developed a desktop client written using Electron, a technology that is a web application locally executed by NodeJs, a server backend.\\
-	The node is also available as a ready-to-use Docker image and published on the Docker Hub. 
+	The core application is called \textbf{node}. It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium leans on famous VPN applications, which are OpenVPN and Wireguard.\\
+	The node can be run in two modes, as a client or as a server, and it is managed via command-line interface or RESTful API, called TequilaAPI, exposed in the localhost.\\
+	The main functionalities of TequilaAPI concern:
+	\begin{itemize}
+		\item the authentication,
+		\item the connection,
+		\item the identities,
+		\item the location,
+		\item the proposals,
+		\item the service operations in provider mode
+		\item other minor features
+	\end{itemize}
+		
+	TequilaAPI is used by the client's application to manage the connection and for diagnostic operations.\\
+	Mysterium developed a desktop client written using Electron, which uses the TequilaAPIs.\\
+	The node is also available as a ready-to-use Docker image and published on the Docker Hub.\\
 	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
+	(MORE ON MOBILE)
 
 	\subsection{setup}
 
 	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.\\
-
 	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\They can be of two types, TAP or TUN.\\
 	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is the number 2. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
 	On the other hand, the TUN type is, in the ISO model, one layer above, working at level 3. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
@@ -187,7 +205,7 @@
 	
 	Iptables is substantially a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
 	The available tables are the filter table, the NAT table, the Mangle table, the Raw table, and the Security table.\\
-	The chains correspond to the available hooks, then Iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
+	The chains correspond to the available hooks, therefore iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
 	The following table explains the triggering logic and execution precedence.\\
 
 	\begin{tabular}{|l|c|c|c|c|c|}
@@ -203,23 +221,27 @@
 	\textbf{SNAT (NAT)} & & X & & & X
 	\end{tabular}
 
-	The packet triggers the hooks from the first row going down to the bottom of the row. It enters the chain depending on the routing decisions that are made, on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
+	The packet triggers the hooks from the first row going down to the bottom of the table. It enters the chain depending on the routing decisions that are made, on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
 
 	The chain traversal order is the following:
 	\begin{itemize}
-		\item Incoming packets destined for the local system: PREROUTING -> INPUT
-		\item Incoming packets destined to another host: PREROUTING -> FORWARD -> POSTROUTING
-		\item Locally generated packets: OUTPUT -> POSTROUTING
+		\item Incoming packets destined for the local system: PREROUTING - > INPUT
+		\item Incoming packets destined to another host: PREROUTING - > FORWARD - > POSTROUTING
+		\item Locally generated packets: OUTPUT - > POSTROUTING
 	\end{itemize}
 	
-	Every chain is a list of rules. Every packet is checked against each rule and, if the matching component checks, an action is executed.\\
+	Every chain is a list of rules. Every packet is checked against each rule and, if the matching component checks, iptables executes an action.\\
 	The rule can match the packet depending on the protocol type, the source or destination address, or packet, among other criteria.\\
 	The action called target, which is triggered if the rule matches, can be of terminating or non-terminating type.\\
-	The terminating type target causes the packet to exit the chain after a verdict that can be to allow or to drop the packet.
-	The non-terminating type target causes the packet to continue its evaluation in the chain. There can be any number of non-terminating targets before a terminating one.\\
-	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain, and when that chain finishes the rule check, the execution is back to the previous chain. This way is useful to organize the rules in chains based on their purposes.\\
+	The terminating type target causes the packet to exit the chain after a verdict that can be to allow or to drop the packet. The non-terminating type target causes the packet to continue its evaluation in the chain. There can be any number of non-terminating targets before a terminating one.\\
+	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain, and when that chain finishes the rules check, the execution comes back to the previous chain. This way is useful to organize the rules in chains based on their purposes.\\
+
+	LITTLE IMAGE OF CHAIN JUMP ACTION
 
 	\subsection{Design vulnerabilities}
+
+	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios and focuses on how the elements dialog each other.\\
+	In the following chapter, we provide detailed considerations on Mysterium Network, but we faced some limitations: the Mysterium project is still under development, and they plan a full decentralized network will only in 2021. For this reason, the analyzes that regard components not yet implemented, like the payment system, are only theoretical. (!!!) 
 
 	There are several aspects that on a project like Mysterium must be considered to evaluate its design vulnerabilities.\\
 	We classify them based on:
@@ -232,12 +254,27 @@
 	
 	\subsubsection{The position in the network}
 
-	In the simplest configuration, the network includes a starting point that is the service consumer node and an endpoint, which is the service provider node. The VPN tunnel connects the two nodes and encrypts the traffic. The service node, as previously described, is the consumer's exit point to the internet. The provider's internet side is, for now, considered not secured.\\
-	In this configuration, as described by the following image, the provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions to exploit, but, at first glance, this design vulnerability is unavoidable. If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.\\
+	In the simplest configuration, the network includes a starting point that is the service consumer node and an endpoint, which is the service provider node. The VPN tunnel connects the two nodes and encrypts their traffic. The service node, as previously described, is the consumer's exit point to the internet.\\
+	We consider secure the traffic passing through the VPN tunnel because it is encrypted, while not secure the traffic outside the VPN, that is from the provider to the internet.\\
+	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default.\\
+	There is a similar problem for the Tor network. Tor, which stands for The Onion Router, is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
+	(MAYBE DESCRIBE WHY MYSTERIUM AND TOR ARE DIFFERENCES)
+	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The last node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource. A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of emails, setting up malicious exit nodes around the world and sniffing the connection between his nodes and the clear internet.\\
+	Another research found existing malicious nodes in the Tor network with a simple test. They built up a website with a login and a system to count the login attempts. Then, they used multiple Tor paths with different exit nodes to reach the page and try to access it. The system counted more login attempts that the researched have done: this means the exist nodes sniffed the connection and tried to login by themselves.\\
 	
-	An improved configuration has one or more middle points between the consumer and the provider. Those points are called hops, and they are similar to the provider node since they act as traffic forwarder.\\
-	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that regard the traffic shape, with no abilities to understand it. The actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
-	For example, a middle node can slow down the data speed that it forwards. This operation is as simple as fast and does not need to understand the content. It can be made with a Linux package called tc \cite{tc} that stands for Traffic Control.\\
+	In both cases, the use of HTTP instead of HTTPS was crucial. The final goal was to demonstrate the importance of the exit nodes. As we will discuss in the conclusions, to solve this kind of problem is necessary to add another security layer over the Tor or Mysterium networks.  
+
+
+
+
+
+
+
+	In this configuration, as described by the following image, the provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit, but, at first glance, this design vulnerability is unavoidable. \textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
+	
+	An improved configuration has one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
+	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
+	For example, a middle node can slow down the data speed that it forwards. This operation is as simple as fast and does not need to understand the content at all. It can be made with a Linux package called ``tc'' \cite{tc} that stands for Traffic Control.\\
 
 	\begin{verbatim}
 		sudo tc qdisc add dev eth0 root netem delay 500ms
@@ -245,21 +282,19 @@
 		sudo tc qdisc del dev eth0 root netem
 	\end{verbatim}
 
-	With this command every packet sent to the interface eth0 has a delay of 500 milliseconds.\\
-	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down operation. From the consumer side, this poor connection is a quality agreement breach and it affects the service provider reputation. Since the provider can detect the slow speed connection, he can suppose it is packet path problem and can propose to the network to change one or more middle nodes. This is a remediation.
+	With this command, every packet sent to the interface eth0 has a delay of 500 milliseconds.\\
+	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose it is a packet path issue and can propose to the network to change one or more middle nodes. 
 
-	
 	\subsubsection{The flow steps}
 	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network, has a positive balance to the cryptocurrency wallet, and look for a service proposal. They agree on the service cost and issue a payment promise. If the user does not respect the promise...
 
 
 
 
-	
-
-
-
 	\subsubsection{Traffic manipulation}
+
+
+
 
 
 	\subsubsection{Side channels attack and particular scenarios}
@@ -301,22 +336,24 @@
 		 	\subsubsection{liv 5+: http/imap/dns/ntp/etc}
 				analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
 			
+	\subsection{Tests}
 	\subsection{Design solutions for malicious context}
-		\subsubsection{comparing}
+		\subsubsection{comparing data}
 		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
+
 		\subsubsection{comparing hashes}
 		come precedente ma con la gestione degli hash invece che di tutto il dato
 
 
-	\section{Design integration with reputation systems}
-	
-	\subsection{something here}
-	
+	\subsection{Design integration with reputation systems}
+
 		
 \section{Conclusions}
-	\subsection{Tests}
 	\subsection{Future development}
 	\subsection{Considerations}
+
+	The use of Mysterium Network like an end-to-end encryption tool: https://nakedsecurity.sophos.com/2015/06/25/can-you-trust-tors-exit-nodes/
+	Here there is a nice consideration on how bad is an exit point for TOR.
 
 	\pagebreak
 
@@ -353,6 +390,10 @@
 		\bibitem{tc}
 			traffic control
 			https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/
+		\bibitem{exitnodeTOR}
+			exit node TOR network
+			https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all
+
 	\end{thebibliography}
 		
 	\pagebreak
