@@ -12,6 +12,7 @@
 \usepackage{listings}
 \usepackage{array,multirow,graphicx}
 \usepackage{float}
+
 \makeindex
 
 \begin{document}
@@ -33,12 +34,12 @@
 	\subsection{Outline}
 	\subsection{Goal}
 
-	\section{State of the art}
-
-	\subsection{Introduction}
-	The need for privacy is becoming more critical day after day: the massive digitalization of many aspects of our life implicitly exposes us and our data and even the simplest operations which use an internet connection are becoming unsafe.\\
-    In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, following the increase of security attacks. For instance, in 2017, the popular Chrome browser announced it would mark as non-secure any website using the HTTP protocol instead of HTTPS. This move was to encourage the website to use SSL/TLS certificates and make secure the communication between client and server. It's interesting to discover the Netscape Navigator browser has made the first HTTPS version around 1990, but the official RFC publication has been released only in May 2000 \cite{HTTPS}.\\
-	Similar scenario for the VPN: abbreviation for "virtual private network" it's a technical solution to extend a private network across a public network. It creates a virtual point-to-point connection through the use of a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first VPN specification proposal is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems that only lately are beeing relevant. Those problems can be exiting a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
+	\section{Introduction}
+	The need for privacy is becoming more critical day after day. The massive digitalization of many aspects of our life implicitly exposes us and our data and even the simplest operations which use an internet connection are becoming unsafe.\\
+	In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to solve the increase of security attacks. In 2017, for example, the popular Google Chrome browser announced it would mark as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol which uses SSL/TLS certificates, an additional security layer to make secure the communication between clients and servers. Before that date, and in some cases still now, the connections were without any encrypting algorithm. But, the original proposal of HTTPS protocol was made around 1990 by the Netscape Navigator browser.\\
+	The Chrome browser initiative is part of a gobal trend to increase the security level, often achieved encrypting the communication: realtime messages applications, internet protocols like the DNS, industrial systems, and many others.\\
+	Even if internet security has done steps forwards, there still are many situations where the individual is unsafe on the internet.\\
+	A solution can be the VPN: abbreviation for "virtual private network" it's a technical solution to extend a private network across a public network. It creates a virtual point-to-point connection through the use of a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first VPN specification proposal is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems that are becoming relevant. Those problems of different nature are exiting a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
 	Currently, there are commercial solutions that allow users to have a private connection to the company's servers across the world, but there are many security concerns about those solutions. The company can keep the connection logs, inspect the traffic, or sell statistical data.\\
     Some open-source projects were, lately, born to solve these problems. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect through a VPN. The project provides a platform that includes all the components needed to have an efficient, fast, and easy-to-use system: from the discovery to the payment.\\
     
@@ -47,10 +48,8 @@
     The second step focuses on the solutions that can patch those critical aspects and provides a comparison of them with an eye on the practical perspective.
 	
 	\subsection{The world now}
-	We are still in the middle of a large transformation. From the invention of the pc and the birth of the internet, more and more services are becoming digital; more and more people are using those services; more and more bad guys are trying to pull down those services.\\
-
-	But there are differences from some decades ago.\\
-	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data within a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the base of cipher methods.\\
+	The world now is different from some decades ago.\\
+	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data within a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
 	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal attack destinations.\\
 	Third, some technologies are mature enough to provide an excellent alternative to traditional models — for instance, the cryptocurrency model against the bank model. Here, the changes regard the paradigma, and the reasons behind these new approaches are much more than technological.\\
 
@@ -70,17 +69,20 @@
 		https://en.wikipedia.org/wiki/Proof_of_stake
 	\end{verbatim}
 
-	Anonymization: in every network systems, anonymization is a tough challenge. Even more, if privacy is a crucial point. In some countries, the VPN is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country ISPs.\\There are countries, the People's Republic of China for example, where censorship is present and where identity obfuscation is, therefore, necessary to protect yourself. In these cases, the use of a VPN is a solution, as long as a safe company provides it. With the adjective `safe' we mean a company that does not make you or your traffic detectable or even worsts sniffs and crafts your data for malicious actions.\\
+	Technology is becoming an essential tool to exercise the people's rights. There are sides of the world where these rights are not accessible, and people fight to obtain them. For example, in the People's Republic of China, the government built up a firewall to censure the internet. It is called the Great Firewall Of China, abbreviated in GFW, and it is a combination of laws and technologies to control the internal domestic internet, so-called censorship. It blocks social networks, search engines, and many other services that declined the government's request to make clear and detectable the traffic.\\
+	In this context, aspects such as the anonymization, become not only relevant but crucial to be preserved, and they are required for communication systems.\\
+	A solution to obtain identity obfuscation is the VPN. It is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country Internet Service Providers.\\VPNs are provided by companies that often do not act genuinely, making the identity or the traffic detectable or even worsts sniffing and crafting the data for malicious actions.\\
 
 	The decentralized VPN completely changes the paradigma, the design of the infrastructure.\\
 	An analogy can be made with the traditional bank model: as we know, the bank is a centralized entity trusted by definition. What if the bank suddenly becomes untrusted? Cryptocurrencies spread among ourselves, the cryptocurrency owners, and network participants the trusts we put in the bank, using a blockchain as a technical solution. 
 	A similar design is used with decentralized VPN: there is no central entity to control the system, but a significant number of peers, the network, we can choose to connect.
 
-	\subsection{We are our trust}
+	\subsection{Decentralized systems}
 
-	\subsubsection{Decentralized VPNs}
+	\subsubsection{dVPNs}
 
-	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
+	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. It allows the user to create a private tunnel with another user, making encrypted all the traffic between the two points. 
+	The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
 	First of all, the user creates an identity into the system, linked to the payment wallet, using a client application. Then, he connects to the network providing his availability to be a consumer or a provider.\\
 	The consumer user chooses the provider he prefers based on different features such as the region, quality, or cost of the node, and asks for a new connection to that server. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, otherwise called client and server, is established. When the connection correctly ends, the network closes the smart contract, that registers the result of the transaction in the blockchain.\\
 	We outlined the main steps from which we can think of a decentralized VPN more as a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the features a decentralized system so composed can have. (EXPLAIN BETTER THE IDEA)  
@@ -89,6 +91,8 @@
 	As a business project, which aims to earn money, the project has a specific business plan: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. For every cryptocurrency transaction, the network applies a fee that wants, substantially, to create a market to manage.\\
 	Each couple of entities, a consumer and a provider, agree on a transaction paid using cryptocurrency in the face of the used service. This transaction is regulated by an Ethereum smart contract signed by both sides and requires a fee to be closed. This fee is not the Ethereum fee, generally called gas, but the precisely Mysterium source of earnings. For this reason, Mysterium and other projects created their coins used to buy and sell internet bandwidth between the nodes inside the network. The coin name is MYST for Mysterium Network and, as a regular cryptocurrency, it is possible to convert MYST to ETH and vice versa.\\
 	Although a node can decide to be a consumer or a provider at any moment, the two entities are different, and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth. (EXPLAIN BETTER)\\
+
+	(BID AND ASK GRAPHIC DEPENDING ON THE FEES)
 
 	\begin{verbatim}
 		concetti introduttivi
@@ -173,19 +177,23 @@
 	\subsection{setup}
 
 	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.\\
-	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\They can be of two types, TAP or TUN.\\
-	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is the number 2. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
-	On the other hand, the TUN type is, in the ISO model, one layer above, working at level 3. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
+
+	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\
+	They can be of two types, TAP or TUN.\\
+	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is number two. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
+	On the other hand, the TUN type is, in the ISO model, one layer above, working at level three. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
 	Usually, the TUN type is the most used, since the TAP type brings some limitations such as it cannot be used with Android or iOS devices, causes higher overhead on the VPN tunnel, and scales poorly.\\
 	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
 	The virtual TUN interface created by OpenVPN is tun0, the public interface is eth0, and the internal interface is eth1.\\
 
 	\includegraphics[width=1\textwidth]{"images/openvpn_routing_setup.PNG"}
 
-	When a packet arrives at the eth1 interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\On the other direction, when a packet arrives at eth0 interface, ``iptables'' and the routing engine apply their rules to filter and masquerade and then forward it to tun0 interface. Then, OpenVPN picks it up, encrypts the data, and sends it to the public eth1 interface.\\
-	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port the traffic that its OpenVPN client decrypts. \\
+	When a packet arrives at the eth1 interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\
+	In the other direction, when the packet arrives at ``eth0'' interface, ``iptables'' and the routing engine apply their rules to filter and masquerade and then forward it to ``tun0'' interface. Then, OpenVPN picks it up, encrypts the data, and sends it to the public ``eth1'' interface.\\
+	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
 
 	\includegraphics{"images/openvpn_tun_interface.jpg"}
+
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
 	\subsubsection{iptables}
@@ -203,7 +211,7 @@
 
 	IMAGE OF THE POINTS IN THE FLOW WHERE THE HOOKS ARE
 	
-	Iptables is substantially a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
+	Iptables is mainly used as a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
 	The available tables are the filter table, the NAT table, the Mangle table, the Raw table, and the Security table.\\
 	The chains correspond to the available hooks, therefore iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
 	The following table explains the triggering logic and execution precedence.\\
@@ -221,13 +229,13 @@
 	\textbf{SNAT (NAT)} & & X & & & X
 	\end{tabular}
 
-	The packet triggers the hooks from the first row going down to the bottom of the table. It enters the chain depending on the routing decisions that are made, on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
+	The packet triggers the hooks from the first row going down to the bottom of the table. It enters the chain depending on the routing decisions that are made based on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
 
 	The chain traversal order is the following:
 	\begin{itemize}
-		\item Incoming packets destined for the local system: PREROUTING - > INPUT
-		\item Incoming packets destined to another host: PREROUTING - > FORWARD - > POSTROUTING
-		\item Locally generated packets: OUTPUT - > POSTROUTING
+		\item Incoming packets destined for the local system: PREROUTING - INPUT
+		\item Incoming packets destined to another host: PREROUTING - FORWARD - POSTROUTING
+		\item Locally generated packets: OUTPUT - POSTROUTING
 	\end{itemize}
 	
 	Every chain is a list of rules. Every packet is checked against each rule and, if the matching component checks, iptables executes an action.\\
@@ -238,16 +246,18 @@
 
 	LITTLE IMAGE OF CHAIN JUMP ACTION
 
+	With ``iptables'', it is possible to build firewalls and control systems to efficiently manage the computer network.
+
+
 	\subsection{Design vulnerabilities}
 
-	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios and focuses on how the elements dialog each other.\\
-	In the following chapter, we provide detailed considerations on Mysterium Network, but we faced some limitations: the Mysterium project is still under development, and they plan a full decentralized network will only in 2021. For this reason, the analyzes that regard components not yet implemented, like the payment system, are only theoretical. (!!!) 
+	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios where the focus is on how the elements dialog each other.\\
+	In the following chapter, we provide detailed considerations on Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because, Mysterium, at this time, does not implement them yet. Mysterium project is under development which plan to have a full decentralized network in 2021. 
 
-	There are several aspects that on a project like Mysterium must be considered to evaluate its design vulnerabilities.\\
-	We classify them based on:
+	We classify the several aspects that, on a project like Mysterium, must be considered to evaluate its design vulnerabilities based on:
 	\begin{itemize}
-		\item the position in the network: the starting point, the endpoint or the middle point;
-		\item the step of the complete flow: the service proposals, the promise issuing, the transaction closing, and others;
+		\item the position in the network: starting, middle or endpoint point;
+		\item the step of the complete flow: the service proposals, the promise issuing, the transaction closing, and other steps;
 		\item the type of traffic manipulation: sniffing, filtering or crafting the data;
 		\item side channels attack and other particular scenarios.
 	\end{itemize}
@@ -255,34 +265,36 @@
 	\subsubsection{The position in the network}
 
 	In the simplest configuration, the network includes a starting point that is the service consumer node and an endpoint, which is the service provider node. The VPN tunnel connects the two nodes and encrypts their traffic. The service node, as previously described, is the consumer's exit point to the internet.\\
-	We consider secure the traffic passing through the VPN tunnel because it is encrypted, while not secure the traffic outside the VPN, that is from the provider to the internet.\\
-	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default.\\
-	There is a similar problem for the Tor network. Tor, which stands for The Onion Router, is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
-	(MAYBE DESCRIBE WHY MYSTERIUM AND TOR ARE DIFFERENCES)
-	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The last node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource. A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of emails, setting up malicious exit nodes around the world and sniffing the connection between his nodes and the clear internet.\\
-	Another research found existing malicious nodes in the Tor network with a simple test. They built up a website with a login and a system to count the login attempts. Then, they used multiple Tor paths with different exit nodes to reach the page and try to access it. The system counted more login attempts that the researched have done: this means the exist nodes sniffed the connection and tried to login by themselves.\\
+	We consider secure the traffic passing through the VPN tunnel because it is encrypted, not secure otherwise, that is from the provider to the internet.\\
+
+	SIMPLE NETWORK CONFIGURATION WITH AN EXIT NODE\\
+
+	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default and without specific precautions can be the weak link of the system.\\
+	The Tor network has a similar problem. Tor stands for The Onion Router, and it is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
+	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The end node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource.\\
+	A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of diplomatic emails. He set up malicious exit nodes around the world and sniffed the connection between his nodes and the clear internet.\\
+	To discover malicious nodes in the Tor network, another researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means the exit nodes sniffed the connections, caught the username and password, and tried to login by themselves.\\
+	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, was necessary, but the research aim was to demonstrate the exit nodes' critical role.\\
+	The conclusion is that Tor's end nodes are the weak link of the system when users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
+
+	(MAYBE DESCRIBE WHY MYSTERIUM AND TOR ARE DIFFERENCES)\\
+
+
+	The figure X describes an end node configuration.\\
+	The provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X. \textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
 	
-	In both cases, the use of HTTP instead of HTTPS was crucial. The final goal was to demonstrate the importance of the exit nodes. As we will discuss in the conclusions, to solve this kind of problem is necessary to add another security layer over the Tor or Mysterium networks.  
-
-
-
-
-
-
-
-	In this configuration, as described by the following image, the provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit, but, at first glance, this design vulnerability is unavoidable. \textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
-	
-	An improved configuration has one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
+	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
 	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
-	For example, a middle node can slow down the data speed that it forwards. This operation is as simple as fast and does not need to understand the content at all. It can be made with a Linux package called ``tc'' \cite{tc} that stands for Traffic Control.\\
+	Many traffic shapes operations can be performed on a connection. The simplest and the fastest is about traffic speed, and it does not need to understand the content at all. A middle node can slow down the data speed that it forwards. We used a Linux package called ``tc'' \cite{tc} that stands for Traffic Control that is specifically created for service quality analysis.\\
 
+	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface ``eth0''.\\
+	
 	\begin{verbatim}
 		sudo tc qdisc add dev eth0 root netem delay 500ms
 		# and turn it off with
 		sudo tc qdisc del dev eth0 root netem
 	\end{verbatim}
 
-	With this command, every packet sent to the interface eth0 has a delay of 500 milliseconds.\\
 	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose it is a packet path issue and can propose to the network to change one or more middle nodes. 
 
 	\subsubsection{The flow steps}
@@ -303,38 +315,50 @@
 	\includegraphics[width=\linewidth]{"images/client_server_vpn_connection.png"}
 
 
+	\section{Craftberry}
+
+	\subsection{The idea}
+	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic in the exit node.\\
+	Craftberry can catch the incoming or outgoing packets and executes different actions accurately implemented to cover many attack cases.\\
+
+
+	The software is written in C and C++.\\
+	
+	It uses the ``iptable'' ``nfqueue extension'' for inline catching the packet and express a verdict.\\
+
+	It uses the PcapPlusPlus library to parse and craft the packet.\\
 
 	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
-	Note:
+	First 
+
+
 	\begin{itemize}
-		\item https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture
 		\item http://linux-training.be/networking/ch14.html
 	\end{itemize}
-	
-	\subsection{Craftberry, a demo tool}
-			useful tips
-			\begin{verbatim}
-				http://unixwiz.net/techtips/gnu-c-attributes.html
-				https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
-				https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
-				https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
-			\end{verbatim}
+
+	\begin{verbatim}
+		http://unixwiz.net/techtips/gnu-c-attributes.html
+		https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
+		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
+		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
+	\end{verbatim}
 			
-			\subsubsection{liv 2: arp, vlan tagging}
-			\subsubsection{liv 3: ip, icmp}
-			\subsubsection{liv 4: tcp/udp}
-			\subsubsection{side attacks}
-				- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
-				- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
-			
-			\begin{itemize}
-				\item copia x volte dei pacchetti (TCP/UDP)
-				\item gonfiamento dei pacchetti nei campi che poi verranno corretti dai check (TCP/UDP)
-				\item modifica del payload se in chiaro (TCP/UDP)
-				\item azione positiva sul payload (UDP), ad esempio cifratura chacha20
-			\end{itemize}
-		 	\subsubsection{liv 5+: http/imap/dns/ntp/etc}
-				analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
+	\subsection{Description}
+		\subsubsection{liv 2: arp, vlan tagging}
+		\subsubsection{liv 3: ip, icmp}
+		\subsubsection{liv 4: tcp/udp}
+		\subsubsection{side attacks}
+			- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
+			- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
+		
+		\begin{itemize}
+			\item copia x volte dei pacchetti (TCP/UDP)
+			\item gonfiamento dei pacchetti nei campi che poi verranno corretti dai check (TCP/UDP)
+			\item modifica del payload se in chiaro (TCP/UDP)
+			\item azione positiva sul payload (UDP), ad esempio cifratura chacha20
+		\end{itemize}
+		\subsubsection{liv 5+: http/imap/dns/ntp/etc}
+			analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
 			
 	\subsection{Tests}
 	\subsection{Design solutions for malicious context}
