@@ -283,16 +283,23 @@
 	To discover malicious nodes in the Tor network, another researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means the exit nodes sniffed the connections, caught the username and password, and tried to login by themselves.\\
 	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role.\\
 	The conclusion is that Tor's end nodes are the weak link of the system when users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
-	For this reason, many of the conceptual vulnerabilities that a Tor exit node has can be applied to the Mysterium Network exit node. What makes Mysterium Network more vulnerable is the final use the users make of it.\\
-	Tor is designed and principally used for critical situations such as for political, 
+	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor, can be applied to an exit node of Mysterium Network.\\
 
 	(MAYBE DESCRIBE WHY MYSTERIUM AND TOR ARE DIFFERENCES)\\
 
-
-	Figure X describes an end node configuration.\\
-	The provider can see all the passing traffic, both incoming and outgoing, performing all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X. \textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
-	
+	Figure X describes the network configuration of a Mysterium end node.\\
+	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
+	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
 	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
+	Mysterium did not implement those hops in the network yet. Therefore we make a hypothesis on its possible implementation.\\
+	As well as for the provider nodes, we can suppose there is a distributed list of the forwarder nodes. When the consumer chooses the provider, and they agree to issue a payment promise, the network picks a node from that list to place it as the hop. The middle node receives a new VPN connection from the consumer and creates a new VPN to the provider. He technically builds and manages two different VPN tunnels: it takes encrypted data from one side, decrypts them, and encrypts again to send on the other one.\\
+	The scenario is similar to the end node because the middle node holds unencrypted data in the forwarding action.\\
+	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, from the tips, where all the hops can perform unwanted operations on the traffic.\\
+
+	IMAGE OF MULTIHOP CONNECTION.\\
+
+	Mandatory would be an additional encryption layer end to end that the consumer and provider have to manage. The second encryption solves the multihop data exposing, but it increases the computational load.\\
+	
 	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
 	Many traffic shapes operations can be performed on a connection. The simplest and the fastest is about traffic speed, and it does not need to understand the content at all. A middle node can slow down the data speed that it forwards. We used a Linux package called \tag{tc} \cite{tc} that stands for Traffic Control that is created and used for service quality analysis.\\
 
@@ -323,7 +330,6 @@
 	\subsection{The idea}
 	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic on the exit node.\\
 	It is an application which runs via the command-line interface, that can catch the incoming or outgoing packets. It is in line with the packet flow and executes different actions accurately implemented to cover many attack cases.\\
-
 
 	The software is written in C and C++.\\
 	
@@ -384,7 +390,7 @@
 	\subsection{Considerations}
 
 	The use of Mysterium Network like an end-to-end encryption tool: https://nakedsecurity.sophos.com/2015/06/25/can-you-trust-tors-exit-nodes/
-	Here there is an helpful consideration of how critical is an exit point for TOR.
+	Here there is a helpful consideration of how critical is an exit point for TOR.
 
 	\pagebreak
 
