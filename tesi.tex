@@ -15,11 +15,21 @@
 \usepackage{xcolor}
 \usepackage{tcolorbox}
 
-\definecolor{mycolor}{rgb}{0.122, 0.435, 0.698}
+\lstset
+{
+    language=bash,
+	basicstyle=\ttfamily,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false
+}
 
 \newtcbox{\tag}{on line,
-  colframe=gray,colback=lightgray,
-  boxrule=0.5pt,arc=2pt,boxsep=0pt,left=2pt,right=2pt,top=1.5pt,bottom=0.5pt}
+  colframe=lightgray,colback=lightgray,
+  boxrule=0.5pt,arc=2pt,boxsep=0pt,left=2pt,right=2pt,top=1.5pt,bottom=1.5pt}
 
 \makeindex
 
@@ -265,7 +275,7 @@
 	\begin{itemize}
 		\item the position in the network: starting, middle or endpoint point;
 		\item the step of the complete flow: the service proposals, the promise issuing, the transaction closing, and other steps;
-		\item the type of traffic manipulation: sniffing, filtering or crafting the data;
+		\item the operations on the passing data: sniffing, filtering or crafting the data;
 		\item side channels attack and other particular scenarios.
 	\end{itemize}
 	
@@ -279,7 +289,7 @@
 	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default and without specific precautions can be the weak link of the system.\\
 	The Tor network has a similar problem. Tor stands for The Onion Router, and it is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
 	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The end node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource.\\
-	A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of diplomatic emails. He set up malicious exit nodes around the world and sniffed the connection between his nodes and the clear internet.\\
+	A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of diplomatic emails setting up malicious exit nodes around the world and sniffing the connection between them and the clear internet.\\
 	To discover malicious nodes in the Tor network, another researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means the exit nodes sniffed the connections, caught the username and password, and tried to login by themselves.\\
 	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role.\\
 	The conclusion is that Tor's end nodes are the weak link of the system when users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
@@ -292,35 +302,53 @@
 	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
 	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
 	Mysterium did not implement those hops in the network yet. Therefore we make a hypothesis on its possible implementation.\\
-	As well as for the provider nodes, we can suppose there is a distributed list of the forwarder nodes. When the consumer chooses the provider, and they agree to issue a payment promise, the network picks a node from that list to place it as the hop. The middle node receives a new VPN connection from the consumer and creates a new VPN to the provider. He technically builds and manages two different VPN tunnels: it takes encrypted data from one side, decrypts them, and encrypts again to send on the other one.\\
+	As well as for the provider nodes, we can suppose there is a distributed list of the forwarder nodes. When the consumer chooses the provider, and they agree to issue a payment promise, the network picks a node from that list to place it as the hop. The middle node receives a new VPN connection from the consumer and creates a new VPN connection to the provider. He technically builds and manages two different VPN tunnels: it takes encrypted data from one side, decrypts them, and encrypts again to send on the other one.\\
 	The scenario is similar to the end node because the middle node holds unencrypted data in the forwarding action.\\
-	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, from the tips, where all the hops can perform unwanted operations on the traffic.\\
+	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, between the tips, where all the hops can perform unwanted operations on the traffic.\\
 
 	IMAGE OF MULTIHOP CONNECTION.\\
 
-	Mandatory would be an additional encryption layer end to end that the consumer and provider have to manage. The second encryption solves the multihop data exposing, but it increases the computational load.\\
+	Mandatory would be an additional encryption layer end to end that the consumer and provider have to manage. This second encryption solves the multihop data exposing: the nodes manage encrypted data because they are inside the VPN tunnel. The cons are that it increases the computational load.\\
+	The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
+	Many traffic shapes operations can be performed on a connection: the simplest and the fastest is on the traffic speed, and it does not need to understand the content at all.\\
+	A demonstration of how a middle node can slow down the data speed that it forwards is using a Linux package called \tag{tc} \cite{tc}, which stands for Traffic Control and that is created and used for service quality analysis.\\
+	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \tag{eth0}.\\
 	
-	These hops are nodes that manage encrypted data because they are inside the VPN tunnel, so they do not understand the data meaning. The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
-	Many traffic shapes operations can be performed on a connection. The simplest and the fastest is about traffic speed, and it does not need to understand the content at all. A middle node can slow down the data speed that it forwards. We used a Linux package called \tag{tc} \cite{tc} that stands for Traffic Control that is created and used for service quality analysis.\\
-
-	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface ``eth0''.\\
-	
-	\begin{verbatim}
+	\begin{lstlisting}
 		sudo tc qdisc add dev eth0 root netem delay 500ms
-		# and turn it off with
+	\end{lstlisting}
+	
+	Here is what each option means:
+	\begin{itemize}
+		\item qdisc: modify the scheduler (aka queuing discipline)
+		\item add: add a new rule
+		\item dev eth0: rules will be applied on device eth0
+		\item root: modify the outbound traffic scheduler (aka known as the egress qdisc)
+		\item netem: use the network emulator to emulate a WAN property
+		\item delay: the network property that is modified
+		\item 500ms: introduce delay of 500 ms
+	\end{itemize}
+
+	With the following command, we delete the delay rule. 
+	\begin{lstlisting}[frame=single]
 		sudo tc qdisc del dev eth0 root netem
-	\end{verbatim}
+	\end{lstlisting}
 
 	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose it is a packet path issue and can propose to the network to change one or more middle nodes. 
 
 	\subsubsection{The flow steps}
 	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network, has a positive balance to the cryptocurrency wallet, and look for a service proposal. They agree on the service cost and issue a payment promise. If the user does not respect the promise...
 
-	\subsubsection{Traffic manipulation}
+	\subsubsection{Operations on the passing data}
+
+	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
+	The three operations that the node can do are sniffing, filtering, and crafting the passing data.\\
+
+
 
 
 	\subsubsection{Side channels attack and particular scenarios}
-
+	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
 
 	\includegraphics[width=\linewidth]{"images/client_server_vpn_connection.png"}
 
