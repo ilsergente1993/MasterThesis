@@ -291,12 +291,14 @@
 	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The end node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource.\\
 	A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of diplomatic emails setting up malicious exit nodes around the world and sniffing the connection between them and the clear internet.\\
 	To discover malicious nodes in the Tor network, another researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means the exit nodes sniffed the connections, caught the username and password, and tried to login by themselves.\\
-	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role.\\
-	The conclusion is that Tor's end nodes are the weak link of the system when users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
-	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor, can be applied to an exit node of Mysterium Network.\\
-
-	(MAYBE DESCRIBE WHY MYSTERIUM AND TOR ARE DIFFERENCES)\\
-
+	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role because there still are many protocols and applications that do not use encryption for their traffic.\\
+	The conclusion is that Tor's end nodes are the weak link of the system when the users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
+	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor, can be applied to a Mysterium Network exit node. But we want to point out a difference between Tor and Mysterium networks: the type of target users of the two projects.\\
+	The Tor's users use it to accomplish specific online activities where the identity obfuscation is mandatory. For the rest of the actions, Tor is not efficient or does not work at all.\\
+	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume a continuous connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
+	This scenario, however, introduces move vulnerabilities simply because the network is used for more activities, and many protocols and applications still use unencrypted communication.\\
+	
+	
 	Figure X describes the network configuration of a Mysterium end node.\\
 	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
 	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
@@ -338,34 +340,80 @@
 
 	\subsubsection{The flow steps}
 	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network, has a positive balance to the cryptocurrency wallet, and look for a service proposal. They agree on the service cost and issue a payment promise. If the user does not respect the promise...
+	TODO\\
 
 	\subsubsection{Operations on the passing data}
 
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
-	The three operations that the node can do are sniffing, filtering, and crafting the passing data.\\
-
-
-
+	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different levels where the lowest have no encryption at all.\\ Based on this consideration, the operations that a node can potentially do on the passing data are sniffing, filtering, and crafting.\\
+	TODO\\
 
 	\subsubsection{Side channels attack and particular scenarios}
+	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
+	In Mysterium Network, the billing method is per the amount of transferred data or per time. Considering the first method, if the exit node is able to higher the volume of the traffic to the consumer, it means the exit node earns money without providing an equal service. A well-designed attack can perform the traffic shaping hiding the increase of traffic volume with network inefficiency.\\
+	In the "tcp/udp" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using tcp and udp protocols with no content understanding. A more refined attack would be modifying the packet specifically for the protocol, forcing the error in the communication so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
+	
 	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
 
 	\includegraphics[width=\linewidth]{"images/client_server_vpn_connection.png"}
-
 
 	\section{Craftberry}
 
 	\subsection{The idea}
 	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic on the exit node.\\
-	It is an application which runs via the command-line interface, that can catch the incoming or outgoing packets. It is in line with the packet flow and executes different actions accurately implemented to cover many attack cases.\\
+	It is an application which runs via the command-line interface, that catches the incoming or outgoing packets. The packet catching is in line with the packet flow, and it executes different actions accurately implemented to cover many attack cases.\\
 
-	The software is written in C and C++.\\
+	The software is entirely written in C and C++.\\
 	
+	We propose part of the output provided by the application when the help command is used:
+	\begin{lstlisting}[
+		basicstyle=\small, %or \small or \footnotesize etc.
+	]
+		-a: Use the specified action
+		-i: Use the specified interface, tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
+		-t: Use the specified timeout in seconds, if not defined it runs until some external signals stop the execution (e.g. ctrl+c)
+		-l: Write all the crafted and generated traffic into a pcapng file having name passed by parameter or, if the parameter is equal to 'default', the name is 'out_<epoch_ms>.pcapng'
+		-d: Direction filtering by and perform the crafting {IN, OUT}, default = IN
+		-v: Shows verbose debug application logs
+		-h: Displays this help message and exits
+	\end{lstlisting}
+		
+	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the actions into two categories: attack or defense. The attack actions are the most interesting for this research document, but we also implemented a possible solution that protects the passing traffic encrypting the packet content.\\
+	The attacks differ on which ISO-OSI layer the packet is crafted.\\
+
+	IMAGE OF THE ISO OSI LAYERS MODEL\\
+	
+	The attack actions are:
+	\begin{itemize}
+		\item Layer 2: VLanDoubleTagging
+		\item Layer 3: IP, icmp
+		\item Layer 4: tcp/udp
+		\item Layer 5 and above: HTTP, DNS, NTP
+	\end{itemize}
+
+	The defense action is for Layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a Salsa20 modification published in 2008. It is a particularly efficient stream cipher.\\
+
+	\subsubsection{VLan double tagging}
+	use the double tagging attack method on cisco routers
+
+
+	\subsubsection{IP}
+
+	\subsubsection{icmp}
+
+	\subsubsection{tcp/udp}
+	
+	The context of the attack supposes that the client and the server have an end to end encryption connection, thus supplementary to the VPN encryption. The exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
+	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of copied packet to the consumer.\\
+	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.
+
+	We have implemented a demonstrative example of this attack using the protocols tcp and udp.\\
+
 	\subsubsection{nfqueue extension}
-	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is a C/C++ application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
+	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
 
-	It uses the \tag{iptable} ``nfqueue extension'' for inline catching the packet and expressing a verdict.\\
+	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
 
 	It uses the PcapPlusPlus library to parse and craft the packet.\\
 
@@ -392,12 +440,6 @@
 			- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
 			- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 		
-		\begin{itemize}
-			\item copia x volte dei pacchetti (TCP/UDP)
-			\item gonfiamento dei pacchetti nei campi che poi verranno corretti dai check (TCP/UDP)
-			\item modifica del payload se in chiaro (TCP/UDP)
-			\item azione positiva sul payload (UDP), ad esempio cifratura chacha20
-		\end{itemize}
 		\subsubsection{liv 5+: http/imap/dns/ntp/etc}
 			analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
 			
