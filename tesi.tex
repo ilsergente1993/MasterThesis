@@ -1,4 +1,4 @@
-\documentclass[]{article}
+\documentclass[12pt]{article}
 
 %opening
 \title{Malicious context and workaround analysis of decentralized VPN:\\the case of Mysterium Network}
@@ -130,7 +130,7 @@
 	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
 	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
 
-	\includegraphics[width=0.5\linewidth]{"images/mysterium_architecture.png"}
+	\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}
 		
 	As a general workflow description, Mysterium starts by collecting all the agents' service proposals and presents them to the clients. Then it registers the client's intention to pay for the agent's service chosen by the user and creates the VPN connection between the two points. The outcome of each transaction is saved in the blockchain.\\
 	
@@ -150,7 +150,7 @@
 	Furthermore, the user benefits in using the same identity because it is possible to rebuild his transaction history and his balance from the Ethereum blockchain, making the user more predictable and thus trustworthy for service providers.\\
 
 	\begin{figure}
-		\includegraphics[width=0.5\linewidth]{"images/mysterium_identity_creation.png"}
+		\includegraphics[width=0.5\linewidth]{images/mysterium_identity_creation.png}
 		\caption{The Mysterium identity creation steps}
 	\end{figure}
 
@@ -159,7 +159,7 @@
 	The \textbf{service discovery} provides the list of service proposals available in the network. The service posts its service offer characterized by some service parameters: those parameters can be the VPN application the provider supports, the provider's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append the proposal to the blockchain, making it publicly available for everyone.\\
 
 	\begin{figure}
-		\includegraphics[width=0.5\linewidth]{"images/mysterium_service_announcement.png"}
+		\includegraphics[width=0.5\linewidth]{images/mysterium_service_announcement.png}
 		\caption{The Mysterium service announcement steps}
 	\end{figure}
 	
@@ -203,13 +203,13 @@
 	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
 	The virtual TUN interface created by OpenVPN is tun0, the public interface is eth0, and the internal interface is eth1.\\
 
-	\includegraphics[width=1\textwidth]{"images/openvpn_routing_setup.PNG"}
+	\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.PNG}
 
 	When a packet arrives at the ``eth1'' interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\
 	In the other direction, when the packet arrives at ``eth0'' interface, ``iptables'' and the routing engine apply their rules to filter and masquerade, and then they forward it to ``tun0'' interface. Thus, OpenVPN picks it up, encrypts the data, and sends it to the public ``eth1'' interface.\\
 	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
 
-	\includegraphics{"images/openvpn_tun_interface.jpg"}
+	\includegraphics{images/openvpn_tun_interface.jpg}
 
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
@@ -355,7 +355,7 @@
 	
 	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
 
-	\includegraphics[width=\linewidth]{"images/client_server_vpn_connection.png"}
+	\includegraphics[width=\linewidth]{images/client_server_vpn_connection.png}
 
 	\section{Craftberry}
 
