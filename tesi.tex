@@ -331,7 +331,8 @@
 		\item 500ms: introduce delay of 500 ms
 	\end{itemize}
 
-	With the following command, we delete the delay rule. 
+	With the following command, we delete the delay rule.\\
+
 	\begin{lstlisting}[frame=single]
 		sudo tc qdisc del dev eth0 root netem
 	\end{lstlisting}
@@ -345,8 +346,23 @@
 	\subsubsection{Operations on the passing data}
 
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
-	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different levels where the lowest have no encryption at all.\\ Based on this consideration, the operations that a node can potentially do on the passing data are sniffing, filtering, and crafting.\\
-	TODO\\
+	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different structure levels where the lowest have no encryption at all.\\ Based on this consideration, the operations that a node can potentially do on the passing data can be grouped in sniffing, filtering, and crafting.\\
+	The first step to manipulate the data is to catch it. To do so, we start the Mysterium Node on our test server and then establish the connection with a Mysterium client from another computer. We used \tag{tcpdump}, a powerful tool to dump the traffic on a network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
+	The command is the following:\\
+	
+	\begin{lstlisting}[frame=single]
+		todo
+	\end{lstlisting}
+	where the parameters are:....
+
+	The output is:\\
+	
+	\begin{lstlisting}[frame=single]
+		todo
+	\end{lstlisting}
+	
+	
+	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
 
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
@@ -411,13 +427,12 @@
 
 	\subsubsection{nfqueue extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
-	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
+	The function gets the queue details and the packet payload, craft the packet, and then send a verdict to the iptables module. 
 
-	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
+	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)\\
 
 	It uses the PcapPlusPlus library to parse and craft the packet.\\
 
-	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
 	
 
 
