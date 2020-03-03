@@ -1,0 +1,20 @@
+
+	\textbf{problemi individuati}
+	\begin{enumerate}
+		\item valutazione della reputazione dell'agent da parte del client
+		\item valutazione della reputazione dell'agent da parte della Net
+	\end{enumerate}
+	
+	\textbf{soluzioni proposta}
+	\textbf{Proposte per la valutazione della reputazione dell'agent da parte del client}
+	
+	Le seguenti proposte sono metodi di verifica del corretto comportamento ed hanno come scopo finale la valutazione della reputazione degli agent
+	\begin{itemize}
+		\item Dati civetta: modifiche al client che con scadenze richiede una o più risorse dal valore noto e verifica che siano integre. Le scadenze possono essere regolari/random/all’inizio frequenti/dipendenti dalla reputazione dell’agent. È necessario avere delle risorse distribuite e disponibili: potrebbero essere i nodi stessi della rete (altri agent).
+		\item Dati duplicati: modifiche al client che implementa la possibilità di connessione con più agent. Dopo la richiesta il client compara i dati ottenuti dalle due fonti
+		\begin{itemize}
+			\item Hash *: (soluzione aggiuntiva) I nodi sono generalmente in posizioni migliori dei client in termini di velocità. L’idea è quella di far generare un hash dei dati che il client richiede ad un altro nodo fuori dal servizio primario, così da comparare gli hash e non tutto il dato.
+			Inoltre, se la richiesta la faccio a molti più nodi posso intrinsicamente verificare quali modificano i dati nel network.
+		\end{itemize}
+		\item Applicazione di modelli di reputazione (Eigentrust): attualmente non studiato
+	\end{itemize}

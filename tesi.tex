@@ -52,23 +52,24 @@
 	\subsection{Goal}
 
 	\section{Introduction}
-	The need for privacy is becoming more critical day after day. The massive digitalization of many aspects of our life implicitly exposes us and our data and even the simplest operations which use an internet connection are becoming unsafe.\\
-	In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to solve the increase of security attacks. In 2017, for example, the popular Google Chrome browser announced it would mark as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make secure the communication between clients and servers. Before that date, and in some cases, the connections were without any encrypting algorithm. But, the original proposal of HTTPS protocol was made around 1990 by the Netscape Navigator browser.\\
-	The Chrome browser initiative is part of a global trend to increase the security level, often achieved encrypting the communication: realtime messages applications, internet protocols like the DNS, industrial systems, and many others.\\
-	Even if internet security has done steps forwards, there still are many situations where the individual is unsafe on the internet.\\
-	A solution can be the VPN: abbreviation for "virtual private network" it's a technical solution to extend a private network across a public network. It creates a virtual point-to-point connection through the use of a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first VPN specification proposal is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems that are becoming relevant. Those problems of different nature are exiting a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
-	Currently, there are commercial solutions that allow users to have a private connection to the company's servers across the world, but there are many security concerns about those solutions. The company can keep the connection logs, inspect the traffic, or sell statistical data.\\
-    Some open-source projects were, lately, born to solve these problems. Their goal is to revolution the idea of VPN and its uses, building a rich network of peers where two nodes can connect through a VPN. The project provides a platform that includes all the components needed to have an efficient, fast, and easy-to-use system: from the discovery to the payment.\\
+	Privacy is increasingly becoming a central topic of discussion in many different fields, as the need to protect our data is becoming critical. The massive digitalization of many aspects of our life implicitly exposes us, and our data to possible attacks. Even the simplest operations over the internet are becoming unsafe.\\
+	In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to prevent increasing attacks to users' security. For instance, in 2017 Google Chrome, the popular browser, announced that it would have marked as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make the communication between clients and servers secure. Before that, connections were not protected by any encryption algorithm.\\
+	Even though the first HTTPS protocol was proposed by Netscape Navigator b in 1990, it is only in more recent years that we stated assisting to a global trend to increase security levels, often achieved BY encrypting communications.\\
+	The Chrome browser initiative is part of a global trend to increase the security level, often achieved encrypting the communication: instant messages applications, internet protocols like the DNS, industrial system infrastructures, and many others.\\
+	Although the level of security of the internet has substantially increased, there is still a wide range of situations and scenarios in which the individual user browsers the internet in an unsafe way.\\
+	A solution to increase the security level is provided by the Virtual Private Network (VPN), a technical solution that allows extending a private network across a public network. It creates a virtual point-to-point connection by using a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first proposal of the VPN specification is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems of various nature, such as to exit a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
+	Currently, there are commercial solutions that allow users to have a private connection to the company's servers across the world, but there are many security concerns about those solutions. These companies can keep the connection logs, inspect the traffic, or sell statistical data.\\
+    Some open-source projects were, lately, born to solve these issues. Their goal is to revolutionize the idea of VPN and its uses, building a rich network of peers where two nodes can connect through a VPN. The projects provide a platform that includes all the components needed to have an efficient, fast, and easy-to-use system, from the discovery to the payment.\\
     
-    In this research document, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and design vulnerabilities on, owns by the decentralized architecture, more than the Mysterium project itself.\\
+    In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
 	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
-    The second step focuses on the solutions that can patch those critical aspects and provides a comparison of them with an eye on the practical perspective.
+    Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
 	
 	\subsection{The world now}
-	The world now is different from some decades ago.\\
-	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data within a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
-	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal attack destinations.\\
-	Third, some technologies are mature enough to provide an excellent alternative to traditional models — for instance, the cryptocurrency model against the bank model. Here, the changes regard the paradigma, and the reasons behind these new approaches are much more than technological.\\
+	The world is changing at a fast pace.\\
+	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data in just a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed increases the computational power, and it is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
+	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal attack destination.\\
+	Third, some technologies are mature enough to provide an excellent alternative to traditional models — for instance, the cryptocurrency model against the bank model. Here, the changes are in the paradigm, and the reasons behind these new approaches are much more than technological.\\
 
 	\textit{The security noun is changing the meaning inside the people's minds, from "how thick is my bank caveau" to "how long my bank requires my new online account password"}
 
@@ -86,12 +87,12 @@
 		https://en.wikipedia.org/wiki/Proof_of_stake
 	\end{verbatim}
 
-	Technology is becoming an essential tool to exercise the people's rights. There are sides of the world where these rights are not accessible, and people fight to obtain them. For example, in the People's Republic of China, the government built up a firewall to censure the internet. It is called the Great Firewall Of China, abbreviated in GFW, and it is a combination of laws and technologies to control the internal domestic internet, so-called censorship. It blocks social networks, search engines, and many other services that declined the government's request to make clear and detectable the traffic.\\
-	In this context, aspects such as the anonymization, become not only relevant but crucial to be preserved, and they are required for communication systems.\\
-	A solution to obtain identity obfuscation is the VPN. It is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country Internet Service Providers.\\VPNs are provided by companies that often do not act genuinely, making the identity or the traffic detectable or even worsts sniffing and crafting the data for malicious actions.\\
+	Technology is becoming an essential tool to exercise the people's rights. There are areas of the world where these rights are not accessible, and people fight to obtain them. For example, in the People's Republic of China, the government built a firewall to censure the internet. It is called the Great Firewall Of China, abbreviated in GFW, and it is a combination of laws and technologies to control the internal domestic internet, so-called censorship. It blocks social networks, search engines, and many other services that declined the government's request to make the traffic clear and detectable.\\
+	In this context, aspects such as anonymization, become not only relevant but crucial to be preserved.\\
+	As for anonymization, a solution to obtain identity obfuscation is the VPN. It is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country Internet Service Providers.\\VPNs are provided by companies that often do not act genuinely, making the identity or the traffic detectable or, even worsts, sniffing and crafting the data for malicious actions.\\
 
-	The decentralized VPN completely changes the paradigma, the design of the infrastructure.\\
-	An analogy can be made with the traditional bank model: as we know, the bank is a centralized entity trusted by definition. What if the bank suddenly becomes untrusted? Cryptocurrencies spread among ourselves, the cryptocurrency owners, and network participants the trusts we put in the bank, using a blockchain as a technical solution. 
+	The decentralized VPN completely changes the paradigm, the design of the infrastructure.\\
+	An analogy can be made with the traditional bank model: as we know, the bank is a centralized entity trusted by definition. What if the bank suddenly becomes untrusted? Cryptocurrencies spread among ourselves, the cryptocurrency owners and network participants, the trusts we put in the bank, using a blockchain as a technical solution. 
 	A similar design is used with decentralized VPN: there is no central entity to control the system, but a significant number of peers, the network, we can choose to connect.
 
 	\subsection{Decentralized systems}
@@ -123,7 +124,7 @@
 	
 	\section{Mysterium Network}
 	
-	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research document.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
+	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
 	Therefore, we decided to use the Mysterium Network as a test case to analyze the malicious context the project is exposed to and propose our proof of concepts as solutions.
 	
 	\subsection{Architecture}
@@ -269,7 +270,7 @@
 	\subsection{Design vulnerabilities}
 
 	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios where the focus is on how the elements dialog each other.\\
-	In the following chapter, we provide detailed considerations on the Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because, Mysterium, at this time, does not implement them yet. Mysterium project is under development, which plans to have a fully decentralized network in 2021. 
+	In the following chapter, we provide detailed considerations on the Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because Mysterium does not implement them yet, at this time. Mysterium project is under development, which plans to have a fully decentralized network in 2021. 
 
 	We classify the several aspects that, on a project like Mysterium, must be considered to evaluate its design vulnerabilities based on:
 	\begin{itemize}
@@ -353,6 +354,7 @@
 	\begin{lstlisting}[frame=single]
 		todo
 	\end{lstlisting}
+
 	where the parameters are:....
 
 	The output is:\\
@@ -378,36 +380,48 @@
 	\subsection{The idea}
 	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic on the exit node.\\
 	It is an application which runs via the command-line interface, that catches the incoming or outgoing packets. The packet catching is in line with the packet flow, and it executes different actions accurately implemented to cover many attack cases.\\
+	The software is entirely written in C and C++. It uses the \tag{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
+	The application sets up the iptables rules to redirect the packets. The rules follow the Craftberry action passed via CLI. 
 
-	The software is entirely written in C and C++.\\
-	
+	\subsection{nfqueue extension}
+	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
+	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
+
+	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
+
+	\subsection{PcapPlusPlus}
+	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most famous packet processing engines making easy forgin 
+
 	We propose part of the output provided by the application when the help command is used:
-	\begin{lstlisting}[
-		basicstyle=\small, %or \small or \footnotesize etc.
-	]
-		-a: Use the specified action
-		-i: Use the specified interface, tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
-		-t: Use the specified timeout in seconds, if not defined it runs until some external signals stop the execution (e.g. ctrl+c)
-		-l: Write all the crafted and generated traffic into a pcapng file having name passed by parameter or, if the parameter is equal to 'default', the name is 'out_<epoch_ms>.pcapng'
-		-d: Direction filtering by and perform the crafting {IN, OUT}, default = IN
-		-v: Shows verbose debug application logs
-		-h: Displays this help message and exits
-	\end{lstlisting}
+	\begin{itemize}
+		\item \lstinline{-a}: Use the specified action
+		\item  \lstinline{-i}: Use the specified interface, tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
+		\item  \lstinline{-t}: Use the specified timeout in seconds, if not defined it runs until some external signals stop the execution (e.g. ctrl+c)
+		\item  \lstinline{-l}: Write all the crafted and generated traffic into a \lstinline{pcapng file} having name passed by parameter or, if the parameter is equal to 'default', the name is \lstinline{out_<epoch_ms>.pcapng}
+		\item  \lstinline{-d}: Direction filtering by and perform the crafting {IN, OUT}, default = IN
+		\item  \lstinline{-v}: Shows verbose debug application logs
+		\item  \lstinline{-h}: Displays this help message and exits
+	\end{itemize}
 		
-	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the actions into two categories: attack or defense. The attack actions are the most interesting for this research document, but we also implemented a possible solution that protects the passing traffic encrypting the packet content.\\
+	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a possible solution that protects the passing traffic encrypting the packet content.\\
 	The attacks differ on which ISO-OSI layer the packet is crafted.\\
 
 	IMAGE OF THE ISO OSI LAYERS MODEL\\
 	
-	The attack actions are:
+	The attack actions categorized by layer are:
 	\begin{itemize}
 		\item Layer 2: VLanDoubleTagging
 		\item Layer 3: IP, icmp
 		\item Layer 4: tcp/udp
 		\item Layer 5 and above: HTTP, DNS, NTP
 	\end{itemize}
+	
+	side attacks:\\
+	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
+	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 
-	The defense action is for Layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a Salsa20 modification published in 2008. It is a particularly efficient stream cipher.\\
+
+	The defense action is for Layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a \tag{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
 	\subsubsection{VLan double tagging}
 	use the double tagging attack method on cisco routers
@@ -420,7 +434,7 @@
 	\subsubsection{tcp/udp}
 	
 	The context of the attack supposes that the client and the server have an end to end encryption connection, thus supplementary to the VPN encryption. The exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
-	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of copied packet to the consumer.\\
+	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of the copied packet to the consumer.\\
 	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.
 
 	We have implemented a demonstrative example of this attack using the protocols tcp and udp.\\
@@ -431,10 +445,10 @@
 
 	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)\\
 
-	It uses the PcapPlusPlus library to parse and craft the packet.\\
+	\subsubsection{HTTP}
 
-	
-
+	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
+	The protocol is perfect for implementing an attack to demonstrate how a node can maliciously and heavily modify the packet content.
 
 	\begin{itemize}
 		\item http://linux-training.be/networking/ch14.html
@@ -448,16 +462,6 @@
 	\end{verbatim}
 			
 	\subsection{Description}
-		\subsubsection{liv 2: arp, vlan tagging}
-		\subsubsection{liv 3: ip, icmp}
-		\subsubsection{liv 4: tcp/udp}
-		\subsubsection{side attacks}
-			- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
-			- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
-		
-		\subsubsection{liv 5+: http/imap/dns/ntp/etc}
-			analisi e modifica dei contenuti a livello del singolo protocollo (ad esempio sostituzione di tutte le immagini con una immagine di default)
-			
 	\subsection{Tests}
 	\subsection{Design solutions for malicious context}
 		\subsubsection{comparing data}
@@ -478,26 +482,6 @@
 	Here there is a helpful consideration of how critical is an exit point for TOR.
 
 	\pagebreak
-
-	\textbf{problemi individuati}
-	\begin{enumerate}
-		\item valutazione della reputazione dell'agent da parte del client
-		\item valutazione della reputazione dell'agent da parte della Net
-	\end{enumerate}
-	
-	\textbf{soluzioni proposta}
-	\textbf{Proposte per la valutazione della reputazione dell'agent da parte del client}
-	
-	Le seguenti proposte sono metodi di verifica del corretto comportamento ed hanno come scopo finale la valutazione della reputazione degli agent
-	\begin{itemize}
-		\item Dati civetta: modifiche al client che con scadenze richiede una o più risorse dal valore noto e verifica che siano integre. Le scadenze possono essere regolari/random/all’inizio frequenti/dipendenti dalla reputazione dell’agent. È necessario avere delle risorse distribuite e disponibili: potrebbero essere i nodi stessi della rete (altri agent).
-		\item Dati duplicati: modifiche al client che implementa la possibilità di connessione con più agent. Dopo la richiesta il client compara i dati ottenuti dalle due fonti
-		\begin{itemize}
-			\item Hash *: (soluzione aggiuntiva) I nodi sono generalmente in posizioni migliori dei client in termini di velocità. L’idea è quella di far generare un hash dei dati che il client richiede ad un altro nodo fuori dal servizio primario, così da comparare gli hash e non tutto il dato.
-			Inoltre, se la richiesta la faccio a molti più nodi posso intrinsicamente verificare quali modificano i dati nel network.
-		\end{itemize}
-		\item Applicazione di modelli di reputazione (Eigentrust): attualmente non studiato
-	\end{itemize}
 
 	\bibliographystyle{plain}
 	\begin{thebibliography}{1}
