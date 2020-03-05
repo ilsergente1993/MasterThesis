@@ -185,17 +185,16 @@
 		\item the service operations in provider mode
 		\item other minor features
 	\end{itemize}
-		
+
 	TequilaAPI is used by the client's application to manage the connection and for diagnostic operations.\\
 	Mysterium developed a desktop client written using Electron, which uses the TequilaAPIs.\\
 	The node is also available as a ready-to-use Docker image and published on the Docker Hub.\\
 	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
 	(MORE ON MOBILE)
 
-	\subsection{setup}
+	\subsubsection{Technical description}
 
 	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.\\
-
 	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\
 	They can be of two types, TAP or TUN.\\
 	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is number two. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
@@ -214,7 +213,11 @@
 
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
-	\subsubsection{iptables}
+	\subsubsection{Starting a node}
+	
+	\subsubsection{Connecting to a node}
+
+	\subsubsection{Iptables}
 
 	The ``iptables'' is a framework to manage the network decisions. It is based on the ``Netfilter'' kernel component, which exposes a set of hooks that are triggered at specific points of the network stack. Every packet that enters the networking system will trigger these hooks as it proceeds through the stack so all the programs that register with these hooks can interact with the traffic.\\
 	Five different hooks correspond to different points of the stack:\\
@@ -381,17 +384,8 @@
 	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic on the exit node.\\
 	It is an application which runs via the command-line interface, that catches the incoming or outgoing packets. The packet catching is in line with the packet flow, and it executes different actions accurately implemented to cover many attack cases.\\
 	The software is entirely written in C and C++. It uses the \tag{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
-	The application sets up the iptables rules to redirect the packets. The rules follow the Craftberry action passed via CLI. 
-
-	\subsection{nfqueue extension}
-	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
-	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
-
-	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
-
-	\subsection{PcapPlusPlus}
-	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most famous packet processing engines making easy forgin 
-
+	The application sets up the iptables rules to redirect the packets. The rules follow the Craftberry action passed via CLI.\\
+	
 	We propose part of the output provided by the application when the help command is used:
 	\begin{itemize}
 		\item \lstinline{-a}: Use the specified action
@@ -420,14 +414,26 @@
 	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
 	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 
-
 	The defense action is for Layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a \tag{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
+	\subsection{nfqueue extension}
+	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
+	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
+
+	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
+
+	\subsection{PcapPlusPlus}
+	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most famous packet processing engines making easy decoding and forging a large variety of network protocols.
+ 
+	\subsection{Actions}
 	\subsubsection{VLan double tagging}
 	use the double tagging attack method on cisco routers
 
 
 	\subsubsection{IP}
+	The IP packet contains information of the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
+	This example takes place in a structured attack where the attacker has a server working as a controller.
+
 
 	\subsubsection{icmp}
 
@@ -439,6 +445,15 @@
 
 	We have implemented a demonstrative example of this attack using the protocols tcp and udp.\\
 
+
+	\subsubsection{DNS robber}
+
+	Malisious DNS redirect: https://securitytrails.com/blog/dns-hijacking\\
+
+	This attack can be used for phishing or data colletting attacks. The first one aims to attemp to obtain sensitive information by disguising oneself as a trustworthy entity in an electronic communication. In our case, the idea is to redirect the requested page to a fake page which matches the look and feel of the legitimate site.\\
+	The second one, instead, uses the 
+
+
 	\subsubsection{nfqueue extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, craft the packet, and then send a verdict to the iptables module. 
@@ -448,8 +463,9 @@
 	\subsubsection{HTTP}
 
 	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
-	The protocol is perfect for implementing an attack to demonstrate how a node can maliciously and heavily modify the packet content.
+	This protocol is perfect to implement an attack and to demonstrate how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be splitted over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
 
+	
 	\begin{itemize}
 		\item http://linux-training.be/networking/ch14.html
 	\end{itemize}
@@ -459,6 +475,7 @@
 		https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
 		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
 		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
+		
 	\end{verbatim}
 			
 	\subsection{Description}
@@ -469,10 +486,6 @@
 
 		\subsubsection{comparing hashes}
 		come precedente ma con la gestione degli hash invece che di tutto il dato
-
-
-	\subsection{Design integration with reputation systems}
-
 		
 \section{Conclusions}
 	\subsection{Future development}
