@@ -326,7 +326,7 @@
 	
 	Here is what each option means:
 	\begin{itemize}
-		\item qdisc: modify the scheduler (aka queuing discipline)
+		\item qdisc: modify the scheduler (also known as queuing discipline)
 		\item add: add a new rule
 		\item dev eth0: rules will be applied on device eth0
 		\item root: modify the outbound traffic scheduler (aka known as the egress qdisc)
@@ -381,10 +381,10 @@
 	\section{Craftberry}
 
 	\subsection{The idea}
-	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the traffic on the exit node.\\
-	It is an application which runs via the command-line interface, that catches the incoming or outgoing packets. The packet catching is in line with the packet flow, and it executes different actions accurately implemented to cover many attack cases.\\
+	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the outgoing traffic from the exit node.\\
+	It is an application that runs via the command-line interface. It catches the incoming or outgoing packets in line with the packet flow, and it executes different actions accurately implemented to cover many attack and defence cases.\\
 	The software is entirely written in C and C++. It uses the \tag{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
-	The application sets up the iptables rules to redirect the packets. The rules follow the Craftberry action passed via CLI.\\
+	The application sets up the iptables rules to redirect the packets. These rules follow the Craftberry action passed via CLI.\\
 	
 	We propose part of the output provided by the application when the help command is used:
 	\begin{itemize}
@@ -397,7 +397,7 @@
 		\item  \lstinline{-h}: Displays this help message and exits
 	\end{itemize}
 		
-	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a possible solution that protects the passing traffic encrypting the packet content.\\
+	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a defence solution that protects the passing traffic encrypting the packet content.\\
 	The attacks differ on which ISO-OSI layer the packet is crafted.\\
 
 	IMAGE OF THE ISO OSI LAYERS MODEL\\
@@ -414,7 +414,7 @@
 	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
 	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 
-	The defense action is for Layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a \tag{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
+	The defense action is at layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a \tag{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
 	\subsection{nfqueue extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
