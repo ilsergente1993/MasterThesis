@@ -65,7 +65,7 @@
 	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
     Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
 	
-	\subsection{The world now}
+	\subsection{The state of the art}
 	The world is changing at a fast pace.\\
 	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data in just a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed increases the computational power, and it is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
 	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal attack destination.\\
@@ -214,8 +214,73 @@
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
 	\subsubsection{Starting a node}
+	There are two ways to start a Mysterium node. The first one is using the Docker image: Docker is a platform that uses the OS virtualization to deliver software in packages called containers. The image contains all the specifics that the application requires to be executed.\\
+	From the software image, Docker creates as many containers as we instantiate, and they are the virtualized software we will use.  We can think of the software image as the house project and the software container as the real house construction. As the house construction can have personalizations, either the container is set up passing parameters to customize the network, the storage, or other settings such as the resources allocated by Docker to the single container.\\
+	With the following command, we pull the image of the Mysterium node to the Docker platform:
+	\begin{verbatim}
+		docker pull mysteriumnetwork/myst
+	\end{verbatim}
+	
+	Then, we create the container using:\\
+
+	\begin{verbatim}
+		sudo docker run --cap-add NET_ADMIN --net host --name myst -d mysteriumnetwork/myst service --agreed-terms-and-conditions --openvpn.port 1194
+	\end{verbatim}
+
+	The parameters specify, from left to right:
+	\begin{enumerate}
+		\item to add the network capability to the operative system, which is Linux,
+		\item to connect the container to the net,
+		\item to name the container ``myst'',
+		\item to run the container in background mode and detach it from the shell.
+	\end{enumerate}
+
+	The remaining values are passed to the Mysterium software. The ``service'' value means Mysterium node starts as a node, thus a service provider, instead of a client, the next one is to agree on the terms and conditions, and the last one is to set up the OpenVPN port.\\
+	When the container is up and running, we can check the logs using:
+
+	\begin{verbatim}
+		sudo docker logs -f myst
+	\end{verbatim}
+	
+	We can find relevant details reading the log, such as the identity registration and the node proposal:
+	\begin{verbatim}
+		...
+		[Mysterium.api] Identity registered: 0x4cd126119cd14e38c90e34dd8b6e0e2174b71123
+		[Mysterium.api] Proposal pinged for node: 0x4cd126119cd14e38c90e34dd8b6e0e2174b71123
+		...
+	\end{verbatim}
+
+	The identity registration is the unique ID assigned from the network to the node. With this ID, it is possible to discover it, its connection details, and transaction history on the Mysterium Network website.\\
+	
+	
+	The second way to install the Mysterium node is using the Debian package. To manage its execution, we use the ``systemctl'', a management tool for controlling the init system:\\
+	We run 
+
+	\begin{verbatim}
+		sudo systemctl daemon-reload
+	\end{verbatim}
+
+	to reload the daemon after the changes to the node settings, and 
+	
+	\begin{verbatim}
+		sudo systemctl restart mysterium-node
+	\end{verbatim}
+	
+	to reload the node.\\
+
+	If the node is up and running, it exposes a web interface on the localhost available at port 4449, where it is possible to control the service status and see connection statistics.
 	
 	\subsubsection{Connecting to a node}
+
+	When the node works, the simplest way is to use the mobile or desktop client applications that provide a graphical interface to choose the server node and establish the connection. In a few seconds, the Mysterium network creates the connection record in the blockchain, initializes the connection and, then, the VPN takes place.\\
+
+	Another way to connect to the service provider is using the command-line interface the node as a client exposes. Referring to the node installed by the Debian package, the command to run the node and control it is:\\
+	
+	\begin{verbatim}
+		myst cli
+	\end{verbatim}
+
+	We then enter in a view where we can perform the operations on the node that regard the identity management, the connection creation and the status diagnostic.
 
 	\subsubsection{Iptables}
 
@@ -366,8 +431,7 @@
 		todo
 	\end{lstlisting}
 	
-	
-	\subsection{Basic sniffing to catch content (Wireshark, tcpdump)}
+	Basic sniffing to catch content (Wireshark, tcpdump)\\
 
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
@@ -446,22 +510,15 @@
 
 	\subsubsection{DNS robber}
 
-	Malisious DNS redirect: https://securitytrails.com/blog/dns-hijacking\\
+	Malicious DNS redirect: https://securitytrails.com/blog/dns-hijacking\\
 
-	This attack can be used for phishing or data colletting attacks. The first one attempts to obtain sensitive information by disguising oneself as a trustworthy entity in an electronic communication. In our case, the idea is to redirect the requested page to a fake page which matches the look and feel of the legitimate site.\\
-	The second one, instead, uses the change of the url to redirect the request on a website to record it.
-
-
-	\subsubsection{nfqueue extension}
-	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
-	The function gets the queue details and the packet payload, craft the packet, and then send a verdict to the iptables module. 
-
-	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)\\
+	This attack can be used for phishing or data collecting attacks. The first one attempts to obtain sensitive information by disguising oneself as a trustworthy entity in an electronic communication. In our case, the idea is to redirect the requested page to a fake page which matches the look and feel of the legitimate site.\\
+	The second one, instead, uses the change of the URL to redirect the request on a website to record it.
 
 	\subsubsection{HTTP}
 
 	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
-	This protocol is perfect to implement an attack and to demonstrate how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be splitted over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
+	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be splitted over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
 
 	
 	\begin{itemize}
@@ -476,8 +533,8 @@
 		
 	\end{verbatim}
 			
-	\subsection{Description}
 	\subsection{Tests}
+		???
 	\subsection{Design solutions for malicious context}
 		\subsubsection{comparing data}
 		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
