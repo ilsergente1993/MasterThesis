@@ -24,7 +24,7 @@
     showstringspaces=false,
     tabsize=1,
     breaklines=true,
-    breakatwhitespace=false
+	breakatwhitespace=false
 }
 
 \newtcbox{\tag}{on line,
@@ -53,8 +53,8 @@
 
 	\section{Introduction}
 	Privacy is increasingly becoming a central topic of discussion in many different fields, as the need to protect our data is becoming critical. The massive digitalization of many aspects of our life implicitly exposes us, and our data to possible attacks. Even the simplest operations over the internet are becoming unsafe.\\
-	In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to prevent increasing attacks to users' security. For instance, in 2017 Google Chrome, the popular browser, announced that it would have marked as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make the communication between clients and servers secure. Before that, connections were not protected by any encryption algorithm.\\
-	Even though the first HTTPS protocol was proposed by Netscape Navigator b in 1990, it is only in more recent years that we stated assisting to a global trend to increase security levels, often achieved BY encrypting communications.\\
+	In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to prevent increasing attacks to users' security. For instance, in 2017, the popular browser Google Chrome, announced that it would have marked as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make the communication between clients and servers secure. Before that, connections were not protected by any encryption algorithm.\\
+	Even though the first HTTPS protocol was proposed by Netscape Navigator b in 1990, it is only in more recent years that we started assisting to a global trend to increase security levels, often achieved BY encrypting communications.\\
 	The Chrome browser initiative is part of a global trend to increase the security level, often achieved encrypting the communication: instant messages applications, internet protocols like the DNS, industrial system infrastructures, and many others.\\
 	Although the level of security of the internet has substantially increased, there is still a wide range of situations and scenarios in which the individual user browsers the internet in an unsafe way.\\
 	A solution to increase the security level is provided by the Virtual Private Network (VPN), a technical solution that allows extending a private network across a public network. It creates a virtual point-to-point connection by using a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first proposal of the VPN specification is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems of various nature, such as to exit a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
@@ -213,7 +213,7 @@
 
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
-	\subsubsection{Starting a node}
+	\subsubsection{Start a node}
 	There are two ways to start a Mysterium node. The first one is using the Docker image: Docker is a platform that uses the OS virtualization to deliver software in packages called containers. The image contains all the specifics that the application requires to be executed.\\
 	From the software image, Docker creates as many containers as we instantiate, and they are the virtualized software we will use.  We can think of the software image as the house project and the software container as the real house construction. As the house construction can have personalizations, either the container is set up passing parameters to customize the network, the storage, or other settings such as the resources allocated by Docker to the single container.\\
 	With the following command, we pull the image of the Mysterium node to the Docker platform:
@@ -270,7 +270,7 @@
 
 	If the node is up and running, it exposes a web interface on the localhost available at port 4449, where it is possible to control the service status and see connection statistics.
 	
-	\subsubsection{Connecting to a node}
+	\subsubsection{Connect to a node}
 
 	When the node works, the simplest way is to use the mobile or desktop client applications that provide a graphical interface to choose the server node and establish the connection. In a few seconds, the Mysterium network creates the connection record in the blockchain, initializes the connection and, then, the VPN takes place.\\
 
@@ -337,13 +337,13 @@
 
 	\subsection{Design vulnerabilities}
 
-	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios where the focus is on how the elements dialog each other.\\
-	In the following chapter, we provide detailed considerations on the Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because Mysterium does not implement them yet, at this time. Mysterium project is under development, which plans to have a fully decentralized network in 2021. 
+	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios where the focus is on the system overall and how the elements dialog each other.\\
+	In the following chapter, we provide considerations on the Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because Mysterium does not implement them yet, at this time. Indeed, Mysterium project is under development, which plans to have a fully decentralized network in 2021. 
 
 	We classify the several aspects that, on a project like Mysterium, must be considered to evaluate its design vulnerabilities based on:
 	\begin{itemize}
 		\item the position in the network: starting, middle or endpoint point;
-		\item the step of the complete flow: the service proposals, the promise issuing, the transaction closing, and other steps;
+		\item the step of the flow: the service proposals, the promise issuing, the transaction closing, and other steps;
 		\item the operations on the passing data: sniffing, filtering or crafting the data;
 		\item side channels attack and other particular scenarios.
 	\end{itemize}
@@ -358,31 +358,31 @@
 	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default and without specific precautions can be the weak link of the system.\\
 	The Tor network has a similar problem. Tor stands for The Onion Router, and it is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
 	The traffic is encrypted for each bouncing, except the last one, where it must be in clear to connect to the internet resource. The end node's role is to decouple the encrypted network from clear internet, and this makes it so valuable. If an exit node is malicious, it can potentially understand all the data passing through it and going to the internet resource.\\
-	A Sweden researcher, Egerstad \cite{exitnodeTOR}, in his research, intercepted thousands of diplomatic emails setting up malicious exit nodes around the world and sniffing the connection between them and the clear internet.\\
-	To discover malicious nodes in the Tor network, another researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means the exit nodes sniffed the connections, caught the username and password, and tried to login by themselves.\\
+	Dan Egerstad is a Swedish computer security consultant. He intercepted thousands of diplomatic emails setting up malicious exit nodes around the world and sniffing the connection between them and the clear internet \cite{exitnodeTOR}.\\
+	To discover malicious nodes in the Tor network, another Swedish researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means some exit nodes sniffed the connections, caught the username and password, and tried to login by themselves \cite{exitnodeTOR2}.\\
 	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role because there still are many protocols and applications that do not use encryption for their traffic.\\
 	The conclusion is that Tor's end nodes are the weak link of the system when the users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
-	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor, can be applied to a Mysterium Network exit node. But we want to point out a difference between Tor and Mysterium networks: the type of target users of the two projects.\\
-	The Tor's users use it to accomplish specific online activities where the identity obfuscation is mandatory. For the rest of the actions, Tor is not efficient or does not work at all.\\
-	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume a continuous connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
+	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor can be applied to a Mysterium Network exit node. But we want to point out a difference between Tor and Mysterium networks: the type of target users of the two projects.\\
+	The Tor's users use it to accomplish specific online activities where the identity obfuscation is mandatory. For the rest of the actions, Tor is not efficient, can be blocked by ISP and, in some countries, is even banned.\\
+	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume the use with a persistent connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
 	This scenario, however, introduces move vulnerabilities simply because the network is used for more activities, and many protocols and applications still use unencrypted communication.\\
 	
 	
 	Figure X describes the network configuration of a Mysterium end node.\\
-	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
+	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
 	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
 	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
 	Mysterium did not implement those hops in the network yet. Therefore we make a hypothesis on its possible implementation.\\
 	As well as for the provider nodes, we can suppose there is a distributed list of the forwarder nodes. When the consumer chooses the provider, and they agree to issue a payment promise, the network picks a node from that list to place it as the hop. The middle node receives a new VPN connection from the consumer and creates a new VPN connection to the provider. He technically builds and manages two different VPN tunnels: it takes encrypted data from one side, decrypts them, and encrypts again to send on the other one.\\
 	The scenario is similar to the end node because the middle node holds unencrypted data in the forwarding action.\\
-	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, between the tips, where all the hops can perform unwanted operations on the traffic.\\
+	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, between the ends, where all the hops can perform unwanted operations on the traffic.\\
 
 	IMAGE OF MULTIHOP CONNECTION.\\
 
-	Mandatory would be an additional encryption layer end to end that the consumer and provider have to manage. This second encryption solves the multihop data exposing: the nodes manage encrypted data because they are inside the VPN tunnel. The cons are that it increases the computational load.\\
+	Mandatory would be an additional encryption layer end to end, over the VPN encryption between each node, that the consumer and provider have to manage. This second encryption solves the multihop data exposing because the middle nodes would manage only data encrypted by the second layer. The cons are that it increases the computational load.\\
 	The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
 	Many traffic shapes operations can be performed on a connection: the simplest and the fastest is on the traffic speed, and it does not need to understand the content at all.\\
-	A demonstration of how a middle node can slow down the data speed that it forwards is using a Linux package called \tag{tc} \cite{tc}, which stands for Traffic Control and that is created and used for service quality analysis.\\
+	A demonstration of how a middle node can slow down the data speed that it forwards, is using a Linux package called \tag{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
 	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \tag{eth0}.\\
 	
 	\begin{lstlisting}
@@ -415,23 +415,54 @@
 	\subsubsection{Operations on the passing data}
 
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
-	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different structure levels where the lowest have no encryption at all.\\ Based on this consideration, the operations that a node can potentially do on the passing data can be grouped in sniffing, filtering, and crafting.\\
-	The first step to manipulate the data is to catch it. To do so, we start the Mysterium Node on our test server and then establish the connection with a Mysterium client from another computer. We used \tag{tcpdump}, a powerful tool to dump the traffic on a network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
-	The command is the following:\\
-	
-	\begin{lstlisting}[frame=single]
-		todo
-	\end{lstlisting}
+	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different structure levels where the lowest have no encryption at all and can be modified.\\ Based on this consideration, the operations that a node can potentially do on the passing data can be grouped in sniffing, filtering, and crafting.\\
+	The first step to manipulate the data is to catch it, and we want to show an example of how-to-do. After starting a Mysterium Node on our test server and then establish the connection to it using a Mysterium client, we use \tag{tcpdump} to dump the traffic of the network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
+	Our example provides an HTTP request to the host www.jafed.xyz with the method GET to obtain a file named test.txt with the content the string "cool, you got me sir!".\\
+	The request is executed using curl, a command-line tool for transferring data using various protocols.\\
 
-	where the parameters are:....
-
-	The output is:\\
-	
 	\begin{lstlisting}[frame=single]
-		todo
+		curl www.jafed.xyz/test.txt
 	\end{lstlisting}
 	
-	Basic sniffing to catch content (Wireshark, tcpdump)\\
+	With the following command, instead, we capture the request specifying the output format defined by \lstinline{-v} \lstinline{-n} \lstinline{-l}, then we pipe it to the \lstinline{egrep} command to parse the string and return an easy-to-read text:\\
+	
+	\begin{lstlisting}[frame=single]
+		sudo tcpdump -v -n -l | egrep -i "POST /|GET /|Host:"
+	\end{lstlisting}
+
+	A slice of output is\\
+	
+	\begin{lstlisting}[frame=single]
+		GET /test.txt HTTP/1.1
+        Host: www.jafed.xyz
+	\end{lstlisting}
+
+	that shows we caught the HTTP request.
+	
+	We use Wireshark to analyze the content, a powerful graphical application for network usages. It supports the pcapng file extension that tcpdump uses to save the data.\\
+	We print the captured result filtered of the packets of our interest:\\
+	
+	\begin{lstlisting}[frame=single]
+		GET /test.txt HTTP/1.1
+		Host: www.jafed.xyz
+		User-Agent: curl/7.58.0
+		Accept: */*
+
+		HTTP/1.1 200 OK
+		Date: Sun, 09 Feb 2020 16:59:45 GMT
+		Server: Apache
+		Upgrade: h2,h2c
+		Connection: Upgrade
+		Last-Modified: Thu, 06 Feb 2020 21:49:33 GMT
+		ETag: "1ae1c77-15-59def3f9b28fd"
+		Accept-Ranges: bytes
+		Content-Length: 21
+		Content-Type: text/plain
+
+		cool, you got me sir!
+	\end{lstlisting}
+
+	
 
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
@@ -445,8 +476,8 @@
 	\section{Craftberry}
 
 	\subsection{The idea}
-	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the outgoing traffic from the exit node.\\
-	It is an application that runs via the command-line interface. It catches the incoming or outgoing packets in line with the packet flow, and it executes different actions accurately implemented to cover many attack and defence cases.\\
+	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the outgoing traffic from an exit node of the Mysterium Network.\\
+	It is an application that runs via the command-line interface. It catches the incoming or outgoing packets in line with the packet flow, and it executes different actions accurately implemented to cover many attack and defense cases.\\
 	The software is entirely written in C and C++. It uses the \tag{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
 	The application sets up the iptables rules to redirect the packets. These rules follow the Craftberry action passed via CLI.\\
 	
@@ -461,7 +492,7 @@
 		\item  \lstinline{-h}: Displays this help message and exits
 	\end{itemize}
 		
-	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a defence solution that protects the passing traffic encrypting the packet content.\\
+	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a defense solution that protects the passing traffic encrypting the packet content.\\
 	The attacks differ on which ISO-OSI layer the packet is crafted.\\
 
 	IMAGE OF THE ISO OSI LAYERS MODEL\\
@@ -502,11 +533,33 @@
 
 	\subsubsection{tcp/udp}
 	
-	The context of the attack supposes that the client and the server have an end to end encryption connection, thus supplementary to the VPN encryption. The exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
-	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of the copied packet to the consumer.\\
-	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.
+	The context of the attack supposes that the communication is encrypted supplementary to the VPN encryption. It is provided by end-to-end encryption between the Mysterium client and the server it is communicating with, and not the exit node. Therefore, the exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
+	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of the captured packet to the consumer.\\
+	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.\\
 
-	We have implemented a demonstrative example of this attack using the protocols tcp and udp.\\
+	\bigbreak
+	
+	We have implemented a demonstrative example of this attack using the protocols \lstinline{tcp} and \lstinline{udp}.\\
+
+	The code in the main function is the following:\\
+	\begin{lstlisting}[frame=single]
+		if (conf->method.compare("ICMPMULTIPLY") == 0 && Action::Icmp::isProto(inPacket)) {
+			Action::Tcp *action = new Action::Tcp(n);
+			action->multiply(inPacket->getRawPacket());
+			return verdict_accept(qh, ntohl(ph->packet_id), inPacket);
+		}
+	\end{lstlisting}
+
+	The multiply method is implemented as follows:
+	\begin{lstlisting}[frame=single]
+		void multiply(RawPacket *inPacket) {
+			for (int i = 0; i < this->n; i++) {
+				sendPkt(inPacket);
+			}
+		}
+	\end{lstlisting}
+
+	The \lstinline{n} parameter is a TCP class field. 
 
 	\subsubsection{DNS robber}
 
@@ -554,20 +607,20 @@
 	\bibliographystyle{plain}
 	\begin{thebibliography}{1}
 		\bibitem{HTTPS}
+			HTTP Over TLS - RFC
 			https://tools.ietf.org/html/rfc2818
 		\bibitem{VPNRFC}
+			A Framework for IP Based Virtual Private Networks - RFC
 			https://tools.ietf.org/html/rfc2764
-		\bibitem{wikibook}
-			manually managing references, 
-			\url{https://en.wikibooks.org/wiki/LaTeX/Manually_Managing_References}
-			2016
 		\bibitem{tc}
-			traffic control
+			Traffic Control
 			https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/
 		\bibitem{exitnodeTOR}
-			exit node TOR network
+			exit nodes of TOR network
 			https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all
-
+		\bibitem{exitnodeTOR2}
+			malicious TOR exit nodes
+			https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/
 	\end{thebibliography}
 		
 	\pagebreak
