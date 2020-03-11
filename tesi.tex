@@ -27,10 +27,6 @@
 	breakatwhitespace=false
 }
 
-\newtcbox{\tag}{on line,
-  colframe=lightgray,colback=lightgray,
-  boxrule=0.5pt,arc=2pt,boxsep=0pt,left=2pt,right=2pt,top=1.5pt,bottom=1.5pt}
-
 \makeindex
 
 \begin{document}
@@ -60,6 +56,7 @@
 	A solution to increase the security level is provided by the Virtual Private Network (VPN), a technical solution that allows extending a private network across a public network. It creates a virtual point-to-point connection by using a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first proposal of the VPN specification is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems of various nature, such as to exit a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
 	Currently, there are commercial solutions that allow users to have a private connection to the company's servers across the world, but there are many security concerns about those solutions. These companies can keep the connection logs, inspect the traffic, or sell statistical data.\\
     Some open-source projects were, lately, born to solve these issues. Their goal is to revolutionize the idea of VPN and its uses, building a rich network of peers where two nodes can connect through a VPN. The projects provide a platform that includes all the components needed to have an efficient, fast, and easy-to-use system, from the discovery to the payment.\\
+	\bigbreak
     
     In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
 	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
@@ -90,6 +87,7 @@
 	Technology is becoming an essential tool to exercise the people's rights. There are areas of the world where these rights are not accessible, and people fight to obtain them. For example, in the People's Republic of China, the government built a firewall to censure the internet. It is called the Great Firewall Of China, abbreviated in GFW, and it is a combination of laws and technologies to control the internal domestic internet, so-called censorship. It blocks social networks, search engines, and many other services that declined the government's request to make the traffic clear and detectable.\\
 	In this context, aspects such as anonymization, become not only relevant but crucial to be preserved.\\
 	As for anonymization, a solution to obtain identity obfuscation is the VPN. It is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country Internet Service Providers.\\VPNs are provided by companies that often do not act genuinely, making the identity or the traffic detectable or, even worsts, sniffing and crafting the data for malicious actions.\\
+	\bigbreak
 
 	The decentralized VPN completely changes the paradigm, the design of the infrastructure.\\
 	An analogy can be made with the traditional bank model: as we know, the bank is a centralized entity trusted by definition. What if the bank suddenly becomes untrusted? Cryptocurrencies spread among ourselves, the cryptocurrency owners and network participants, the trusts we put in the bank, using a blockchain as a technical solution. 
@@ -109,6 +107,7 @@
 	As a business project, which aims to earn money, the project has a specific business plan: provide a system network where users can join as a service provider, selling their internet bandwidth, or as a service consumer, buying other's internet bandwidth. For every cryptocurrency transaction, the network applies a fee that wants, substantially, to create a market to manage.\\
 	Each couple of entities, a consumer and a provider, agree on a transaction paid using cryptocurrency in the face of the used service. This transaction is regulated by an Ethereum smart contract signed by both sides and requires a fee to be closed. This fee is not the Ethereum fee, generally called gas, but the precisely Mysterium source of earnings. For this reason, Mysterium and other projects created their coins used to buy and sell internet bandwidth between the nodes inside the network. The coin name is MYST for Mysterium Network and, as a regular cryptocurrency, it is possible to convert MYST to ETH and vice versa.\\
 	Although a node can decide to be a consumer or a provider at any moment, the two entities are different, and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth. (EXPLAIN BETTER)\\
+	\bigbreak
 
 	(BID AND ASK GRAPHIC DEPENDING ON THE FEES)
 
@@ -121,6 +120,7 @@
 		- - cercare applicazione pratica di Eigentrust\\
 		- descrizione di BFT\\
 	\end{verbatim}
+	\bigbreak
 	
 	\section{Mysterium Network}
 	
@@ -130,11 +130,13 @@
 	\subsection{Architecture}
 	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
 	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
-
+	\bigbreak
 	\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}
+	\bigbreak
 		
 	As a general workflow description, Mysterium starts by collecting all the agents' service proposals and presents them to the clients. Then it registers the client's intention to pay for the agent's service chosen by the user and creates the VPN connection between the two points. The outcome of each transaction is saved in the blockchain.\\
 	
+	\bigbreak
 	To implement all the functionalities just said, Mysterium has four core components inside its architecture:
 	\begin{itemize}
 		\item \textbf{Ethereum Blockchain} allows running decentralized code with smart contracts, enabling reliable services and payment handling.
@@ -150,6 +152,7 @@
 	We will discuss those aspects later, but we can surely say this is the first barrier to block in mass identity creation.\\
 	Furthermore, the user benefits in using the same identity because it is possible to rebuild his transaction history and his balance from the Ethereum blockchain, making the user more predictable and thus trustworthy for service providers.\\
 
+	\bigbreak
 	\begin{figure}
 		\includegraphics[width=0.5\linewidth]{images/mysterium_identity_creation.png}
 		\caption{The Mysterium identity creation steps}
@@ -159,6 +162,7 @@
 
 	The \textbf{service discovery} provides the list of service proposals available in the network. The service posts its service offer characterized by some service parameters: those parameters can be the VPN application the provider supports, the provider's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append the proposal to the blockchain, making it publicly available for everyone.\\
 
+	\bigbreak
 	\begin{figure}
 		\includegraphics[width=0.5\linewidth]{images/mysterium_service_announcement.png}
 		\caption{The Mysterium service announcement steps}
@@ -175,6 +179,7 @@
 
 	The core application is called \textbf{node}. It's written in GoLang, a new program language made by Google that is having a high adoption in the last years. The node creates a local webserver to connect to the network, manages the cryptocurrency wallet, and initiates the VPN connection as a client or manages the incoming connection as a server. Mysterium leans on famous VPN applications, which are OpenVPN and Wireguard.\\
 	The node can be run in two modes, as a client or as a server, and it is managed via command-line interface or RESTful API, called TequilaAPI, exposed in the localhost.\\
+	\bigbreak
 	The main functionalities of TequilaAPI concern:
 	\begin{itemize}
 		\item the authentication,
@@ -185,11 +190,14 @@
 		\item the service operations in provider mode
 		\item other minor features
 	\end{itemize}
+	\bigbreak
 
 	TequilaAPI is used by the client's application to manage the connection and for diagnostic operations.\\
 	Mysterium developed a desktop client written using Electron, which uses the TequilaAPIs.\\
 	The node is also available as a ready-to-use Docker image and published on the Docker Hub.\\
 	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
+	
+	\bigbreak
 	(MORE ON MOBILE)
 
 	\subsubsection{Technical description}
@@ -203,11 +211,14 @@
 	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
 	The virtual TUN interface created by OpenVPN is tun0, the public interface is eth0, and the internal interface is eth1.\\
 
+	\bigbreak
 	\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.PNG}
 
+	\bigbreak
 	When a packet arrives at the ``eth1'' interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\
 	In the other direction, when the packet arrives at ``eth0'' interface, ``iptables'' and the routing engine apply their rules to filter and masquerade, and then they forward it to ``tun0'' interface. Thus, OpenVPN picks it up, encrypts the data, and sends it to the public ``eth1'' interface.\\
 	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
+	\bigbreak
 
 	\includegraphics{images/openvpn_tun_interface.jpg}
 
@@ -216,16 +227,17 @@
 	\subsubsection{Start a node}
 	There are two ways to start a Mysterium node. The first one is using the Docker image: Docker is a platform that uses the OS virtualization to deliver software in packages called containers. The image contains all the specifics that the application requires to be executed.\\
 	From the software image, Docker creates as many containers as we instantiate, and they are the virtualized software we will use.  We can think of the software image as the house project and the software container as the real house construction. As the house construction can have personalizations, either the container is set up passing parameters to customize the network, the storage, or other settings such as the resources allocated by Docker to the single container.\\
+	\bigbreak
 	With the following command, we pull the image of the Mysterium node to the Docker platform:
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		docker pull mysteriumnetwork/myst
-	\end{verbatim}
+	\end{lstlisting}
 	
 	Then, we create the container using:\\
 
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		sudo docker run --cap-add NET_ADMIN --net host --name myst -d mysteriumnetwork/myst service --agreed-terms-and-conditions --openvpn.port 1194
-	\end{verbatim}
+	\end{lstlisting}
 
 	The parameters specify, from left to right:
 	\begin{enumerate}
@@ -238,17 +250,17 @@
 	The remaining values are passed to the Mysterium software. The ``service'' value means Mysterium node starts as a node, thus a service provider, instead of a client, the next one is to agree on the terms and conditions, and the last one is to set up the OpenVPN port.\\
 	When the container is up and running, we can check the logs using:
 
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		sudo docker logs -f myst
-	\end{verbatim}
+	\end{lstlisting}
 	
 	We can find relevant details reading the log, such as the identity registration and the node proposal:
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		...
 		[Mysterium.api] Identity registered: 0x4cd126119cd14e38c90e34dd8b6e0e2174b71123
 		[Mysterium.api] Proposal pinged for node: 0x4cd126119cd14e38c90e34dd8b6e0e2174b71123
 		...
-	\end{verbatim}
+	\end{lstlisting}
 
 	The identity registration is the unique ID assigned from the network to the node. With this ID, it is possible to discover it, its connection details, and transaction history on the Mysterium Network website.\\
 	
@@ -256,15 +268,15 @@
 	The second way to install the Mysterium node is using the Debian package. To manage its execution, we use the ``systemctl'', a management tool for controlling the init system:\\
 	We run 
 
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		sudo systemctl daemon-reload
-	\end{verbatim}
+	\end{lstlisting}
 
 	to reload the daemon after the changes to the node settings, and 
 	
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		sudo systemctl restart mysterium-node
-	\end{verbatim}
+	\end{lstlisting}
 	
 	to reload the node.\\
 
@@ -276,15 +288,16 @@
 
 	Another way to connect to the service provider is using the command-line interface the node as a client exposes. Referring to the node installed by the Debian package, the command to run the node and control it is:\\
 	
-	\begin{verbatim}
+	\begin{lstlisting}[frame=single]
 		myst cli
-	\end{verbatim}
+	\end{lstlisting}
 
-	We then enter in a view where we can perform the operations on the node that regard the identity management, the connection creation and the status diagnostic.
+	We then enter in a view where we can perform the operations on the node that regard the identity management, the connection creation, and the status diagnostic.
 
 	\subsubsection{Iptables}
 
 	The ``iptables'' is a framework to manage the network decisions. It is based on the ``Netfilter'' kernel component, which exposes a set of hooks that are triggered at specific points of the network stack. Every packet that enters the networking system will trigger these hooks as it proceeds through the stack so all the programs that register with these hooks can interact with the traffic.\\
+	\bigbreak
 	Five different hooks correspond to different points of the stack:\\
 
 	\begin{itemize}
@@ -294,6 +307,7 @@
 		\item \lstinline{NF_IP_LOCAL_OUT}
 		\item \lstinline{NF_IP_POST_ROUTING}
 	\end{itemize}
+	\bigbreak
 
 	IMAGE OF THE POINTS IN THE FLOW WHERE THE HOOKS ARE
 	
@@ -301,6 +315,7 @@
 	The available tables are the filter table, the NAT table, the Mangle table, the Raw table, and the Security table.\\
 	The chains correspond to the available hooks, therefore iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
 	The following table explains the triggering logic and execution precedence.\\
+	\bigbreak
 
 	\begin{tabular}{|l|c|c|c|c|c|}
 	\textbf{\begin{tabular}[c]{@{}l@{}}Chains\\ Tables\end{tabular}} & \rotatebox[origin=c]{90}{\textbf{PREROUTING}}    & \rotatebox[origin=c]{90}{\textbf{INPUT}}         & \rotatebox[origin=c]{90}{\textbf{FORWARD}}       & \rotatebox[origin=c]{90}{\textbf{OUTPUT}}        & \rotatebox[origin=c]{90}{\textbf{POSTROUTING}}   \\\hline
@@ -314,16 +329,22 @@
 	\textbf{security} & & X & X & X & \\ \hline
 	\textbf{SNAT (NAT)} & & X & & & X
 	\end{tabular}
+	
+	\bigbreak
 
 	The packet triggers the hooks from the first row going down to the bottom of the table. It enters the chain depending on the routing decisions that are made based on its direction, incoming or outgoing, and whether the filtering rule accepts the packet.\\
+	\bigbreak
+	The chain traversal order is the following:\\	
+	\textbf{Incoming packets destined for the local system:}\\
+	$\hbox{PREROUTING} \rightarrow \hbox{INPUT}$\\
+	\medskip
+	\textbf{Incoming packets destined to another host:}\\
+	$\hbox{PREROUTING} \rightarrow \hbox{FORWARD} \rightarrow \hbox{POSTROUTING}$\\
+	\medskip
+	\textbf{Locally generated packets:}\\
+	$\hbox{OUTPUT} \rightarrow \hbox{POSTROUTING}$\\
 
-	The chain traversal order is the following:
-	\begin{itemize}
-		\item Incoming packets destined for the local system: PREROUTING - INPUT
-		\item Incoming packets destined to another host: PREROUTING - FORWARD - POSTROUTING
-		\item Locally generated packets: OUTPUT - POSTROUTING
-	\end{itemize}
-	
+	\bigbreak
 	Every chain is a list of rules. Every packet is checked against each rule and, if the matching component checks, iptables executes an action.\\
 	The rule can match the packet depending on the protocol type, the source or destination address, or packet, among other criteria.\\
 	The action called target, which is triggered if the rule matches, can be of terminating or non-terminating type.\\
@@ -382,8 +403,8 @@
 	Mandatory would be an additional encryption layer end to end, over the VPN encryption between each node, that the consumer and provider have to manage. This second encryption solves the multihop data exposing because the middle nodes would manage only data encrypted by the second layer. The cons are that it increases the computational load.\\
 	The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
 	Many traffic shapes operations can be performed on a connection: the simplest and the fastest is on the traffic speed, and it does not need to understand the content at all.\\
-	A demonstration of how a middle node can slow down the data speed that it forwards, is using a Linux package called \tag{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
-	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \tag{eth0}.\\
+	A demonstration of how a middle node can slow down the data speed that it forwards, is using a Linux package called \lstinline{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
+	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \lstinline{eth0}.\\
 	
 	\begin{lstlisting}
 		sudo tc qdisc add dev eth0 root netem delay 500ms
@@ -391,13 +412,13 @@
 	
 	Here is what each option means:
 	\begin{itemize}
-		\item qdisc: modify the scheduler (also known as queuing discipline)
-		\item add: add a new rule
-		\item dev eth0: rules will be applied on device eth0
-		\item root: modify the outbound traffic scheduler (aka known as the egress qdisc)
-		\item netem: use the network emulator to emulate a WAN property
-		\item delay: the network property that is modified
-		\item 500ms: introduce delay of 500 ms
+		\item \lstinline{qdisc}: modify the scheduler (also known as queuing discipline)
+		\item \lstinline{add}: add a new rule
+		\item \lstinline{dev eth0}: rules will be applied on device eth0
+		\item \lstinline{root}: modify the outbound traffic scheduler (aka known as the egress qdisc)
+		\item \lstinline{netem}: use the network emulator to emulate a WAN property
+		\item \lstinline{delay}: the network property that is modified
+		\item \lstinline{500ms}: introduce delay of 500 ms
 	\end{itemize}
 
 	With the following command, we delete the delay rule.\\
@@ -416,7 +437,7 @@
 
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
 	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different structure levels where the lowest have no encryption at all and can be modified.\\ Based on this consideration, the operations that a node can potentially do on the passing data can be grouped in sniffing, filtering, and crafting.\\
-	The first step to manipulate the data is to catch it, and we want to show an example of how-to-do. After starting a Mysterium Node on our test server and then establish the connection to it using a Mysterium client, we use \tag{tcpdump} to dump the traffic of the network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
+	The first step to manipulate the data is to catch it, and we want to show an example of how-to-do. After starting a Mysterium Node on our test server and then establish the connection to it using a Mysterium client, we use \lstinline{tcpdump} to dump the traffic of the network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
 	Our example provides an HTTP request to the host www.jafed.xyz with the method GET to obtain a file named test.txt with the content the string "cool, you got me sir!".\\
 	The request is executed using curl, a command-line tool for transferring data using various protocols.\\
 
@@ -462,8 +483,6 @@
 		cool, you got me sir!
 	\end{lstlisting}
 
-	
-
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
 	In Mysterium Network, the billing method is per the amount of transferred data or per time. Considering the first method, if the exit node is able to higher the volume of the traffic to the consumer, it means the exit node earns money without providing an equal service. A well-designed attack can perform the traffic shaping hiding the increase of traffic volume with network inefficiency.\\
@@ -478,9 +497,10 @@
 	\subsection{The idea}
 	Craftberry is a proof of concept tool to demonstrate how a node can sniff, filter and craft the outgoing traffic from an exit node of the Mysterium Network.\\
 	It is an application that runs via the command-line interface. It catches the incoming or outgoing packets in line with the packet flow, and it executes different actions accurately implemented to cover many attack and defense cases.\\
-	The software is entirely written in C and C++. It uses the \tag{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
+	The software is entirely written in C and C++. It uses the \lstinline{nfqueue} extension to move the packet from the kernel space to the user space, where it is crafted and sent back to the kernel space to continue the network traversal. The application uses the PcapPlusPlus library to parse the packet, build its layers, and modify the content.\\
 	The application sets up the iptables rules to redirect the packets. These rules follow the Craftberry action passed via CLI.\\
-	
+	\bigbreak
+
 	We propose part of the output provided by the application when the help command is used:
 	\begin{itemize}
 		\item \lstinline{-a}: Use the specified action
@@ -491,11 +511,17 @@
 		\item  \lstinline{-v}: Shows verbose debug application logs
 		\item  \lstinline{-h}: Displays this help message and exits
 	\end{itemize}
+	
+	\bigbreak
 		
-	The parameter set by \tag{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a defense solution that protects the passing traffic encrypting the packet content.\\
+	The parameter set by \lstinline{-a} defines the action Craftberry has to perform when it catches a packet. We divide the operations into two categories: attack or defense. The attack operations are the most interesting for this research, but we also implemented a defense solution that protects the passing traffic encrypting the packet content.\\
 	The attacks differ on which ISO-OSI layer the packet is crafted.\\
+	
+	\bigbreak
 
 	IMAGE OF THE ISO OSI LAYERS MODEL\\
+
+	\bigbreak
 	
 	The attack actions categorized by layer are:
 	\begin{itemize}
@@ -504,29 +530,190 @@
 		\item Layer 4: tcp/udp
 		\item Layer 5 and above: HTTP, DNS, NTP
 	\end{itemize}
+
+	\bigbreak
 	
 	side attacks:\\
 	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
 	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
 
-	The defense action is at layer 4. It encrypts the payload of the packets with \tag{ChaCha20} algorithm, a \tag{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
+	The defense action is at layer 4. It encrypts the payload of the packets with \lstinline{ChaCha20} algorithm, a \lstinline{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
 	\subsection{nfqueue extension}
-	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \tag{Netfilter} target modules in userspace. This module is an application that is called by \tag{nfqueue} hooks. In the program, the hooks are bonded to a function that is called when the iptables match a rule.\\
+	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \lstinline{Netfilter} target modules in userspace. This module is an application that is called by \lstinline{nfqueue} hooks. In the program, the hooks are bounded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
+	\bigbreak
 
 	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
 
 	\subsection{PcapPlusPlus}
-	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most famous packet processing engines making easy decoding and forging a large variety of network protocols.
- 
+	It is a multiplatform C++ library for capturing, parsing and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most popular packet processing engines making easy decoding and forging a large variety of network protocols.
+
+	\subsection{Software Architecture}
+	Craftberry has an architecture composed of four components: the first one is the \lstinline{main} function that sets up the \lstinline{iptables} rules, register the callback function to get the captured packet, and manages the \lstinline{cli} parameters. The second one is the callback function, the core of the application, that takes the captured packets and calls the corresponding action to execute on it. The third component includes all the methods that implement the attack or defense mechanisms. All of them belong to the \lstinline{Action} namespace. The fourth component is a class, called \lstinline{Configuration}, which includes the functions to collect statistics on the elaborated data, and to manage the \lstinline{tun0} network interface. It also implements auxiliary functions for the application.\\
+
+	\subsubsection{The \lstinline{main} function}
+
+	We outline the principal sections of the \lstinline{main} function:\\
+	The first block of code concerns the registration of the function for external signals, like \lstinline{ctrl+c}. Craftberry can run with a timeout, if the value is passed via CLI, or in infinite mode. In both cases, the execution can be stopped using the external \lstinline{ctrl+c} signal.\\
+	\bigbreak
+
+	\begin{lstlisting}[frame=single, language=C++]
+		struct sigaction sigIntHandler;
+		sigIntHandler.sa_handler = ctrl_c; \\the callback function when the signal is emitted
+		sigemptyset(&sigIntHandler.sa_mask);
+		sigIntHandler.sa_flags = 0;
+		sigaction(SIGINT, &sigIntHandler, NULL);
+	\end{lstlisting}
+	\bigbreak
+	
+	The application manages the command-line input parameters using the \lstinline{getopt_long} internal function. The parameters are specified in the \lstinline{help} function output. The input parameters are validated and used to initialize the \lstinline{Configuration} class.\\
+	\bigbreak
+
+	The next step is to register the callback function to the \lstinline{nfqueue} when the \lstinline{iptables} rule is matched. To do so, we need to add the rule to the \lstinline{iptables} list. This operation is done by the \lstinline{makeIptableCmd} function described later in the \lstinline{Configuration} class.\\
+	\bigbreak
+
+	The main function ends with the infinite loop that reads a buffer pointed by the handler calculated using the \lstinline{nfqueue} initializing function. When the packet matches the \lstinline{iptables} rule, it is moved into the user space memory. Craftberry continuously reads the memory and, when it is not empty, starts the procedure to parse and elaborate the packet.\\
+
+	If the execution has a timeout, we use a separate thread to terminate Craftberry when the timeout is expired. At that time, it is called a procedure to destroy the \lstinline{nfqueue} queue, print an execution summary, free the resources, and delete the \lstinline{iptables} rules.
+
+	\subsubsection{The callback function}
+
+	The callback function is the core of the application. It has the following signature:
+	\bigbreak
+	
+	\begin{lstlisting}[frame=single, language=C++]
+		static int callback(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg, struct nfq_data *nfa, void *data);
+	\end{lstlisting}
+	\bigbreak
+
+	\begin{itemize}
+		\item \lstinline{qh}: pointer to the \lstinline{nfqueue} internal handle for the queue;
+		\item \lstinline{nfmsg}: pointer to the Netfilter address family dependent message;
+		\item \lstinline{nfa}: pointer to the Netfilter captured packet data;
+		\item \lstinline{data}: pointer to a user-defined memory to pass context values;
+	\end{itemize}
+	\bigbreak
+
+	The most important parameter, for our purposes, is \lstinline{nfa} from which we extract the message packet header and payload.\\
+	\bigbreak
+
+	\begin{lstlisting}[frame=single, language=C++]
+		struct nfqnl_msg_packet_hdr *ph = nfq_get_msg_packet_hdr(nfa);
+		unsigned char *rawData = nullptr;
+		int len = nfq_get_payload(nfa, &rawData);
+		struct pkt_buff *pkBuff = pktb_alloc(AF_INET, rawData, len, 0x1000);
+		CHECK(ph == nullptr, "Issue while packet header");
+		CHECK(len < 0, "Can't get payload data");
+		struct timeval timestamp;
+		nfq_get_timestamp(nfa, &timestamp);
+	\end{lstlisting}
+
+	Note: we use the MACRO \lstinline{CHECK} to ensure the return values are valid.\\
+	\bigbreak
+	The \lstinline{pkBuff} variable contains the packet raw data from where we build the PcapPlusPlus \lstinline{RawPacket}. From the \lstinline{RawPacket}, the library is capable of parsing the packet and building all the layers.\\
+	\bigbreak
+
+	\begin{lstlisting}[frame=single, language=C++]
+		pcpp::RawPacket *inPacketRaw = new pcpp::RawPacket(pktb_data(pkBuff), pktb_len(pkBuff), timestamp, false, pcpp::LINKTYPE_RAW);
+		pcpp::Packet *inPacket = new pcpp::Packet(inPacketRaw);
+		//Print all packet layers for inspection
+		pcpp::Layer *L = p->getFirstLayer();
+		while (L != nullptr) {
+			cout << "\t\t| LEV: " << L->getOsiModelLayer() << " => " << L->toString() << endl;
+			L = L->getNextLayer();
+		}
+	\end{lstlisting}
+	\bigbreak
+
+	The parsed packet is the input for the single operation that the Craftberry user wants to perform.\\
+	Each operation is selected matching the action, specified in the passed parameter, and the protocol, recognized in the packet.\\
+	\bigbreak
+	The pattern is: 
+	\bigbreak
+
+	\begin{lstlisting}[frame=single, language=C++]
+		if (conf->method.compare("HTTPBLOCK") == 0 && Action::HTTP::isProtocol(inPacket)) {
+			//do something with the packet
+			return verdict_accept(qh, ntohl(ph->packet_id), inPacket);
+		}
+	\end{lstlisting}
+	\bigbreak
+
+	where, for instance, the passed action is \lstinline{HTTPBLOCK} and \lstinline{inPacket} must contain a HTTP layer.\\
+	Every method must end with a call to a \lstinline{verdict} function that decrees if the packet is accepted or dropped.\\
+	For the majority of our action implementations, the verdict is to accept the packet that has been modified. Before calling the function to accept the verdict, we collect statistic data and save the packet into a log file. The log file contains all the packets that Craftberry has captured, in case crafted, and accepted to continue the network stack traversal.
+
+	\subsubsection{The action classes}
+
+	The action classes contain the implementation of the attack or defense action. As said, they belong to the \lstinline{Action} namespace and have a similar common structure. All of them share the \lstinline{isProtocol} method used to identify if the action can be performed on the packet.\\
+	The single method that executes the attack or defense mechanism takes in input a \lstinline{Packet} variable, thus a parsed packet. The advantage of using the PcapPlusPlus library is that it exposes functions to craft the packet easily.\\
+	\bigbreak
+	We describe all the action methods and the relative attack or defense idea in the Action chapter.
+
+	\subsubsection{The \lstinline{Configuration} class}
+	
+	It is a \lstinline{singleton} class that contains all the application setup, collect data, and exposes functions used by all the other application components, thus, it is a shared instance\\
+	\bigbreak
+	An important function is to open and manage the \lstinline{tun0} network interface using the PcapPlusPlus device management methods. Then it implements the \lstinline{sendPkt} function to send a packet to the destination, the \lstinline{tun0} interface: for some actions this function is needed to complete the attack.\\
+	
+	\bigbreak
+
+	\begin{lstlisting}[frame=single, language=C++]
+		bool sendPkt(RawPacket *p) {
+			if (p->getRawDataLen() > conf->devTun0->getMtu()) {
+				conf->dropped.packets++;
+				conf->dropped.bytes += p->getRawDataLen();
+				return false;
+			}
+			if (conf->devTun0->sendPacket(*p)) {
+				conf->created.packets++;
+				conf->created.bytes += p->getRawDataLen();
+				conf->devLogFile->writePacket(*p);
+				return true;
+			}
+			cout << "something strange just happened" << endl;
+			return false;
+		};
+	\end{lstlisting}
+	\bigbreak
+	The function also collects data for the statistics.
+	\bigbreak
+
+	The \lstinline{Configuration} class also contains the \lstinline{makeIptableCmd} function to add or remove the rule to the \lstinline{iptables} list. It composes the bash command string and then calls the \lstinline{system()}function to execute the command. The function builds the string depending on the adding deleting action passed by the function caller.\\
+	
+	\bigbreak
+
+	\begin{lstlisting}[frame=single]
+		void makeIptableCmd(bool isDeleting) {
+			string protocol = "";
+			if (conf->method.compare("BEQUITE") == 0) {
+				protocol = "all";
+			} else if (conf->method.compare("TCPMULTIPLY") == 0 || conf->method.compare("IPV4") == 0) {
+				protocol = "tcp";
+			} else ...
+			string dir = std::to_string(static_cast<std::underlying_type<Direction>::type>(conf->direction));
+			string cmd = ("sudo iptables -t filter "s +
+						(!isDeleting ? "-I "s : "-D "s) +
+						(conf->direction == 0 ? "INPUT "s : "OUTPUT "s) +
+						"-p "s + protocol + " -j NFQUEUE "s +
+						" --queue-num "s + dir);
+			cout << "IPTABLE RULE: " << endl
+				<< "\t$: " << cmd << endl;
+			system(("\n#/bin/bash\n\n"s + cmd).c_str());
+		};
+	\end{lstlisting}
+	\bigbreak
+
+	In a scenario where Craftberry is executed two times, once capturing the incoming traffic and then capturing the outgoing traffic, we use the \lstinline{--queue-num nfqueue} parameter to bind the queue with the Craftberry execution. Therefore, the queue number is defined by the packet capturing direction.
+
 	\subsection{Actions}
 	\subsubsection{VLan double tagging}
 	use the double tagging attack method on cisco routers
 
 
 	\subsubsection{IP}
-	The IP packet contains information of the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
+	The IP packet contains information on the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
 	
 
 	\subsubsection{icmp}
@@ -534,11 +721,9 @@
 	\subsubsection{tcp/udp}
 	
 	The context of the attack supposes that the communication is encrypted supplementary to the VPN encryption. It is provided by end-to-end encryption between the Mysterium client and the server it is communicating with, and not the exit node. Therefore, the exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
-	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \tag{n} times a copy of the captured packet to the consumer.\\
+	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \lstinline{n} times a copy of the captured packet to the consumer.\\
 	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.\\
-
 	\bigbreak
-	
 	We have implemented a demonstrative example of this attack using the protocols \lstinline{tcp} and \lstinline{udp}.\\
 
 	The code in the main function is the following:\\
@@ -559,9 +744,14 @@
 		}
 	\end{lstlisting}
 
-	The \lstinline{n} parameter is a TCP class field. 
+	The \lstinline{n} parameter is a TCP class field.\\
+	For each received \lstinline{tcp} packet the method send \lstinline{n} copies of it to the network.
 
 	\subsubsection{DNS robber}
+
+	The DNS is a network protocol necessary to resolve a domain name to the correspondent address. Unfortunately, it is unencrypted and susceptible to attacks of a different nature. 
+
+	The attack idea is to capture a DNS request and perform DNS hijacking.
 
 	Malicious DNS redirect: https://securitytrails.com/blog/dns-hijacking\\
 
@@ -571,7 +761,7 @@
 	\subsubsection{HTTP}
 
 	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
-	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be splitted over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
+	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be split over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
 
 	
 	\begin{itemize}
@@ -621,6 +811,44 @@
 		\bibitem{exitnodeTOR2}
 			malicious TOR exit nodes
 			https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/
+
+		\bibitem{1}
+			libnetfilter queue
+			https://home.regit.org/netfilter-en/using-nfqueue-and-libnetfilter_queue/
+		
+		\bibitem{2}
+			https://buffered.com/glossary/tun-tap/
+		
+		\bibitem{3}
+		https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html
+
+		\bibitem{4}
+		http://www.cs.unibo.it/~ghini/didattica/sistemimobili/IPtables_Netfilter_AddDelay/packet_engine.c
+
+		\bibitem{5}
+		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
+
+		\bibitem{6}
+		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
+
+		\bibitem{7}
+		https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals
+
+		\bibitem{8}
+		https://mysterium.network/whitepaper.pdf
+
+		\bibitem{9}
+		https://pcapplusplus.github.io/docs/features
+
+		\bibitem{10}
+		https://www.apriorit.com/dev-blog/598-linux-mitm-nfqueue
+
+		\bibitem{11}
+		https://stackoverflow.com/questions/27293924/change-tcp-payload-with-nfqueue-scapy
+
+		\bibitem{12}
+		https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati
+
 	\end{thebibliography}
 		
 	\pagebreak
