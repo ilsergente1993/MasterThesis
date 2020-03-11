@@ -153,20 +153,18 @@
 	Furthermore, the user benefits in using the same identity because it is possible to rebuild his transaction history and his balance from the Ethereum blockchain, making the user more predictable and thus trustworthy for service providers.\\
 
 	\bigbreak
-	\begin{figure}
-		\includegraphics[width=0.5\linewidth]{images/mysterium_identity_creation.png}
-		\caption{The Mysterium identity creation steps}
-	\end{figure}
+	\begin{center}
+		\includegraphics[width=1\linewidth]{images/mysterium_identity_creation.png}
+	\end{center}
 
 	\subsubsection{Service Discovery}
 
 	The \textbf{service discovery} provides the list of service proposals available in the network. The service posts its service offer characterized by some service parameters: those parameters can be the VPN application the provider supports, the provider's connection IP address and port, the provider's server location, or the bandwidth per session. Then, the miners append the proposal to the blockchain, making it publicly available for everyone.\\
 
 	\bigbreak
-	\begin{figure}
-		\includegraphics[width=0.5\linewidth]{images/mysterium_service_announcement.png}
-		\caption{The Mysterium service announcement steps}
-	\end{figure}
+	\begin{center}
+		\includegraphics[width=1\linewidth]{images/mysterium_service_announcement.png}
+	\end{center}
 	
 	\subsubsection{Payments Handling}
 
@@ -209,19 +207,21 @@
 	On the other hand, the TUN type is, in the ISO model, one layer above, working at level three. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
 	Usually, the TUN type is the most used, since the TAP type brings some limitations such as it cannot be used with Android or iOS devices, causes higher overhead on the VPN tunnel, and scales poorly.\\
 	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
-	The virtual TUN interface created by OpenVPN is tun0, the public interface is eth0, and the internal interface is eth1.\\
+	The virtual TUN interface created by OpenVPN is \lstinline{tun0}, the public interface is \lstinline{eth0}, and the internal interface is \lstinline{eth1}.\\
 
 	\bigbreak
-	\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.PNG}
-
+	\begin{center}
+		\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.png}
+	\end{center}
 	\bigbreak
-	When a packet arrives at the ``eth1'' interface, OpenVPN picks it up, decrypts, and sends the data to the tun0 interface. The ``iptables'' and the routing engine filter and masquerade the packet and send it to eth0, where it becomes available to the final receiver.\\
-	In the other direction, when the packet arrives at ``eth0'' interface, ``iptables'' and the routing engine apply their rules to filter and masquerade, and then they forward it to ``tun0'' interface. Thus, OpenVPN picks it up, encrypts the data, and sends it to the public ``eth1'' interface.\\
-	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from ``tun0'' to the public interface eth0 on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
+	When a packet arrives at the \lstinline{eth1} interface, OpenVPN picks it up, decrypts, and sends the data to the\lstinline{tun0} interface. The \lstinline{iptables} and the routing engine filter and masquerade the packet and send it to\lstinline{eth0}, where it becomes available to the final receiver.\\
+	In the other direction, when the packet arrives at \lstinline{eth0} interface, \lstinline{iptables} and the routing engine apply their rules to filter and masquerade, and then they forward it to \lstinline{tun0} interface. Thus, OpenVPN picks it up, encrypts the data, and sends it to the public \lstinline{eth1} interface.\\
+	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from \lstinline{tun0} to the public interface\lstinline{eth0} on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
 	\bigbreak
 
-	\includegraphics{images/openvpn_tun_interface.jpg}
-
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/openvpn_tun_interface.png}
+	\end{center}
 	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
 	\subsubsection{Start a node}
@@ -243,11 +243,11 @@
 	\begin{enumerate}
 		\item to add the network capability to the operative system, which is Linux,
 		\item to connect the container to the net,
-		\item to name the container ``myst'',
+		\item to name the container \lstinline{myst},
 		\item to run the container in background mode and detach it from the shell.
 	\end{enumerate}
 
-	The remaining values are passed to the Mysterium software. The ``service'' value means Mysterium node starts as a node, thus a service provider, instead of a client, the next one is to agree on the terms and conditions, and the last one is to set up the OpenVPN port.\\
+	The remaining values are passed to the Mysterium software. The \lstinline{service} value means Mysterium node starts as a node, thus a service provider, instead of a client, the next one is to agree on the terms and conditions, and the last one is to set up the OpenVPN port.\\
 	When the container is up and running, we can check the logs using:
 
 	\begin{lstlisting}[frame=single]
@@ -265,7 +265,7 @@
 	The identity registration is the unique ID assigned from the network to the node. With this ID, it is possible to discover it, its connection details, and transaction history on the Mysterium Network website.\\
 	
 	
-	The second way to install the Mysterium node is using the Debian package. To manage its execution, we use the ``systemctl'', a management tool for controlling the init system:\\
+	The second way to install the Mysterium node is using the Debian package. To manage its execution, we use the \lstinline{systemctl}, a management tool for controlling the init system:\\
 	We run 
 
 	\begin{lstlisting}[frame=single]
@@ -296,10 +296,11 @@
 
 	\subsubsection{Iptables}
 
-	The ``iptables'' is a framework to manage the network decisions. It is based on the ``Netfilter'' kernel component, which exposes a set of hooks that are triggered at specific points of the network stack. Every packet that enters the networking system will trigger these hooks as it proceeds through the stack so all the programs that register with these hooks can interact with the traffic.\\
+	The \lstinline{iptables} is a framework to manage the network decisions. It is based on the Netfilter kernel component, which exposes a set of hooks that are triggered at specific points of the network stack. Every packet that enters the networking system will trigger these hooks as it proceeds through the stack so all the programs that register with these hooks can interact with the traffic.\\
 	\bigbreak
 	Five different hooks correspond to different points of the stack:\\
 
+	\bigbreak
 	\begin{itemize}
 		\item \lstinline{NF_IP_PRE_ROUTING}
 		\item \lstinline{NF_IP_LOCAL_IN}
@@ -309,8 +310,11 @@
 	\end{itemize}
 	\bigbreak
 
-	IMAGE OF THE POINTS IN THE FLOW WHERE THE HOOKS ARE
-	
+	\bigbreak
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/iptables_hooks.png}
+	\end{center}
+	\bigbreak
 	Iptables is mainly used as a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
 	The available tables are the filter table, the NAT table, the Mangle table, the Raw table, and the Security table.\\
 	The chains correspond to the available hooks, therefore iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
@@ -350,10 +354,14 @@
 	The action called target, which is triggered if the rule matches, can be of terminating or non-terminating type.\\
 	The terminating type target causes the packet to exit the chain after a verdict that can be to allow or to drop the packet. The non-terminating type target causes the packet to continue its evaluation in the chain. There can be any number of non-terminating targets before a terminating one.\\
 	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain, and when that chain finishes the rules check, the execution comes back to the previous chain. This way is useful to organize the rules in chains based on their purposes.\\
+	\bigbreak
 
-	LITTLE IMAGE OF CHAIN JUMP ACTION
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/iptables_jump_chains.png}
+	\end{center}
+	\bigbreak
 
-	With ``iptables'', it is possible to build firewalls and control systems to manage the computer network efficiently.
+	With \lstinline{iptables}, it is possible to build firewalls and control systems to manage the computer network efficiently.
 
 
 	\subsection{Design vulnerabilities}
@@ -414,7 +422,7 @@
 	\begin{itemize}
 		\item \lstinline{qdisc}: modify the scheduler (also known as queuing discipline)
 		\item \lstinline{add}: add a new rule
-		\item \lstinline{dev eth0}: rules will be applied on device eth0
+		\item \lstinline{dev eth0}: rules will be applied on device\lstinline{eth0}
 		\item \lstinline{root}: modify the outbound traffic scheduler (aka known as the egress qdisc)
 		\item \lstinline{netem}: use the network emulator to emulate a WAN property
 		\item \lstinline{delay}: the network property that is modified
@@ -438,7 +446,7 @@
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
 	The traffic outside the tunnel is not encrypted by the VPN, but this does not necessarily mean it is not encrypted by itself. Some protocols encrypt data by design. Others do not encrypt or have different structure levels where the lowest have no encryption at all and can be modified.\\ Based on this consideration, the operations that a node can potentially do on the passing data can be grouped in sniffing, filtering, and crafting.\\
 	The first step to manipulate the data is to catch it, and we want to show an example of how-to-do. After starting a Mysterium Node on our test server and then establish the connection to it using a Mysterium client, we use \lstinline{tcpdump} to dump the traffic of the network. For the example purpose, we get an online resource hosted on a different server and available using the HTTP protocol, so that the dumped traffic is in clear.\\
-	Our example provides an HTTP request to the host www.jafed.xyz with the method GET to obtain a file named test.txt with the content the string "cool, you got me sir!".\\
+	Our example provides an HTTP request to the host www.jafed.xyz with the method GET to obtain a file named test.txt with the content the string \lstinline{cool, you got me sir!}.\\
 	The request is executed using curl, a command-line tool for transferring data using various protocols.\\
 
 	\begin{lstlisting}[frame=single]
@@ -490,7 +498,9 @@
 	
 	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
 
-	\includegraphics[width=\linewidth]{images/client_server_vpn_connection.png}
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/client_server_vpn_connection.png}
+	\end{center}
 
 	\section{Craftberry}
 
@@ -504,7 +514,7 @@
 	We propose part of the output provided by the application when the help command is used:
 	\begin{itemize}
 		\item \lstinline{-a}: Use the specified action
-		\item  \lstinline{-i}: Use the specified interface, tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
+		\item  \lstinline{-i}: Use the specified interface,tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
 		\item  \lstinline{-t}: Use the specified timeout in seconds, if not defined it runs until some external signals stop the execution (e.g. ctrl+c)
 		\item  \lstinline{-l}: Write all the crafted and generated traffic into a \lstinline{pcapng file} having name passed by parameter or, if the parameter is equal to 'default', the name is \lstinline{out_<epoch_ms>.pcapng}
 		\item  \lstinline{-d}: Direction filtering by and perform the crafting {IN, OUT}, default = IN
@@ -539,7 +549,7 @@
 
 	The defense action is at layer 4. It encrypts the payload of the packets with \lstinline{ChaCha20} algorithm, a \lstinline{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
-	\subsection{nfqueue extension}
+	\subsection{\lstinline{nfqueue} extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \lstinline{Netfilter} target modules in userspace. This module is an application that is called by \lstinline{nfqueue} hooks. In the program, the hooks are bounded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
 	\bigbreak
