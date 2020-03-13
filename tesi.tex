@@ -539,7 +539,7 @@
 	\begin{itemize}
 		\item Layer 2: VLanDoubleTagging
 		\item Layer 3: IP, icmp
-		\item Layer 4: tcp/udp
+		\item Layer 4: TCP/UDP
 		\item Layer 5 and above: HTTP, DNS, NTP
 	\end{itemize}
 
@@ -658,7 +658,7 @@
 
 	\subsubsection{The action classes}
 
-	The action classes contain the implementation of the attack or defense action. As said, they belong to the \lstinline{Action} namespace and have a similar common structure. All of them share the \lstinline{isProtocol} method used to identify if the action can be performed on the packet.\\
+	The action classes contain the implementation of the attack or defense mechanisms. As said, they belong to the \lstinline{Action} namespace and have a similar common structure. All of them share the \lstinline{isProtocol} method used to identify if the action can be performed on the packet.\\
 	The single method that executes the attack or defense mechanism takes in input a \lstinline{Packet} variable, thus a parsed packet. The advantage of using the PcapPlusPlus library is that it exposes functions to craft the packet easily.\\
 	\bigbreak
 	We describe all the action methods and the relative attack or defense idea in the Action chapter.
@@ -726,18 +726,34 @@
 
 	\subsubsection{IP}
 	The IP packet contains information on the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
-	
+	When the packet is captured from the callback, the \lstinline{changeDst} function is called passing the parsed packet. Then, we extract the IPv4 layer from the stack and change the destination Ip using the PcapPlusPlus methods.\\
+	The code is the following:
+	\bigbreak
 
-	\subsubsection{icmp}
+	\begin{lstlisting}[frame=single]
+		void changeDst(Packet *inPacket) {
+			IPv4Layer *ipv4 = inPacket->getLayerOfType<pcpp::IPv4Layer>();
+			ipv4->setDstIpAddress(IPv4Address(newIp));
+		}
+	\end{lstlisting}
+	\bigbreak
 
-	\subsubsection{tcp/udp}
+	Where \lstinline{newIp} is a class field that contains the new destination IP the attack aims to set. It is set during the action creation.
+
+	\bigbreak
+	The scenarios that can use this action are where the attacker wants to redirect all the traffic to another server, often called Command and Control, to perform other activities on the data.   
 	
-	The context of the attack supposes that the communication is encrypted supplementary to the VPN encryption. It is provided by end-to-end encryption between the Mysterium client and the server it is communicating with, and not the exit node. Therefore, the exit node cannot then perform any content understanding, and only actions on the entire packet can be done, as described in the Design vulnerabilities chapter.\\
+	\subsubsection{ICMP}
+	ICMP, an abbreviation for Internet Control Message Protocol, is a protocol used for network messages and diagnostic operations. The action on this level has been implemented for test purposes and does not have any particular attack model. By the way, after capturing the ICMP packet, we are able to change its values for the request and the reply messages.
+
+	\subsubsection{TCP/UDP}
+	
+	The context of the attack supposes that communication has supplementary encryption, over the VPN encrypted layer, provided by end-to-end encryption between the Mysterium client and the resource server the user is communicating with, and not the exit node. Therefore, the latter cannot perform any content understanding, and can do only actions on the entire packet, as described in the Design vulnerabilities chapter.\\
 	The attack accomplishes a simple copy of the packet: when the provider receives packets from the internet, it sends \lstinline{n} times a copy of the captured packet to the consumer.\\
 	The implementation is as simple as significant: with this method, with no content understanding, the passing data are more than the necessary, and the service consumer is affected.\\
 	\bigbreak
-	We have implemented a demonstrative example of this attack using the protocols \lstinline{tcp} and \lstinline{udp}.\\
-
+	We have implemented a demonstrative example of this attack using the protocols TCP and UDP.\\
+	\bigbreak
 	The code in the main function is the following:\\
 	\begin{lstlisting}[frame=single]
 		if (conf->method.compare("ICMPMULTIPLY") == 0 && Action::Icmp::isProto(inPacket)) {
@@ -747,7 +763,9 @@
 		}
 	\end{lstlisting}
 
+	\bigbreak
 	The multiply method is implemented as follows:
+	\bigbreak
 	\begin{lstlisting}[frame=single]
 		void multiply(RawPacket *inPacket) {
 			for (int i = 0; i < this->n; i++) {
@@ -755,26 +773,26 @@
 			}
 		}
 	\end{lstlisting}
+	\bigbreak
 
 	The \lstinline{n} parameter is a TCP class field.\\
-	For each received \lstinline{tcp} packet the method send \lstinline{n} copies of it to the network.
+	For each received TCP packet, the method send \lstinline{n} copies of it to the network.
 
 	\subsubsection{DNS robber}
 
-	The DNS is a network protocol necessary to resolve a domain name to the correspondent address. Unfortunately, it is unencrypted and susceptible to attacks of a different nature. 
+	The DNS is a network protocol necessary to resolve a domain name to the correspondent address. Unfortunately, it is unencrypted and susceptible to attacks of a different nature \cite{DNSATTACKS}.\\
+	The attack idea is to capture a DNS request and response and perform DNS hijacking \cite{DNShijacking}. The hijacking can be done in different ways: capturing the DNS request or capturing the DNS response.\\
+	The request contains the name server the machine wants to resolve to get the corresponding IP address necessary to begin the communication. If we catch the request packet, we can change the name server with another malicious nameserver under our control. The DNS resolver reply to the consumer with our machine IP that returns our web page, if the query is HTTP. This attack can be used for phishing, the attempts to obtain sensitive information by disguising oneself as a trustworthy entity, or for collecting data.\\
+	The response packet modification has a similar goal
 
-	The attack idea is to capture a DNS request and perform DNS hijacking.
-
-	Malicious DNS redirect: https://securitytrails.com/blog/dns-hijacking\\
-
-	This attack can be used for phishing or data collecting attacks. The first one attempts to obtain sensitive information by disguising oneself as a trustworthy entity in an electronic communication. In our case, the idea is to redirect the requested page to a fake page which matches the look and feel of the legitimate site.\\
-	The second one, instead, uses the change of the URL to redirect the request on a website to record it.
 
 	\subsubsection{HTTP}
 
 	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
-	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of a HTTP answer, detect if the payload is an image and then substitute it with another one. We need to clarify that the HTTP response content can be split over many tcp packets, if it is larger than the maximum tcp packet size. Craftberry captures tcp packets, but does not perform tcp reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single tcp frame.
+	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of the HTTP answer, detect if the payload is an image, and then substitute it with another one. We need to clarify that the HTTP response content can be split over many TCP packets, if it is larger than the maximum TCP packet size. Craftberry captures TCP packets but does not perform TCP reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single TCP frame.
 
+
+	A little variant of this attack append the original name server and final resource, also called URL, as \lstinline{GET} parameter to another name
 	
 	\begin{itemize}
 		\item http://linux-training.be/networking/ch14.html
@@ -787,7 +805,10 @@
 		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
 		
 	\end{verbatim}
-			
+
+	\subsubsection{Cypher}
+
+
 	\subsection{Tests}
 		???
 	\subsection{Design solutions for malicious context}
@@ -823,42 +844,59 @@
 		\bibitem{exitnodeTOR2}
 			malicious TOR exit nodes
 			https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/
+		\bibitem{DNSATTACKS}
+			DNS attack patterns
+			https://www.fireeye.com/blog/threat-research/2019/01/global-dns-hijacking-campaign-dns-record-manipulation-at-scale.html
+		\bibitem{DNShijacking}
+			DNS hijacking
+			https://securitytrails.com/blog/dns-hijacking
 
 		\bibitem{1}
 			libnetfilter queue
 			https://home.regit.org/netfilter-en/using-nfqueue-and-libnetfilter_queue/
 		
 		\bibitem{2}
+			todo
 			https://buffered.com/glossary/tun-tap/
 		
 		\bibitem{3}
-		https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html
+			todo
+			https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html
 
 		\bibitem{4}
+		todo
 		http://www.cs.unibo.it/~ghini/didattica/sistemimobili/IPtables_Netfilter_AddDelay/packet_engine.c
 
 		\bibitem{5}
+		todo
 		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
 
 		\bibitem{6}
+		todo
 		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
 
 		\bibitem{7}
+		todo
 		https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals
 
 		\bibitem{8}
+		todo
 		https://mysterium.network/whitepaper.pdf
 
 		\bibitem{9}
+		todo
 		https://pcapplusplus.github.io/docs/features
 
 		\bibitem{10}
+		todo
 		https://www.apriorit.com/dev-blog/598-linux-mitm-nfqueue
 
 		\bibitem{11}
+		todo
 		https://stackoverflow.com/questions/27293924/change-tcp-payload-with-nfqueue-scapy
 
 		\bibitem{12}
+		todo
 		https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati
 
 	\end{thebibliography}
