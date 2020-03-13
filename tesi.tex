@@ -398,7 +398,7 @@
 	
 	
 	Figure X describes the network configuration of a Mysterium end node.\\
-	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
+	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
 	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
 	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
 	Mysterium did not implement those hops in the network yet. Therefore we make a hypothesis on its possible implementation.\\
@@ -468,7 +468,7 @@
 
 	that shows we caught the HTTP request.
 	
-	We use Wireshark to analyze the content, a powerful graphical application for network usages. It supports the pcapng file extension that tcpdump uses to save the data.\\
+	We use Wireshark to analyze the content, a powerful graphical application for network usages. It supports the \lstinline{pcapng} file extension that \lstinline{tcpdump} uses to save the data.\\
 	We print the captured result filtered of the packets of our interest:\\
 	
 	\begin{lstlisting}[frame=single]
@@ -494,10 +494,15 @@
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
 	In Mysterium Network, the billing method is per the amount of transferred data or per time. Considering the first method, if the exit node is able to higher the volume of the traffic to the consumer, it means the exit node earns money without providing an equal service. A well-designed attack can perform the traffic shaping hiding the increase of traffic volume with network inefficiency.\\
-	In the "tcp/udp" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using tcp and udp protocols with no content understanding. A more refined attack would be modifying the packet specifically for the protocol, forcing the error in the communication so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
+	In the "TCP/UDP" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using TCP and UDP protocols with no content understanding. A more refined attack would be modifying the packet specifically for the protocol, forcing the error in the communication so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
 	
 	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
 
+	side attacks:\\
+	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
+	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)\\
+
+	situazione in cui il nodo malevolo appartiene ad una bot net che esegue attachi DDOS
 	\begin{center}
 		\includegraphics[width=\linewidth]{images/client_server_vpn_connection.png}
 	\end{center}
@@ -544,11 +549,6 @@
 	\end{itemize}
 
 	\bigbreak
-	
-	side attacks:\\
-	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
-	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)
-
 	The defense action is at layer 4. It encrypts the payload of the packets with \lstinline{ChaCha20} algorithm, a \lstinline{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
 	\subsection{\lstinline{nfqueue} extension}
@@ -559,7 +559,7 @@
 	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
 
 	\subsection{PcapPlusPlus}
-	It is a multiplatform C++ library for capturing, parsing and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most popular packet processing engines making easy decoding and forging a large variety of network protocols.
+	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most popular packet processing engines making easy decoding and forging a large variety of network protocols.
 
 	\subsection{Software Architecture}
 	Craftberry has an architecture composed of four components: the first one is the \lstinline{main} function that sets up the \lstinline{iptables} rules, register the callback function to get the captured packet, and manages the \lstinline{cli} parameters. The second one is the callback function, the core of the application, that takes the captured packets and calls the corresponding action to execute on it. The third component includes all the methods that implement the attack or defense mechanisms. All of them belong to the \lstinline{Action} namespace. The fourth component is a class, called \lstinline{Configuration}, which includes the functions to collect statistics on the elaborated data, and to manage the \lstinline{tun0} network interface. It also implements auxiliary functions for the application.\\
@@ -723,7 +723,6 @@
 	\subsubsection{VLan double tagging}
 	use the double tagging attack method on cisco routers
 
-
 	\subsubsection{IP}
 	The IP packet contains information on the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
 	When the packet is captured from the callback, the \lstinline{changeDst} function is called passing the parsed packet. Then, we extract the IPv4 layer from the stack and change the destination Ip using the PcapPlusPlus methods.\\
@@ -782,17 +781,38 @@
 
 	The DNS is a network protocol necessary to resolve a domain name to the correspondent address. Unfortunately, it is unencrypted and susceptible to attacks of a different nature \cite{DNSATTACKS}.\\
 	The attack idea is to capture a DNS request and response and perform DNS hijacking \cite{DNShijacking}. The hijacking can be done in different ways: capturing the DNS request or capturing the DNS response.\\
+	\bigbreak	
 	The request contains the name server the machine wants to resolve to get the corresponding IP address necessary to begin the communication. If we catch the request packet, we can change the name server with another malicious nameserver under our control. The DNS resolver reply to the consumer with our machine IP that returns our web page, if the query is HTTP. This attack can be used for phishing, the attempts to obtain sensitive information by disguising oneself as a trustworthy entity, or for collecting data.\\
-	The response packet modification has a similar goal
-
-
+	The response packet modification has a similar goal, and the attack has the same impact: to block a specific name server or to force all the requests to a different IP address. The latter scenario can be the central action to perform a denial of service, overloading a server of, in our example, HTTP requests.
+	
 	\subsubsection{HTTP}
 
 	Hypertext Transfer Protocol is an application-layer protocol for transmitting hypermedia documents, and it is the standard in the client-server architectures. The HTTP protocol is stateless, meaning that the server does not keep any state between two requests.\\
-	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of the HTTP answer, detect if the payload is an image, and then substitute it with another one. We need to clarify that the HTTP response content can be split over many TCP packets, if it is larger than the maximum TCP packet size. Craftberry captures TCP packets but does not perform TCP reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single TCP frame.
+	This protocol is perfect for implementing an attack and for demonstrating how a node can maliciously and heavily modify the content of a packet. Our goal is to intercept the response of the HTTP answer, detect if the payload is an image, and then substitute it with another one. We need to clarify that the HTTP response content can be split over many TCP packets, if it is larger than the maximum TCP packet size. Craftberry captures TCP packets but does not perform TCP reassembly. Therefore, for our demonstration purpose, it can operate the image substitution only for images contained in a single TCP frame.\\
+	
+	\bigbreak
+	A little variant of this attack changes the URL of the \lstinline{GET} method of the HTTP request.\\
+	For example, if the HTTP request is in the form:\\
+	
+	\bigbreak
+	\begin{lstlisting}[frame=single]
+		URL: http://www.example.com/resource
+	\end{lstlisting}
+	\bigbreak
+	
+	it becomes
+	
+	\bigbreak
+	\begin{lstlisting}[frame=single]
+		URL: http://www.maliciouswebsite.com?p=http://www.example.com/resource
+	\end{lstlisting}
+	\bigbreak
+	
+	When the malicious website gets the request, it collects data and redirects to the original website.\\
+	The ultimate goal is to perform aggressive advertisement campaigns.\\
+	\bigbreak
 
-
-	A little variant of this attack append the original name server and final resource, also called URL, as \lstinline{GET} parameter to another name
+	As further action implementation, we made a web filter. The method checks the HTTP request and drops the packets that match the blocked URL.
 	
 	\begin{itemize}
 		\item http://linux-training.be/networking/ch14.html
@@ -800,17 +820,62 @@
 
 	\begin{verbatim}
 		http://unixwiz.net/techtips/gnu-c-attributes.html
-		https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html
 		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
 		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
-		
 	\end{verbatim}
 
-	\subsubsection{Cypher}
+	\subsubsection{Cipher}
 
-
+	This action is a conceptual proposal of a defense mechanism to protect the traffic. The idea is to use a fast and efficient cipher algorithm, such as Salsa20, to encrypt all the outgoing content and decrypt all the incoming content. The encryption operation is performed on the TCP payload. It expects to dialog with another cipher/decipher entity positioned at the service provider point or on another server that can be reached outside the VPN tunnel.\\
+	\bigbreak
+	immagine della connessione di due nodi con uno che cifra e la possibile posizione del decifrante.
+	\bigbreak
 	\subsection{Tests}
 		???
+	
+		\bigbreak
+		\begin{lstlisting}[frame=single]
+		make all && sudo ./craftberry -I 10.135.63.160 -a HTTP -d OUT
+		\end{lstlisting}
+		\bigbreak
+
+		\bigbreak
+		\begin{lstlisting}[frame=single]
+		Method:                HTTP
+			Logfile:               captures/out_1584126885.pcapng
+			Direction:             OUT
+		Interface tun0 info:
+			IP:                    10.135.63.160
+			Interface name:        eth1
+			Interface description: 
+			MAC address:           62:26:9f:43:ed:c3
+			Default gateway:       0.0.0.0
+			Interface MTU:         1500
+			DNS Servers:           0
+		IPTABLE RULE: 
+			$: sudo iptables -t filter -I OUTPUT -p tcp -m multiport --dports 80,443 -j NFQUEUE  --queue-num 1
+		Working in infinity mode, press ctrl+c to exit...
+		\end{lstlisting}
+
+		\bigbreak
+
+		\begin{lstlisting}[frame=single]
+		^C
+		Ooooops got ctrl+c signal (2)
+		Here a summary of what happened:
+		Packets received:      0 (0 bytes)
+		Packets crafted:       0 (0 bytes)
+		Packets created:       0 (0 bytes)
+		Packets dropped:       0 (0 bytes)
+		All is clean
+		IPTABLE RULE: 
+				$: sudo iptables -t filter -D OUTPUT -p tcp -m multiport --dports 80,443 -j NFQUEUE  --queue-num 1
+		bye bye
+		\end{lstlisting}
+		\bigbreak
+
+
+
 	\subsection{Design solutions for malicious context}
 		\subsubsection{comparing data}
 		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
