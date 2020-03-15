@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 %opening
-\title{Malicious context and workaround analysis of decentralized VPN:\\the case of Mysterium Network}
+\title{Malicious context and workaround analysis\\of decentralized VPN:\\the case of Mysterium Network}
 \author{Jacopo Federici}
 
 
@@ -14,6 +14,7 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
+\usepackage{hyperref}
 
 \lstset
 {
@@ -39,6 +40,10 @@
 	\pagebreak
 
 	\begin{abstract}
+    
+    In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
+	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
+    Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
 		
 	\end{abstract}
 	\pagebreak
@@ -56,11 +61,6 @@
 	A solution to increase the security level is provided by the Virtual Private Network (VPN), a technical solution that allows extending a private network across a public network. It creates a virtual point-to-point connection by using a tunneling protocol over the existing network, and the tunneled traffic is encrypted. A first proposal of the VPN specification is around 2000 \cite{VPNRFC}, but only in the last years, the use of VPN became massive. The VPN data encryption feature is solving privacy problems of various nature, such as to exit a censored network, using services available or blocked in certain countries, avoiding tracking methods and other similar scenarios.\\
 	Currently, there are commercial solutions that allow users to have a private connection to the company's servers across the world, but there are many security concerns about those solutions. These companies can keep the connection logs, inspect the traffic, or sell statistical data.\\
     Some open-source projects were, lately, born to solve these issues. Their goal is to revolutionize the idea of VPN and its uses, building a rich network of peers where two nodes can connect through a VPN. The projects provide a platform that includes all the components needed to have an efficient, fast, and easy-to-use system, from the discovery to the payment.\\
-	\bigbreak
-    
-    In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
-	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
-    Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
 	
 	\subsection{The state of the art}
 	The world is changing at a fast pace.\\
@@ -131,7 +131,10 @@
 	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
 	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
 	\bigbreak
-	\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}
+	\end{center}
 	\bigbreak
 		
 	As a general workflow description, Mysterium starts by collecting all the agents' service proposals and presents them to the clients. Then it registers the client's intention to pay for the agent's service chosen by the user and creates the VPN connection between the two points. The outcome of each transaction is saved in the blockchain.\\
@@ -367,7 +370,8 @@
 	\subsection{Design vulnerabilities}
 
 	Mysterium is a complex system that integrates components of different types. The distinct nature of these components and their conjunction opens to new vulnerabilities scenarios where the focus is on the system overall and how the elements dialog each other.\\
-	In the following chapter, we provide considerations on the Mysterium Network system concerning its components and their integration. In order to do this, we had to assumed some components behaviours and their impact on the system because Mysterium does not implement them yet, at this time. Indeed, Mysterium project is under development, which plans to have a fully decentralized network in 2021. 
+	In the following chapter, we provide considerations on the Mysterium Network system concerning its components and their integration. To do this, we assumed some components behaviors and their impact on the system because Mysterium does not implement them yet, at this time. Indeed, Mysterium project is under development, which plans to have a fully decentralized network in 2021.\\
+	\bigbreak
 
 	We classify the several aspects that, on a project like Mysterium, must be considered to evaluate its design vulnerabilities based on:
 	\begin{itemize}
@@ -382,7 +386,9 @@
 	In the simplest configuration, the network includes a starting point that is the service consumer node and an endpoint, which is the service provider node. The VPN tunnel connects the two nodes and encrypts their traffic. The service node, as previously described, is the consumer's exit point to the internet.\\
 	We consider secure the traffic passing through the VPN tunnel because it is encrypted, not secure otherwise, that is from the provider to the internet.\\
 
+	\bigbreak
 	SIMPLE NETWORK CONFIGURATION WITH AN EXIT NODE\\
+	\bigbreak
 
 	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default and without specific precautions can be the weak link of the system.\\
 	The Tor network has a similar problem. Tor stands for The Onion Router, and it is a network of peers where the user's encrypted traffic is sent into, and it bounces multiple times before getting an exit node from where, finally, it reaches the external resource.\\
@@ -393,10 +399,9 @@
 	The conclusion is that Tor's end nodes are the weak link of the system when the users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
 	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor can be applied to a Mysterium Network exit node. But we want to point out a difference between Tor and Mysterium networks: the type of target users of the two projects.\\
 	The Tor's users use it to accomplish specific online activities where the identity obfuscation is mandatory. For the rest of the actions, Tor is not efficient, can be blocked by ISP and, in some countries, is even banned.\\
-	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume the use with a persistent connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
+	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume a persistent connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
 	This scenario, however, introduces move vulnerabilities simply because the network is used for more activities, and many protocols and applications still use unencrypted communication.\\
-	
-	
+	\bigbreak	
 	Figure X describes the network configuration of a Mysterium end node.\\
 	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in chapter X.\\
 	\textit{If we ask someone to look at a photo for us and tell us to describe its content, he must, of course, understand the meaning, can change a little detail, or even tells someone else the content of the picture.}\\
@@ -411,10 +416,11 @@
 	Mandatory would be an additional encryption layer end to end, over the VPN encryption between each node, that the consumer and provider have to manage. This second encryption solves the multihop data exposing because the middle nodes would manage only data encrypted by the second layer. The cons are that it increases the computational load.\\
 	The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
 	Many traffic shapes operations can be performed on a connection: the simplest and the fastest is on the traffic speed, and it does not need to understand the content at all.\\
+	\bigbreak
 	A demonstration of how a middle node can slow down the data speed that it forwards, is using a Linux package called \lstinline{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
 	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \lstinline{eth0}.\\
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[frame=single]
 		sudo tc qdisc add dev eth0 root netem delay 500ms
 	\end{lstlisting}
 	
@@ -438,9 +444,8 @@
 	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose it is a packet path issue and can propose to the network to change one or more middle nodes. 
 
 	\subsubsection{The flow steps}
-	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network, has a positive balance to the cryptocurrency wallet, and look for a service proposal. They agree on the service cost and issue a payment promise. If the user does not respect the promise...
-	TODO\\
-
+	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network having a positive balance to the cryptocurrency wallet, and then he looks for a service proposal. They agree on the service cost and issue a payment promise. If the consumer does not respect the promise, the result will be registered in the blockchain. In the same way, if the producer alters the service agreement. Therefore, the blockchain is the reputation book of the network, where every user, consumers or providers, can check the other users' reputation. The reputation implementation in this kind of network is an open point.
+	
 	\subsubsection{Operations on the passing data}
 
 	In this section we analyze the different operation an end node can perform, based on the fact it manages traffic outside the VPN tunnel.\\
@@ -494,19 +499,12 @@
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
 	In Mysterium Network, the billing method is per the amount of transferred data or per time. Considering the first method, if the exit node is able to higher the volume of the traffic to the consumer, it means the exit node earns money without providing an equal service. A well-designed attack can perform the traffic shaping hiding the increase of traffic volume with network inefficiency.\\
-	In the "TCP/UDP" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using TCP and UDP protocols with no content understanding. A more refined attack would be modifying the packet specifically for the protocol, forcing the error in the communication so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
-	
-	VLAN tag attack when the client is into an enterprise network. The attack crosses the firewall of the infrastructure.
+	In the "TCP/UDP" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using TCP and UDP protocols without the need to understand the content. A more refined attack would be modifying the packet specifically for the protocol, forcing a communication error so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
+	\bigbreak
 
-	side attacks:\\
-	- auditin/collezione dei dati sniffati, inviati ad un server esterno per collezionamento, statistiche, vendita a terzi.
-	- trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)\\
-
-	situazione in cui il nodo malevolo appartiene ad una bot net che esegue attachi DDOS
-	\begin{center}
-		\includegraphics[width=\linewidth]{images/client_server_vpn_connection.png}
-	\end{center}
-
+	A considerable number of informatic attacks aim to collect traffic data and then sell them to third party organizations for aggressive advertisement campaigns \cite{VPNsellData}. In this perspective, the capability of an exit node to be able to sniff the web requests, as we demonstrated in the previous subsection, make the network vulnerable to this attack.\\
+	\bigbreak
+	{trojan all'interno di craftberry, per botnet. (approfondire aspetto che se il sw di attacco diventa popolare, può essere lui stesso veicolo di malware, quindi attacco l' attaccante)}\\
 	\section{Craftberry}
 
 	\subsection{The idea}
@@ -542,7 +540,6 @@
 	
 	The attack actions categorized by layer are:
 	\begin{itemize}
-		\item Layer 2: VLanDoubleTagging
 		\item Layer 3: IP, icmp
 		\item Layer 4: TCP/UDP
 		\item Layer 5 and above: HTTP, DNS, NTP
@@ -551,7 +548,7 @@
 	\bigbreak
 	The defense action is at layer 4. It encrypts the payload of the packets with \lstinline{ChaCha20} algorithm, a \lstinline{Salsa20} modification published in 2008. It is a particularly efficient stream cipher.\\
 
-	\subsection{\lstinline{nfqueue} extension}
+	\subsection{nfqueue extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \lstinline{Netfilter} target modules in userspace. This module is an application that is called by \lstinline{nfqueue} hooks. In the program, the hooks are bounded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
 	\bigbreak
@@ -564,7 +561,7 @@
 	\subsection{Software Architecture}
 	Craftberry has an architecture composed of four components: the first one is the \lstinline{main} function that sets up the \lstinline{iptables} rules, register the callback function to get the captured packet, and manages the \lstinline{cli} parameters. The second one is the callback function, the core of the application, that takes the captured packets and calls the corresponding action to execute on it. The third component includes all the methods that implement the attack or defense mechanisms. All of them belong to the \lstinline{Action} namespace. The fourth component is a class, called \lstinline{Configuration}, which includes the functions to collect statistics on the elaborated data, and to manage the \lstinline{tun0} network interface. It also implements auxiliary functions for the application.\\
 
-	\subsubsection{The \lstinline{main} function}
+	\subsubsection{The main function}
 
 	We outline the principal sections of the \lstinline{main} function:\\
 	The first block of code concerns the registration of the function for external signals, like \lstinline{ctrl+c}. Craftberry can run with a timeout, if the value is passed via CLI, or in infinite mode. In both cases, the execution can be stopped using the external \lstinline{ctrl+c} signal.\\
@@ -652,7 +649,7 @@
 	\end{lstlisting}
 	\bigbreak
 
-	where, for instance, the passed action is \lstinline{HTTPBLOCK} and \lstinline{inPacket} must contain a HTTP layer.\\
+	where, in this example, the passed action is \lstinline{HTTPBLOCK} and \lstinline{inPacket} must contain a HTTP layer.\\
 	Every method must end with a call to a \lstinline{verdict} function that decrees if the packet is accepted or dropped.\\
 	For the majority of our action implementations, the verdict is to accept the packet that has been modified. Before calling the function to accept the verdict, we collect statistic data and save the packet into a log file. The log file contains all the packets that Craftberry has captured, in case crafted, and accepted to continue the network stack traversal.
 
@@ -663,9 +660,9 @@
 	\bigbreak
 	We describe all the action methods and the relative attack or defense idea in the Action chapter.
 
-	\subsubsection{The \lstinline{Configuration} class}
+	\subsubsection{The Configuration class}
 	
-	It is a \lstinline{singleton} class that contains all the application setup, collect data, and exposes functions used by all the other application components, thus, it is a shared instance\\
+	It is a class that follows the \lstinline{singleton} pattern. It contains all the application setup, collects data, and exposes functions used by all the other application components, thus, it is a shared instance.\\
 	\bigbreak
 	An important function is to open and manage the \lstinline{tun0} network interface using the PcapPlusPlus device management methods. Then it implements the \lstinline{sendPkt} function to send a packet to the destination, the \lstinline{tun0} interface: for some actions this function is needed to complete the attack.\\
 	
@@ -720,8 +717,6 @@
 	In a scenario where Craftberry is executed two times, once capturing the incoming traffic and then capturing the outgoing traffic, we use the \lstinline{--queue-num nfqueue} parameter to bind the queue with the Craftberry execution. Therefore, the queue number is defined by the packet capturing direction.
 
 	\subsection{Actions}
-	\subsubsection{VLan double tagging}
-	use the double tagging attack method on cisco routers
 
 	\subsubsection{IP}
 	The IP packet contains information on the source and the destination IP address. The goal of this attack is to change the destination address to redirect the packet somewhere else.\\
@@ -863,9 +858,9 @@
 		^C
 		Ooooops got ctrl+c signal (2)
 		Here a summary of what happened:
-		Packets received:      0 (0 bytes)
-		Packets crafted:       0 (0 bytes)
-		Packets created:       0 (0 bytes)
+		Packets received:      147 (11760 bytes)
+		Packets crafted:       130 (10400 bytes)
+		Packets created:       260 (20800 bytes)
 		Packets dropped:       0 (0 bytes)
 		All is clean
 		IPTABLE RULE: 
@@ -874,14 +869,39 @@
 		\end{lstlisting}
 		\bigbreak
 
-
-
 	\subsection{Design solutions for malicious context}
-		\subsubsection{comparing data}
-		invia la richiesta a due nodi e le confronta (essenziale possibilità di connessione a due nodi in contemporanea: due o più container docker mappati su porte diverse con uno script che invia la richiesta a più container e confronta le risposte)
 
-		\subsubsection{comparing hashes}
-		come precedente ma con la gestione degli hash invece che di tutto il dato
+		The Mysterium Network has, as previously described, several vulnerability scenarios. The exit nodes control the incoming and outgoing data and can perform different actions on it. Furthermore, the introduction of the multihop topology does not seem to solve this problem.\\
+		\bigbreak
+		In this section, we analyze the possible solutions from the consumer perspective. They do not solve all the problems but try to increase the reliability of the network.\\
+
+		\subsubsection{Decoy data}
+		The decoy data are known resources the client already has.
+		In this first solution that we analyze, the client requests these decoy data at a variable frequency to check the data integrity. The ultimate goal is to compare the data obtained from the VPN connection with the data the client has. If the result is positive, so the resources are equal, it means the exit node did not alter the traffic content.\\
+		\bigbreak
+		This method does not provide the certainty that all the traffic has not been modified. More we increase the frequency of the decoy data requests, and more we increase the integrity reliability. On the other hand, the connection cost increases linearly.\\
+		Another supposition regards the exit node capability to adapt its self to this scenario. It can easily detect a frequent request to the same resource and deduct that the client is using decoy data to perform a connection integrity check.\\To solve this problem, the client should increase the number of known resources so that every request is addressed to a different decoy data.\\
+		These considerations make the method unfeasible to implement.
+
+		\subsubsection{Duplicated data}
+		A different approach to the previous method consists of requesting the same resource to two different nodes and then compare the two resources. This method needs the client node to be connected to two nodes at the same time. This is not possible with the current Mysterium Network implementation. Furthermore, it is costly because it doubles the connection cost.\\
+		Another limitation regards the nature of the resource: if it is stateful, the double request breaks the consistency of the states.
+
+		 
+		\subsubsection{Data hashes}
+		A little variant of the duplicated data approach consists of changing the duplicated content, from the whole data to its hash.\\
+		The hash function is a mathematical algorithm that maps data of arbitrary size to a bit string of a fixed size. It is a one-way function, and it is commonly used in cryptography. We can consider the hash of a file like a file fingerprint. In our proposed solution, the other exit nodes that would duplicate the data, need only to execute the hash function on the data and send it to the client. Then, the client executes the hash function and compare its hash output with the output obtained from the exit nodes. The hash function must be the same between all the nodes, consumers and providers.\\
+		\bigbreak
+		This solution does not fit with stateful connections as well, but cut the costs for the client.\\
+		\bigbreak
+		We implement a prototype of this last solution.\\
+		Currently, Mysterium Network does not support multi-connection to many exit nodes; only one VPN tunnel is implemented. Therefore, we used Docker to run two instances of the Mysterium client mapped on two different ports. Then, using a bash script, we requested the same resource and, once obtained the data, we performed the comparison.\\
+		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used \lstinline{MD5} for simplicity.\\
+		\bigbreak
+		IMMAGINE DELLA ARCHIETTURA (docker +  multi instance + requests + nodes + hash func + resources)
+		\bigbreak
+		Codice bash
+		\bigbreak
 		
 \section{Conclusions}
 	\subsection{Future development}
@@ -896,73 +916,75 @@
 	\begin{thebibliography}{1}
 		\bibitem{HTTPS}
 			HTTP Over TLS - RFC
-			https://tools.ietf.org/html/rfc2818
+			\url{https://tools.ietf.org/html/rfc2818}
 		\bibitem{VPNRFC}
 			A Framework for IP Based Virtual Private Networks - RFC
-			https://tools.ietf.org/html/rfc2764
+			\url{https://tools.ietf.org/html/rfc2764}
 		\bibitem{tc}
 			Traffic Control
-			https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/
+			\url{https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/}
 		\bibitem{exitnodeTOR}
 			exit nodes of TOR network
-			https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all
+			\url{https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all}
 		\bibitem{exitnodeTOR2}
 			malicious TOR exit nodes
-			https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/
+			\url{https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/}
 		\bibitem{DNSATTACKS}
 			DNS attack patterns
-			https://www.fireeye.com/blog/threat-research/2019/01/global-dns-hijacking-campaign-dns-record-manipulation-at-scale.html
+			\url{https://www.fireeye.com/blog/threat-research/2019/01/global-dns-hijacking-campaign-dns-record-manipulation-at-scale.html}
 		\bibitem{DNShijacking}
 			DNS hijacking
-			https://securitytrails.com/blog/dns-hijacking
+			\url{https://securitytrails.com/blog/dns-hijacking}
 
 		\bibitem{1}
 			libnetfilter queue
-			https://home.regit.org/netfilter-en/using-nfqueue-and-libnetfilter_queue/
+			\url{https://home.regit.org/netfilter-en/using-nfqueue-and-libnetfilter_queue/}
 		
 		\bibitem{2}
 			todo
-			https://buffered.com/glossary/tun-tap/
+			\url{https://buffered.com/glossary/tun-tap/}
 		
 		\bibitem{3}
 			todo
-			https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html
+			\url{https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html}
 
 		\bibitem{4}
 		todo
-		http://www.cs.unibo.it/~ghini/didattica/sistemimobili/IPtables_Netfilter_AddDelay/packet_engine.c
+			\url{http://www.cs.unibo.it/~ghini/didattica/sistemimobili/IPtables_Netfilter_AddDelay/packet_engine.c}
 
 		\bibitem{5}
 		todo
-		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
-
+			\url{https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html}
+		\bibitem{VPNsellData}
+			VPN seel data to third parties
+			\url{https://thenextweb.com/contributors/2018/05/28/be-cautious-free-vpns-are-selling-your-data-to-3rd-parties/}
 		\bibitem{6}
 		todo
-		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
+			\url{https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ}
 
 		\bibitem{7}
 		todo
-		https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals
+			\url{https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals}
 
 		\bibitem{8}
 		todo
-		https://mysterium.network/whitepaper.pdf
+			\url{https://mysterium.network/whitepaper.pdf}
 
 		\bibitem{9}
 		todo
-		https://pcapplusplus.github.io/docs/features
+			\url{https://pcapplusplus.github.io/docs/features}
 
 		\bibitem{10}
 		todo
-		https://www.apriorit.com/dev-blog/598-linux-mitm-nfqueue
+			\url{https://www.apriorit.com/dev-blog/598-linux-mitm-nfqueue}
 
 		\bibitem{11}
 		todo
-		https://stackoverflow.com/questions/27293924/change-tcp-payload-with-nfqueue-scapy
+			\url{https://stackoverflow.com/questions/27293924/change-tcp-payload-with-nfqueue-scapy}
 
 		\bibitem{12}
 		todo
-		https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati
+			\url{https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati}
 
 	\end{thebibliography}
 		
