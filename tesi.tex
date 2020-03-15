@@ -41,6 +41,8 @@
 
 	\begin{abstract}
     
+
+
     In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
 	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
     Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
@@ -70,7 +72,7 @@
 
 	\textit{The security noun is changing the meaning inside the people's minds, from "how thick is my bank caveau" to "how long my bank requires my new online account password"}
 
-	\subsection{the need for trust and privacy}
+	\subsection{Trust and privacy}
 
 	\begin{verbatim}
 		https://www.geeksforgeeks.org/need-of-information-security/
@@ -871,38 +873,40 @@
 
 	\subsection{Design solutions for malicious context}
 
-		The Mysterium Network has, as previously described, several vulnerability scenarios. The exit nodes control the incoming and outgoing data and can perform different actions on it. Furthermore, the introduction of the multihop topology does not seem to solve this problem.\\
+		The Mysterium Network is, as previously described, vulnerable in several scenarios. The exit nodes control the incoming and outgoing data and can perform different actions on it. Furthermore, the introduction of the multihop topology does not seem to avoid this problem.\\
 		\bigbreak
 		In this section, we analyze the possible solutions from the consumer perspective. They do not solve all the problems but try to increase the reliability of the network.\\
 
 		\subsubsection{Decoy data}
 		The decoy data are known resources the client already has.
-		In this first solution that we analyze, the client requests these decoy data at a variable frequency to check the data integrity. The ultimate goal is to compare the data obtained from the VPN connection with the data the client has. If the result is positive, so the resources are equal, it means the exit node did not alter the traffic content.\\
+		In this first solution that we analyze, the client requests these decoy data at a variable frequency to check the data integrity. The ultimate goal is to compare the data obtained from the VPN connection with the data the client has. If the resources match it means the exit node did not alter the traffic content.\\
 		\bigbreak
-		This method does not provide the certainty that all the traffic has not been modified. More we increase the frequency of the decoy data requests, and more we increase the integrity reliability. On the other hand, the connection cost increases linearly.\\
-		Another supposition regards the exit node capability to adapt its self to this scenario. It can easily detect a frequent request to the same resource and deduct that the client is using decoy data to perform a connection integrity check.\\To solve this problem, the client should increase the number of known resources so that every request is addressed to a different decoy data.\\
+		This method does not provide the certainty that all the traffic has not been modified. More we increase the frequency of the decoy data requests, and more the integrity reliability increases. On the other hand, the connection cost grows up linearly with the frequency of the request.\\
+		Another supposition regards the exit node capability to adapt itself to this scenario. It can easily detect a frequent request to the same resource and deduct that the client is using decoy data to perform a connection integrity check.\\To solve this problem, the client should increase the number of known resources so that every request is addressed to a different decoy data.\\
 		These considerations make the method unfeasible to implement.
 
 		\subsubsection{Duplicated data}
-		A different approach to the previous method consists of requesting the same resource to two different nodes and then compare the two resources. This method needs the client node to be connected to two nodes at the same time. This is not possible with the current Mysterium Network implementation. Furthermore, it is costly because it doubles the connection cost.\\
+		A different approach to the previous method consists of requesting the same resource to two different nodes and then compare the two obtained data. This method needs the client node to be connected to two nodes at the same time. This is not possible with the current Mysterium Network implementation. Furthermore, it is costly because it doubles the connection cost.\\
 		Another limitation regards the nature of the resource: if it is stateful, the double request breaks the consistency of the states.
-
 		 
 		\subsubsection{Data hashes}
-		A little variant of the duplicated data approach consists of changing the duplicated content, from the whole data to its hash.\\
-		The hash function is a mathematical algorithm that maps data of arbitrary size to a bit string of a fixed size. It is a one-way function, and it is commonly used in cryptography. We can consider the hash of a file like a file fingerprint. In our proposed solution, the other exit nodes that would duplicate the data, need only to execute the hash function on the data and send it to the client. Then, the client executes the hash function and compare its hash output with the output obtained from the exit nodes. The hash function must be the same between all the nodes, consumers and providers.\\
+		A little variant of the duplicated data approach consists of changing the duplicated content: from the whole data to its hash.\\
+		The hash function is a mathematical algorithm that maps data of arbitrary size to a bit string of a fixed size. It is a one-way function commonly used in cryptography. We can consider the hash of a file like its fingerprint. In our solution, the client has a main connection from where it gets the resource and other connections that provide the hashes of the same resources. When the client gets the resource, it calculates its hash and compares it with the hashes obtained from the other connections. The hashes must match to determinate the exit node of the main connection did not alter the returned data. Also, the hash function must be the same between all the nodes, consumers and providers.\\
 		\bigbreak
 		This solution does not fit with stateful connections as well, but cut the costs for the client.\\
 		\bigbreak
 		We implement a prototype of this last solution.\\
-		Currently, Mysterium Network does not support multi-connection to many exit nodes; only one VPN tunnel is implemented. Therefore, we used Docker to run two instances of the Mysterium client mapped on two different ports. Then, using a bash script, we requested the same resource and, once obtained the data, we performed the comparison.\\
-		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used \lstinline{MD5} for simplicity.\\
+		Currently, Mysterium Network does not support connection to many exit nodes at the same time; only one VPN tunnel is supported. Therefore, we used Docker to run two instances of the Mysterium client mapped on two different ports. Then, using a bash script, we requested the same resource and, once obtained the data, we performed the comparison.\\
+		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used the \lstinline{MD5} function for simplicity.\\
 		\bigbreak
 		IMMAGINE DELLA ARCHIETTURA (docker +  multi instance + requests + nodes + hash func + resources)
 		\bigbreak
 		Codice bash
 		\bigbreak
 		
+		As described, the two \lstinline{md5} hashes match: this means the exit node of the main connection did not modify the returned content.
+
+
 \section{Conclusions}
 	\subsection{Future development}
 	\subsection{Considerations}
