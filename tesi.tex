@@ -15,10 +15,11 @@
 \usepackage{xcolor}
 \usepackage{tcolorbox}
 \usepackage{hyperref}
+\usepackage{titlesec}
 
 \lstset
 {
-    language=bash,
+    language=C++,
 	basicstyle=\ttfamily,
     numbers=left,
     stepnumber=1,
@@ -33,7 +34,50 @@
 \begin{document}
 	\raggedright
 	\setstretch{1.5}
-	\maketitle	
+
+
+	\begin{titlepage}{\large}
+		\begin{center}
+			{\Large UNIVERSITÀ DEGLI STUDI DI BERGAMO}\\
+			\bigskip
+			{\large Scuola di Ingegneria}\\
+			{\large Corso di Laurea Magistrale in Ingegneria Informatica}\\
+			{\large Classe N. XX - Descrizione Classe XX}\\
+		\end{center}
+	
+		\vspace*{\fill}
+		
+		\begin{center}		
+			\textbf{\Large Malicious context and workaround analysis\\
+				of decentralized VPN:\\
+				the case of Mysterium Network\\}
+		\end{center}
+		
+		\vspace*{\fill}
+		
+		\begin{flushleft}
+			Relatore:\\
+			Chiar.mo Prof. Stefano Paraboschi
+		\end{flushleft}
+		
+		\bigskip
+	
+	
+		\begin{flushright}
+			Tesi di Laurea Magistrale\\
+			Jacopo FEDERICI\\
+			Matricola n. 1025458
+		\end{flushright}
+	
+		\bigskip
+	
+		\begin{center}
+			ANNO ACCADEMICO 2018/2019
+		\end{center}
+	
+	\end{titlepage}
+
+
 	\clearpage
 	
 	\tableofcontents{}
@@ -52,6 +96,7 @@
 	\subsection{Outline}
 	\subsection{Goal}
 
+	\newpage
 	\section{Introduction}
 	The world is changing at a fast pace.\\
 	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data in just a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed increases the computational power, and it is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
@@ -97,6 +142,7 @@
 	Although a node can decide to be a consumer or a provider at any moment, the two entities are different, and the type of market is called a two-sided market where bid and ask respectively grow on the other side growth.
 	\bigbreak
 
+	\newpage
 	\section{Mysterium Network}
 	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open-source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
 	Therefore, we decided to use the Mysterium Network as a test case to analyze the malicious context the project is exposed to and propose our proof of concepts as solutions.
@@ -107,7 +153,8 @@
 	\bigbreak
 	
 	\begin{center}
-		\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}
+		\includegraphics[width=0.5\linewidth]{images/mysterium_architecture.png}\\
+		\small{\textit{The Mysterium Network architecture}}
 	\end{center}
 	\bigbreak
 
@@ -131,6 +178,7 @@
 	\bigbreak
 	\begin{center}
 		\includegraphics[width=1\linewidth]{images/mysterium_identity_creation.png}
+		\small{\textit{Identity data registration and replication}}
 	\end{center}
 
 	\subsubsection{Service Discovery}
@@ -139,6 +187,7 @@
 	\bigbreak
 	\begin{center}
 		\includegraphics[width=1\linewidth]{images/mysterium_service_announcement.png}
+		\small{\textit{Service announcement and discovery}}
 	\end{center}
 	
 	\subsubsection{Payments Handling}
@@ -183,6 +232,7 @@
 	\bigbreak
 	\begin{center}
 		\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.png}
+		\small{\textit{OpenVPN routing setting}}
 	\end{center}
 	\bigbreak
 	When a packet arrives at the \lstinline{eth1} interface, OpenVPN picks it up, decrypts, and sends the data to the\lstinline{tun0} interface. The \lstinline{iptables} and the routing engine filter and masquerade the packet and send it to\lstinline{eth0}, where it becomes available to the final receiver.\\
@@ -192,8 +242,8 @@
 
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{images/openvpn_tun_interface.png}
+		\small{\textit{OpenVPN TUN interface}}
 	\end{center}
-	IMAGE TO EDIT AS BEFORE DESCRIBED\\
 
 	\subsubsection{Start a node}
 	There are two ways to start a Mysterium node. The first one is using the Docker image: Docker is a platform that uses the OS virtualization to deliver software in packages called containers. The image contains all the specifics that the application requires to be executed.\\
@@ -284,6 +334,7 @@
 	\bigbreak
 	\begin{center}
 		\includegraphics[width=\linewidth]{images/iptables_hooks.png}
+		\small{\textit{Hooks in the internal network stack}}
 	\end{center}
 	\bigbreak
 	Iptables is mainly used as a firewall which organizes its rule in tables and chains. The tables classify the rules according to the type of decision that regards the packet.\\
@@ -291,19 +342,25 @@
 	The chains correspond to the available hooks, therefore iptbales has the \textbf{prerouting}, \textbf{input}, \textbf{forward}, \textbf{output}, and \textbf{postrouting} chains.\\
 	The following table explains the triggering logic and execution precedence.\\
 	\bigbreak
+	
+	\begin{center}	
+		\begin{tabular}{|l|c|c|c|c|c|}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}l@{}}Chains\\ Tables\end{tabular}} & \rotatebox[origin=c]{90}{\textbf{PREROUTING}}    & \rotatebox[origin=c]{90}{\textbf{INPUT}}         & \rotatebox[origin=c]{90}{\textbf{FORWARD}}       & \rotatebox[origin=c]{90}{\textbf{OUTPUT}}        & \rotatebox[origin=c]{90}{\textbf{POSTROUTING}}   \\\hline
+		\textit{ruoting decision} & & & & X & \\\hline
+		\textbf{raw} & X & & & X & \\ \hline
+		\textit{connection tracking enabled} & X & & & X & \\\hline
+		\textbf{mangle} & X & X & X & X & X \\\hline
+		\textbf{DNAT (NAT)} & X & & & X & \\ \hline
+		\textit{routing decision} & X & & & X & \\ \hline
+		\textbf{filter} & & X & X & X & \\ \hline
+		\textbf{security} & & X & X & X & \\ \hline
+		\textbf{SNAT (NAT)} & & X & & & X\\	\hline
+		\end{tabular}
+		\bigbreak
+		\small{\textit{Hooks and triggers}}
+	\end{center}
 
-	\begin{tabular}{|l|c|c|c|c|c|}
-	\textbf{\begin{tabular}[c]{@{}l@{}}Chains\\ Tables\end{tabular}} & \rotatebox[origin=c]{90}{\textbf{PREROUTING}}    & \rotatebox[origin=c]{90}{\textbf{INPUT}}         & \rotatebox[origin=c]{90}{\textbf{FORWARD}}       & \rotatebox[origin=c]{90}{\textbf{OUTPUT}}        & \rotatebox[origin=c]{90}{\textbf{POSTROUTING}}   \\\hline
-	\textit{ruoting decision} & & & & X & \\\hline
-	\textbf{raw} & X & & & X & \\ \hline
-	\textit{connection tracking enabled} & X & & & X & \\\hline
-	\textbf{mangle} & X & X & X & X & X \\\hline
-	\textbf{DNAT (NAT)} & X & & & X & \\ \hline
-	\textit{routing decision} & X & & & X & \\ \hline
-	\textbf{filter} & & X & X & X & \\ \hline
-	\textbf{security} & & X & X & X & \\ \hline
-	\textbf{SNAT (NAT)} & & X & & & X
-	\end{tabular}
 	
 	\bigbreak
 
@@ -329,6 +386,7 @@
 
 	\begin{center}
 		\includegraphics[width=\linewidth]{images/iptables_jump_chains.png}
+		\small{\textit{The \lstinline{iptables} jump rule}}
 	\end{center}
 	\bigbreak
 
@@ -374,6 +432,7 @@
 	\bigbreak
 	\begin{center}
 		\includegraphics[width=1\linewidth]{images/client_server_vpn_connection2.png}
+		\small{\textit{The VPN connection between a client and a server}}
 	\end{center}
 	\bigbreak
 	
@@ -485,6 +544,10 @@
 	\bigbreak
 
 	A considerable number of informatic attacks aim to collect traffic data and then sell them to third party organizations for aggressive advertisement campaigns \cite{VPNsellData}. In this perspective, the capability of an exit node to be able to sniff the web requests, as we demonstrated in the previous subsection, make the network vulnerable to this attack.\\
+
+
+
+	\newpage
 	\section{Craftberry}
 
 	\subsection{The idea}
@@ -514,6 +577,7 @@
 
 	\begin{center}
 		\includegraphics[width=0.7\linewidth]{images/iso_osi_layers.jpg}
+		\small{\textit{The ISO/OSI model}}
 	\end{center}
 
 	\bigbreak
@@ -806,14 +870,14 @@
 	immagine della connessione di due nodi con uno che cifra e la possibile posizione del decifrante.
 	\bigbreak
 	\subsection{Tests}
-		???
-	
+		Following, we show a complete example of execution.\\
+		The input specifies the action to block the outgoing HTTP requests.
 		\bigbreak
 		\begin{lstlisting}[frame=single]
-		make all && sudo ./craftberry -I 10.135.63.160 -a HTTP -d OUT
+		make all && sudo ./craftberry -I 10.135.63.160 -a HTTPBLOCK -d OUT
 		\end{lstlisting}
 		\bigbreak
-
+		The following is the working output of Craftberry that prints a setup summary and then the captured packets.
 		\bigbreak
 		\begin{lstlisting}[frame=single]
 		Method:                HTTP
@@ -830,24 +894,37 @@
 		IPTABLE RULE: 
 			$: sudo iptables -t filter -I OUTPUT -p tcp -m multiport --dports 80,443 -j NFQUEUE  --queue-num 1
 		Working in infinity mode, press ctrl+c to exit...
+		| LEV: 3 => IPv4 Layer, Src: 165.22.66.6, Dst: 82.196.9.250
+		| LEV: 4 => TCP Layer, [ACK], Src port: 33167, Dst port: 443
+		| LEV: 6 => TLSv1.2 Layer, Application Data
+
+		| LEV: 3 => IPv4 Layer, Src: 165.22.66.6, Dst: 82.196.9.250
+		| LEV: 4 => TCP Layer, [FIN, ACK], Src port: 33167, Dst port: 443
+
+		| LEV: 3 => IPv4 Layer, Src: 165.22.66.6, Dst: 82.196.9.250
+		| LEV: 4 => TCP Layer, Src port: 33167, Dst port: 443
+		.....
 		\end{lstlisting}
 
 		\bigbreak
-
+		Finally, when the application finishes, it prints a performance summary.
 		\begin{lstlisting}[frame=single]
 		^C
 		Ooooops got ctrl+c signal (2)
 		Here a summary of what happened:
 		Packets received:      147 (11760 bytes)
-		Packets crafted:       130 (10400 bytes)
-		Packets created:       260 (20800 bytes)
-		Packets dropped:       0 (0 bytes)
+		Packets crafted:       0 (0 bytes)
+		Packets created:       0 (0 bytes)
+		Packets dropped:       147 (11760 bytes)
 		All is clean
 		IPTABLE RULE: 
 				$: sudo iptables -t filter -D OUTPUT -p tcp -m multiport --dports 80,443 -j NFQUEUE  --queue-num 1
 		bye bye
 		\end{lstlisting}
 		\bigbreak
+		We performed several tests on the Craftberry application that regarded the different actions and the different contexts where the app can work. Even if the app is a prototype, we successfully demonstrated its main purpose: to shows the Mysterium Network vulnerability for what concerns the exit nodes.\\
+		The tests also focused on the performance impacts: our results show the overhead is minimum thanks to the use of efficient technologies, the C++ language and the PcapPlusPlus library in particular.
+		
 
 	\subsection{Design solutions for malicious context}
 
@@ -875,7 +952,7 @@
 		\bigbreak
 		We implement a prototype of this last solution.\\
 		Currently, Mysterium Network does not support connection to many exit nodes at the same time; only one VPN tunnel is supported. Therefore, we used Docker to run two instances of the Mysterium client mapped on two different ports. Then, using a bash script, we requested the same resource and, once obtained the data, we performed the comparison.\\
-		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used the \lstinline{MD5} function for simplicity.\\
+		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used the \lstinline{MD5} function for simplicity. We do not use \lstinline{MD5} for security application, since it has been declared broken \cite{MD5hash}, but only to get a fast fingerprint of the file.\\
 		\bigbreak
 		IMMAGINE DELLA ARCHIETTURA (docker +  multi instance + requests + nodes + hash func + resources)
 		\bigbreak
@@ -884,94 +961,91 @@
 		
 		As described, the two \lstinline{md5} hashes match: this means the exit node of the main connection did not modify the returned content.
 
+	\newpage
+	\section{Conclusions}
+		\subsection{Future development}
+			There are two future development paths the Craftberry application can take: the first one regards the implementation of other attack or defense mechanisms to extend the possible scenario where Craftberry can act. The second one, for us the most interesting, regards the enhancement of specific attacks. For instance, the TCP/UDP packet multiplication could be refined and improved to exploit the end node critical role fully.\\
+			If the Craftberry application becomes popular in the Mysterium Network community, many other scenarios could take place: for instance, a coordinated attack of all node against a specific server or network can lead to distributed denial of service, acting as a botnet.\\
 
-\section{Conclusions}
-	\subsection{Future development}
-	\subsection{Considerations}
+			\subsection{Considerations}
+			At the end of this research, we can say that the Mysterium Network is a promising solution to keep safe our online identities and protect our browsing. Nevertheless, the vulnerabilities we analyzed make the product not mature enough to be used commercially.\\
+			The level of security we currently have to protect us browsing or for online activities is not sufficient. Projects like Mysterium Network are necessary to enhance it. Our motivations behind the study of Mysterium Network are to expose its weak side so they can be patched and the project improved. For this reason, Craftberry wants to be a demonstrative tool, and we do not suggest or encourage its use for any usage apart from the research one.
+			
+			\bigbreak
 
-	The use of Mysterium Network like an end-to-end encryption tool: https://nakedsecurity.sophos.com/2015/06/25/can-you-trust-tors-exit-nodes/
-	Here there is a helpful consideration of how critical is an exit point for TOR.
+			For what concerns our demonstrative tool, a significant milestone has been reached: the technical solution to use Netfilter Queue Library to capture the inline packets and PcapPlusPlus to parse them. The Craftberry application represents a working example of how the two technologies can work together.
+
+			\bigbreak
+
+			Mysterium Network
 
 	\pagebreak
 
 	\bibliographystyle{plain}
 	\begin{thebibliography}{1}
+		\bibitem{UnsecureVpns}
+			The risks of vpns\\
+			\url{https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati}
+		\bibitem{MD5hash}
+			The MD5 hash is broken\\
+			\url{https://www.schneier.com/blog/archives/2008/12/forging_ssl_cer.html}
 		\bibitem{HTTPS}
-			HTTP Over TLS - RFC
+			HTTP Over TLS - RFC\\
 			\url{https://tools.ietf.org/html/rfc2818}
 		\bibitem{VPNRFC}
-			A Framework for IP Based Virtual Private Networks - RFC
+			A Framework for IP Based Virtual Private Networks - RFC\\
 			\url{https://tools.ietf.org/html/rfc2764}
 		\bibitem{tc}
-			Traffic Control
+			Traffic Control\\
 			\url{https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/}
 		\bibitem{exitnodeTOR}
-			exit nodes of TOR network
+			Tor Network - Exit nodes\\
 			\url{https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all}
 		\bibitem{exitnodeTOR2}
-			malicious TOR exit nodes
+			TOR Network - Malicious exit nodes\\
 			\url{https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/}
 		\bibitem{DeanonymizingTorCircuits}
-			Deanonymizing Tor Circuits
+			Deanonymizing Tor Circuits\\
 			\url{https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html}
-
-
 		\bibitem{DNSATTACKS}
-			DNS attack patterns
+			DNS attack patterns\\
 			\url{https://www.fireeye.com/blog/threat-research/2019/01/global-dns-hijacking-campaign-dns-record-manipulation-at-scale.html}
 		\bibitem{DNShijacking}
-			DNS hijacking
+			DNS hijacking\\
 			\url{https://securitytrails.com/blog/dns-hijacking}
-
-		\bibitem{1}
-			libnetfilter queue
+		\bibitem{NetfilterLibrary}
+			Netfilter Queue Extension Library\\
 			\url{https://home.regit.org/netfilter-en/using-nfqueue-and-libnetfilter_queue/}
-		
-		\bibitem{2}
-			todo
+		\bibitem{TUNTAP}
+			TUN/TAP\\
 			\url{https://buffered.com/glossary/tun-tap/}
-		
-		\bibitem{3}
-			todo
+		\bibitem{NFQueue_PcapPlusPlus Integration}
+			Netfilter queue extension and PcapPlusPlus integration\\
 			\url{https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html}
-
-		\bibitem{4}
-		todo
-			\url{http://www.cs.unibo.it/~ghini/didattica/sistemimobili/IPtables_Netfilter_AddDelay/packet_engine.c}
-
-		\bibitem{5}
-		todo
-			\url{https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html}
-		\bibitem{VPNsellData}
-			VPN seel data to third parties
-			\url{https://thenextweb.com/contributors/2018/05/28/be-cautious-free-vpns-are-selling-your-data-to-3rd-parties/}
-		\bibitem{6}
-		todo
+		\bibitem{PcapPlusPlusNetfilter}
+			Netfilter queue extension and PcapPlusPlus integration\\
 			\url{https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ}
-
-		\bibitem{7}
-		todo
-			\url{https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals}
-
-		\bibitem{8}
-		todo
-			\url{https://mysterium.network/whitepaper.pdf}
-
-		\bibitem{9}
-		todo
-			\url{https://pcapplusplus.github.io/docs/features}
-
-		\bibitem{10}
-		todo
+		\bibitem{NetfilterMITM}
+			Netfilter queue MITM attack\\
 			\url{https://www.apriorit.com/dev-blog/598-linux-mitm-nfqueue}
-
-		\bibitem{11}
-		todo
+		\bibitem{NetfilterPython}
+			Netfilter queue with python\\
+			\url{https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html}
+		\bibitem{NetfilterQueueSnapy}
+			Netfilter queue with Snapy	\\		
 			\url{https://stackoverflow.com/questions/27293924/change-tcp-payload-with-nfqueue-scapy}
-
-		\bibitem{12}
-		todo
-			\url{https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/shining-a-light-on-the-risks-of-holavpn-and-luminati}
+		\bibitem{VPNsellData}
+			VPN seel data to third parties\\
+			\url{https://thenextweb.com/contributors/2018/05/28/be-cautious-free-vpns-are-selling-your-data-to-3rd-parties/}
+		\bibitem{OpenVPNInternalSchema}
+			OpenVPN Internal Schema\\
+			\url{https://subscription.packtpub.com/book/networking_and_servers/9781783553136/1/ch01lvl1sec12/openvpn-internals}
+		\bibitem{MysteriumWhitePaper}
+			Mysterium White Paper\\
+			\url{https://mysterium.network/whitepaper.pdf}
+		\bibitem{PcapPlusPlusLibrary}
+			PcapPlusPlus Library\\
+			\url{https://pcapplusplus.github.io/docs/features}
 
 	\end{thebibliography}
 		
