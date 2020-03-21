@@ -42,39 +42,29 @@
 			\bigskip
 			{\large Scuola di Ingegneria}\\
 			{\large Corso di Laurea Magistrale in Ingegneria Informatica}\\
-			{\large Classe N. XX - Descrizione Classe XX}\\
+			{\normalsize LM-32 - Classe delle lauree magistrali in Ingegneria informatica}\\
 		\end{center}
-	
 		\vspace*{\fill}
-		
 		\begin{center}		
 			\textbf{\Large Malicious context and workaround analysis\\
 				of decentralized VPN:\\
 				the case of Mysterium Network\\}
-		\end{center}
-		
+		\end{center}		
 		\vspace*{\fill}
-		
 		\begin{flushleft}
 			Relatore:\\
 			Chiar.mo Prof. Stefano Paraboschi
 		\end{flushleft}
-		
-		\bigskip
-	
-	
+		\bigskip	
 		\begin{flushright}
 			Tesi di Laurea Magistrale\\
 			Jacopo FEDERICI\\
 			Matricola n. 1025458
 		\end{flushright}
-	
 		\bigskip
-	
 		\begin{center}
 			ANNO ACCADEMICO 2018/2019
 		\end{center}
-	
 	\end{titlepage}
 
 
@@ -83,18 +73,23 @@
 	\tableofcontents{}
 	\pagebreak
 
+
 	\begin{abstract}
-    
-    In this research, we analyzed the most developed project, Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities, owns by the decentralized architecture, more than the Mysterium project itself.\\
-	We even discover how secondary aspects are pivotal to guide attacks to the system.\\
-    Then we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
-		
+	\begin{flushleft}
+		Millions of users worldwide use VPN clients for privacy and security purposes, to circumvent censorship, or to access geo-blocked resources. A new solution that transforms the existing VPN system into a decentralized network is emerging, and it configures new vulnerability scenarios that require to be analyzed.\\ 
+    	In this research, we studied the most grown project, called Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities. We also discover how secondary aspects are pivotal to guide attacks to the system.\\
+		Our analysis leads us to develop a tool that we called Craftberry, the first tool to perform basic hacks to the Mysterium Network. The application implements several attacks and defense mechanisms to capture, filter, and craft packets on an exit node of the Mysterium Network.\\
+		In the end, we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
+	\end{flushleft}
 	\end{abstract}
+		
 	\pagebreak
 
-	\subsection{Work structure}
-	\subsection{Outline}
 	\subsection{Goal}
+	The principal goal of this research is to study new vulnerability scenarios of the  Mysterium Network decentralized VPN system. The result of our work provides details of possible malicious uses of the network and different approaches that solve the weaknesses discovered. We present practical examples of vulnerabilities and solutions.
+
+	\subsection{Structure of the work}
+	The first step of our work has been an in-depth analysis of the Mysterium Network project. Then, we focused the research on studying its vulnerabilities in different contexts. To extend the study, we developed an application to test and confirm our suppositions. Finally, we proposed solutions for the vulnerabilities. 
 
 	\newpage
 	\section{Introduction}
@@ -231,7 +226,7 @@
 
 	\bigbreak
 	\begin{center}
-		\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.png}
+		\includegraphics[width=1\textwidth]{images/openvpn_routing_setup.png}\\
 		\small{\textit{OpenVPN routing setting}}
 	\end{center}
 	\bigbreak
@@ -241,7 +236,7 @@
 	\bigbreak
 
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{images/openvpn_tun_interface.png}
+		\includegraphics[width=0.5\textwidth]{images/openvpn_tun_interface.png}\\
 		\small{\textit{OpenVPN TUN interface}}
 	\end{center}
 
@@ -998,18 +993,28 @@
 		\bibitem{tc}
 			Traffic Control\\
 			\url{https://jvns.ca/blog/2017/04/01/slow-down-your-internet-with-tc/}
+		\bibitem{tc}
+			An Analysis of the Privacy and Security Risks of
+Android VPN Permission-enabled Apps\\
+			\url{https://research.csiro.au/ng/wp-content/uploads/sites/106/2016/08/paper-1.pdf}
 		\bibitem{exitnodeTOR}
 			Tor Network - Exit nodes\\
 			\url{https://www.wired.com/2007/09/rogue-nodes-turn-tor-anonymizer-into-eavesdroppers-paradise/?currentPage=all}
 		\bibitem{exitnodeTOR2}
 			TOR Network - Malicious exit nodes\\
 			\url{https://www.makeuseof.com/tag/priority-wretched-hive-scum-villainy-5-ways-stay-safe-bad-tor-exit-nodes/}
+		\bibitem{exitnodeTOR3}
+			TOR - trust exit nodes\\
+			\url{https://nakedsecurity.sophos.com/2015/06/25/can-you-trust-tors-exit-nodes/}
 		\bibitem{DeanonymizingTorCircuits}
 			Deanonymizing Tor Circuits\\
 			\url{https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html}
 		\bibitem{DNSATTACKS}
 			DNS attack patterns\\
 			\url{https://www.fireeye.com/blog/threat-research/2019/01/global-dns-hijacking-campaign-dns-record-manipulation-at-scale.html}
+		\bibitem{DNSATTACKS2}
+			DNS leaks\\
+			\url{https://securitytrails.com/blog/what-is-dns-leak-how-can-i-prevent-it}
 		\bibitem{DNShijacking}
 			DNS hijacking\\
 			\url{https://securitytrails.com/blog/dns-hijacking}
@@ -1019,6 +1024,9 @@
 		\bibitem{TUNTAP}
 			TUN/TAP\\
 			\url{https://buffered.com/glossary/tun-tap/}
+		\bibitem{TCPDUMP_linktypes}
+			Tcpdump link types\\
+			\url{https://www.tcpdump.org/linktypes.html}
 		\bibitem{NFQueue_PcapPlusPlus Integration}
 			Netfilter queue extension and PcapPlusPlus integration\\
 			\url{https://netfilter.org/projects/libnetfilter_queue/doxygen/html/group__nfq__verd.html}
