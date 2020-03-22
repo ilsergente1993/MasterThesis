@@ -77,9 +77,9 @@
 	\begin{abstract}
 	\begin{flushleft}
 		Millions of users worldwide use VPN clients for privacy and security purposes, to circumvent censorship, or to access geo-blocked resources. A new solution that transforms the existing VPN system into a decentralized network is emerging, and it configures new vulnerability scenarios that require to be analyzed.\\ 
-    	In this research, we studied the most grown project, called Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and to design vulnerabilities. We also discover how secondary aspects are pivotal to guide attacks to the system.\\
-		Our analysis leads us to develop a tool that we called Craftberry, the first tool to perform basic hacks to the Mysterium Network. The application implements several attacks and defense mechanisms to capture, filter, and craft packets on an exit node of the Mysterium Network.\\
-		In the end, we focus on the solutions that can patch those critical aspects and provide a comparison of them with an eye on the practical perspective.
+    	In this research, we studied the most grown project, called Mysterium Network, as a case of study. As we write, Mysterium offers a working network composed of hundreds of nodes around the world, making it the best project to investigate malicious contexts and design vulnerabilities. We also discover how secondary aspects are pivotal to guide attacks to the system.\\
+		Our analysis leads us to develop a tool that we called Craftberry, the first tool to perform basic hacks to the Mysterium Network. The application implements several attacks and defense mechanisms to capture, filter, and craft packets on an Mysterium Network exit node.\\
+		In the end, we focus on the solutions that can patch those critical aspects and provide a comparison of them.
 	\end{flushleft}
 	\end{abstract}
 		
@@ -95,14 +95,13 @@
 	\section{Introduction}
 	The world is changing at a fast pace.\\
 	First, everything is now much faster. The internet infrastructure allows us to move significant amounts of data in just a few seconds. Furthermore, our personal computer can perform operations that were impossible to execute some years ago on mainstream servers. This speed increases the computational power, and it is jeopardizing many security solutions, such as ciphers that based, and still base, their strength on the practical difficulties to solve the mathematical problems at the foundation of cipher methods.\\
-	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal attack destination.\\
+	Second, the architecture is moving back to a cloud-based infrastructure. Many workflows see, again, a thin client sending the execution step to a cloud server that elaborates the output that is then sent back to the client. This architecture changes the surface of the attack targeting the cloud servers as the principal destination.\\
 	Third, some technologies are mature enough to provide an excellent alternative to traditional models — for instance, the cryptocurrency model against the bank model. Here, the changes are in the paradigm, and the reasons behind these new approaches are much more than technological.\\
 		
 	\subsection{Trust and privacy}
 	In many different fields, as the need to protect our data is becoming critical, privacy is increasingly becoming a central topic of discussion. The massive digitalization of many aspects of our life implicitly exposes us, and our data to possible attacks. Even the simplest operations over the internet are becoming unsafe.\\
 	There are scenarios where the level of security has increased, such as browsers and mobile contexts. In the last years, we have seen security solutions integrated into popular applications, such as browsers or mobile apps, to prevent increasing attacks to users' security.\\
-	For instance, in 2017, the popular browser Google Chrome, announced that it would have marked as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make the communication between clients and servers secure. Before that, connections were not protected by any encryption algorithm.
-	Even though the first HTTPS protocol was proposed by Netscape Navigator \cite{HTTPS} in 1990, it is only in more recent years that we started assisting to a global trend to increase security levels, often achieved BY encrypting communications.\\
+	For instance, in 2017, the popular browser Google Chrome, announced that it would have marked as non-secure any website using the HTTP protocol instead of HTTPS. The HTTPS protocol is the standard HTTP protocol that uses SSL/TLS certificates, an additional security layer to make the communication between clients and servers secure. Before that, connections were not protected by any encryption algorithm.\\
 	The Chrome browser initiative is part of a global trend to increase the security level, often achieved encrypting the communication: instant messages applications, internet protocols like the DNS, industrial system infrastructures, and many others.\\
 	\bigbreak
 	Although the level of security of the internet has substantially increased, there is still a wide range of situations and scenarios in which the individual user browsers the internet in an unsafe way.\\
@@ -112,7 +111,7 @@
 	\subsection{The state of the art}
 	Technology is becoming an essential tool to exercise the people's rights. There are areas of the world where these rights are not accessible, and people fight to obtain them. For example, in the People's Republic of China, the government built a firewall to censure the internet. It is called the Great Firewall Of China, abbreviated in GFW, and it is a combination of laws and technologies to control the internal domestic internet, so-called censorship. It blocks social networks, search engines, and many other services that declined the government's request to make the traffic clear and detectable.\\
 	In this context, aspects such as anonymization, become not only relevant but crucial to be preserved.\\
-	A solution is Tor: it stands for The Onion Router, and it is an open-source software to protect the user's privacy, anonymizing the connection and encryption of the communication. It is used worldwide but brings different downsides: Tor does not hide the fact that someone is using Tor and, this is a critical problem in certain countries. Also, under specific circumstances, Tor is susceptible to deanonymization attacks of its circuits \cite{DeanonymizingTorCircuits}.\\
+	A solution is Tor: it stands for The Onion Router, and it is an open-source software to protect the user's privacy, anonymizing the connection and encryption of the communication. It is used worldwide but brings different downsides: Tor does not hide the fact that someone is using Tor and this is a critical problem in certain countries. Also, under specific circumstances, Tor is susceptible to deanonymization attacks of its circuits \cite{DeanonymizingTorCircuits}.\\
 	
 	\bigbreak
 	Another solution to obtain identity obfuscation is the VPN. It is massively used to protect data from surveillance at any level, from a public unsecured wifi connection to the country Internet Service Providers.\\
@@ -126,7 +125,7 @@
 	\subsubsection{Decentralized VPNs}
 
 	A decentralized VPN is a network of nodes where the users can connect through a VPN to nodes without a central entity. It allows the user to create a private tunnel with another user, encrypting all the traffic between the two points. 
-	The decentralization system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
+	The decentralized system, in this context, includes several steps to make the final connection happening, rather than a simple VPN connection between two peers.\\
 	First of all, the user creates an identity into the system, linked to the payment wallet and using a client application. Then, he connects to the network providing his availability to be a consumer or a provider.\\
 	The consumer user chooses the provider he prefers based on different features such as the region, quality, or cost of the node, and asks for a new connection to that server. In this step, the blockchain, based on Ethereum, allows creating a smart contract between the two participants with a predetermined amount of money. Using commercial VPN applications, such as OpenVPN or Wireguard, the connection between consumer and provider, otherwise called client and server, is established. When the connection correctly ends, the network closes the smart contract, that registers the result of the transaction in the blockchain.\\
 	We outlined the main steps from which we can think of a decentralized VPN more as a platform solution rather than a simple VPN application. Indeed, other projects suggested the VPN is one of the features a decentralized system so composed can have.
@@ -139,12 +138,12 @@
 
 	\newpage
 	\section{Mysterium Network}
-	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research.\\It is the most completed in terms of development and design. Furthermore, it's 100\% open-source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
+	The main open-source projects which aim to create a decentralized VPN are Mysterium Network, Privatix, Substratum, and Sentinel. We explored all of them, and we can safely say the most advanced project is Mysterium Network, at the time we are writing this research.\\It is the most completed in terms of development and design. Furthermore, it is completely open-source, that for this kind of project is a requirement which conditions the users' adoption and the market diffusion.\\
 	Therefore, we decided to use the Mysterium Network as a test case to analyze the malicious context the project is exposed to and propose our proof of concepts as solutions.
 	
 	\subsection{Architecture}
-	Mysterium Network is an open-source project. Its main goal is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
-	As described in figure X, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
+	The main goal of Mysterium Network is to build a decentralized infrastructure made up of layered VPN protocols, blockchain, and smart contracts.\\
+	As described in the following figure, we can distinguish between a service client block and a service provider block. Both of them lean on the Ethereum blockchain block, which is a distributed database where all the network operations, the identities, and the service proposals are recorder.\\
 	\bigbreak
 	
 	\begin{center}
@@ -165,14 +164,14 @@
 	\end{itemize}
 
 	\subsubsection{Identity Service}
-	The \textbf{identity service} manages the network identities that every node needs. A single node can create one identity or more, and each of them consists of a public and a private key. The last 20 bytes of the hash function, applied on the public key, is the unique id used to identify the node into the network. To publish a new identity so that other network members can reach it, Mysterium uses the smart contract mechanism. The private and public keys are used to validate the signature for the communication between the nodes.\\
-	The blockchain mining process appends the public key and the unique id to the Ethereum blockchain after the node pays a fee to the network. This amount of money has the purpose of giving value to the identity. In such a way,  to abandon the identity to create a new one is unattractive, because it is expensive, but not impossible.\\ 
+	The \textbf{identity service} manages the network identities that every node needs. A single node can create one identity or more, and each of them consists of a public and a private key. The last 20 bytes of the hash function, applied on the public key, is the unique ID used to identify the node into the network. To publish a new identity so that other network members can reach it, Mysterium uses the smart contract mechanism. The private and public keys are used to validate the signature for the communication between the nodes.\\
+	The blockchain mining process appends the public key and the unique ID to the Ethereum blockchain after the node pays a fee to the network. This amount of money has the purpose of giving value to the identity. In such a way, to abandon the identity and create a new one is unattractive because it is expensive, but not impossible.\\ 
 	We will discuss those aspects later, but we can surely say this is the first barrier to block in mass identity creation.\\
 	Furthermore, the user benefits in using the same identity because it is possible to rebuild his transaction history and his balance from the Ethereum blockchain, making the user more predictable and thus trustworthy for service providers.\\
 
 	\bigbreak
 	\begin{center}
-		\includegraphics[width=1\linewidth]{images/mysterium_identity_creation.png}
+		\includegraphics[width=1\linewidth]{images/mysterium_identity_creation.png}\\
 		\small{\textit{Identity data registration and replication}}
 	\end{center}
 
@@ -181,7 +180,7 @@
 
 	\bigbreak
 	\begin{center}
-		\includegraphics[width=1\linewidth]{images/mysterium_service_announcement.png}
+		\includegraphics[width=1\linewidth]{images/mysterium_service_announcement.png}\\
 		\small{\textit{Service announcement and discovery}}
 	\end{center}
 	
@@ -208,21 +207,20 @@
 	\bigbreak
 
 	TequilaAPI is used by the client's application to manage the connection and for diagnostic operations.\\
-	Mysterium developed a desktop client written using Electron, which uses the TequilaAPIs.\\
-	The node is also available as a ready-to-use Docker image and published on the Docker Hub.\\
+	Mysterium developed a desktop client written using Electron, which uses the TequilaAPIs. The node is also available as a ready-to-use Docker image and published on the Docker Hub.\\
 	On the mobile side, Mysterium is present with its multiplatform app that works only as a client.\\
 	
 	\bigbreak
 
 	\subsubsection{Technical description}
-	We have chosen the Linux platform and OpenVPN as the VPN application, but similar considerations can be made with different configurations.\\
+	We have chosen the Linux platform and OpenVPN as the VPN application to describe the technical aspect, but the same conclusion can be reached with different configurations.\\
 	When the Mysterium application starts, it calls OpenVPN, which sets up its network environment. OpenVPN creates a virtual network device used to encrypt and decrypt the traffic. These devices reside in the kernel and are entirely virtual, which means there is no hardware on their back.\\
 	They can be of two types, TAP or TUN.\\
 	The TAP type is used to simulate a link layer device, which means the corresponding ISO model level it refers to is number two. Therefore, a TAP interface handles the transmission of the data frames between two nodes on the same physical layer. The behavior is equal to a bridge device: to connect two separates networks as if they were one.\\
 	On the other hand, the TUN type is, in the ISO model, one layer above, working at level three. A TUN interface handles packets, such as Internet Protocol packets. The main functions include port forwarding, host addressing, and traffic control, for example. The behavior is, in this case, equal to a router device: to connect two separates networks allowing their communication but keeping them independent.\\
 	Usually, the TUN type is the most used, since the TAP type brings some limitations such as it cannot be used with Android or iOS devices, causes higher overhead on the VPN tunnel, and scales poorly.\\
 	The following schema describes an example of a scenario where the network has two ethernet cards, one public and one internal.\\
-	The virtual TUN interface created by OpenVPN is \lstinline{tun0}, the public interface is \lstinline{eth0}, and the internal interface is \lstinline{eth1}.\\
+	As described in the following picture, the virtual TUN interface created by OpenVPN is \lstinline{tun0}, the public interface is \lstinline{eth0}, and the internal interface is \lstinline{eth1}.\\
 
 	\bigbreak
 	\begin{center}
@@ -230,9 +228,9 @@
 		\small{\textit{OpenVPN routing setting}}
 	\end{center}
 	\bigbreak
-	When a packet arrives at the \lstinline{eth1} interface, OpenVPN picks it up, decrypts, and sends the data to the\lstinline{tun0} interface. The \lstinline{iptables} and the routing engine filter and masquerade the packet and send it to\lstinline{eth0}, where it becomes available to the final receiver.\\
+	When a packet arrives at the \lstinline{eth1} interface, OpenVPN picks it up, decrypts it, and sends it to the \lstinline{tun0} interface. The \lstinline{iptables} and the routing engine filter and masquerade the packet and send it to \lstinline{eth0}, where it becomes available to the final receiver.\\
 	In the other direction, when the packet arrives at \lstinline{eth0} interface, \lstinline{iptables} and the routing engine apply their rules to filter and masquerade, and then they forward it to \lstinline{tun0} interface. Thus, OpenVPN picks it up, encrypts the data, and sends it to the public \lstinline{eth1} interface.\\
-	In our scenario, the network configuration is slightly different and does not include an internal interface network. As the schema below describes, OpenVPN sends the traffic coming from \lstinline{tun0} to the public interface\lstinline{eth0} on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
+	In our scenario, the network configuration is slightly different and does not include an internal interface network. OpenVPN sends the traffic coming from \lstinline{tun0} to the public interface \lstinline{eth0} on a specific port. The client application listens on that port, and the OpenVPN client decrypts the received data.\\
 	\bigbreak
 
 	\begin{center}
@@ -244,7 +242,8 @@
 	There are two ways to start a Mysterium node. The first one is using the Docker image: Docker is a platform that uses the OS virtualization to deliver software in packages called containers. The image contains all the specifics that the application requires to be executed.\\
 	From the software image, Docker creates as many containers as we instantiate, and they are the virtualized software we will use.  We can think of the software image as the house project and the software container as the real house construction. As the house construction can have personalizations, either the container is set up passing parameters to customize the network, the storage, or other settings such as the resources allocated by Docker to the single container.\\
 	\bigbreak
-	With the following command, we pull the image of the Mysterium node to the Docker platform:
+	With the following command, we pull the image of the Mysterium node from the Docker platform:\\
+	\bigbreak
 	\begin{lstlisting}[frame=single]
 		docker pull mysteriumnetwork/myst
 	\end{lstlisting}
@@ -328,7 +327,7 @@
 
 	\bigbreak
 	\begin{center}
-		\includegraphics[width=\linewidth]{images/iptables_hooks.png}
+		\includegraphics[width=\linewidth]{images/iptables_hooks.png}\\
 		\small{\textit{Hooks in the internal network stack}}
 	\end{center}
 	\bigbreak
@@ -377,10 +376,10 @@
 	The action called target, which is triggered if the rule matches, can be of terminating or non-terminating type.\\
 	The terminating type target causes the packet to exit the chain after a verdict that can be to allow or to drop the packet. The non-terminating type target causes the packet to continue its evaluation in the chain. There can be any number of non-terminating targets before a terminating one.\\
 	A very used non-terminating target is the jump action: a rule can decide to jump a packet into another chain, and when that chain finishes the rules check, the execution comes back to the previous chain. This way is useful to organize the rules in chains based on their purposes.\\
+	
 	\bigbreak
-
 	\begin{center}
-		\includegraphics[width=\linewidth]{images/iptables_jump_chains.png}
+		\includegraphics[width=\linewidth]{images/iptables_jump_chains.png}\\
 		\small{\textit{The \lstinline{iptables} jump rule}}
 	\end{center}
 	\bigbreak
@@ -408,7 +407,10 @@
 	We consider secure the traffic passing through the VPN tunnel because it is encrypted, not secure otherwise, that is from the provider to the internet.\\
 
 	\bigbreak
-	SIMPLE NETWORK CONFIGURATION WITH AN EXIT NODE\\
+	\begin{center}
+		\includegraphics[width=1\linewidth]{images/client_server_vpn_connection2.png}\\
+		\small{\textit{The VPN connection between a consumer and a provider}}
+	\end{center}
 	\bigbreak
 
 	The exit nodes connect two areas with two different security levels: for this reason, it is sensitive by default and without specific precautions can be the weak link of the system.\\
@@ -417,21 +419,14 @@
 	\bigbreak
 	Dan Egerstad is a Swedish computer security consultant. He intercepted thousands of diplomatic emails setting up malicious exit nodes around the world and sniffing the connection between them and the clear internet \cite{exitnodeTOR}.\\
 	To discover malicious nodes in the Tor network, another Swedish researcher built up a website with a login and a system to count the login attempts. Then, he used multiple Tor paths with different exit nodes to access the page. The system counted more login attempts that the researcher have done: this means some exit nodes sniffed the connections, caught the username and password, and tried to login by themselves \cite{exitnodeTOR2}.\\
-	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role because there still are many protocols and applications that do not use encryption for their traffic.\\
+	In both cases, the use of HTTP instead of HTTPS, or of other unencrypted protocols, has been necessary, but the research aim was to demonstrate the exit nodes' critical role: there still are many protocols and applications that do not use encryption for their traffic.\\
 	The conclusion is that Tor's end nodes are the weak link of the system when the users use it as an end-to-end encryption network, rather than an anonymization network, as well as Mysterium Network end nodes.\\
 	For this reason, many of the conceptual vulnerabilities held by the exit node of Tor can be applied to a Mysterium Network exit node. But we want to point out a difference between Tor and Mysterium networks: the type of target users of the two projects.\\
 	The Tor's users use it to accomplish specific online activities where the identity obfuscation is mandatory. For the rest of the actions, Tor is not efficient, can be blocked by ISP and, in some countries, is even banned.\\
-	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume a persistent connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet and the capability to have a device connected all the time with the VPN network provides a security level not yet implemented for consumer uses.\\
-	This scenario, however, introduces move vulnerabilities simply because the network is used for more activities, and many protocols and applications still use unencrypted communication.\\
-
+	The Mysterium Network users, instead, use it for a broader range of online activities, and we can assume a persistent connection to the VPN network with almost no impact on the user's system. In this direction, the implementation of the mobile app is crucial: smartphones are becoming the first device from where people access the internet. The capability to have a device connected all the time with the VPN network provides a desirable security level for consumer uses.\\
+	This scenario, however, introduces more vulnerabilities simply because the network is used for more activities, and many protocols and applications still use unencrypted communication.\\
+	In conclusion, the provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in Craftberry chapter.\\
 	\bigbreak
-	\begin{center}
-		\includegraphics[width=1\linewidth]{images/client_server_vpn_connection2.png}
-		\small{\textit{The VPN connection between a client and a server}}
-	\end{center}
-	\bigbreak
-	
-	The provider manages all the traffic from the VPN tunnel, both incoming and outgoing, and because it has not the VPN encryption, he can potentially perform all the manipulation he wants. We will discuss further this scenario analyzing the technical solutions and providing a practical example to exploit in Craftberry chapter.\\
 	An improved configuration implies one or more middle points between the consumer and the provider. Those points are called hops, and they act similarly to the provider node since they forward the traffic.\\
 	Mysterium did not implement those hops in the network yet. Therefore we make a hypothesis on its possible implementation.\\
 	As well as for the provider nodes, we can suppose there is a distributed list of the forwarder nodes. When the consumer chooses the provider, and they agree to issue a payment promise, the network picks a node from that list to place it as the hop. The middle node receives a new VPN connection from the consumer and creates a new VPN connection to the provider. He technically builds and manages two different VPN tunnels: it takes encrypted data from one side, decrypts them, and encrypts again to send on the other one.\\
@@ -439,19 +434,25 @@
 	The following picture well describes the situation with even more than one hop. We would have a segmented connection, called multihop connection, between the ends, where all the hops can perform unwanted operations on the traffic.\\
 	
 	\bigbreak
-	IMAGE OF MULTIHOP CONNECTION.\\
+	\begin{center}
+		\includegraphics[width=1\linewidth]{images/client_server_vpn_multihop_connection.png}\\
+		\small{\textit{A multihop connection a consumer and a provider}}
+	\end{center}
 	\bigbreak
-	
+
 	Mandatory would be an additional encryption layer end to end, over the VPN encryption between each node, that the consumer and provider have to manage. This second encryption solves the multihop data exposing because the middle nodes would manage only data encrypted by the second layer. The cons are that it increases the computational load.\\
 
 	\bigbreak
-	IMAGE OF MULTIHOP CONNECTION WITH E2E encryption.\\
+	\begin{center}
+		\includegraphics[width=1\linewidth]{images/client_server_vpn_multihop_connection_e2e_enc.png}\\
+		\small{\textit{A multihop end-to-end encrypted connection}}
+	\end{center}
 	\bigbreak	
 
 	The vulnerabilities, in this scenario, are restricted to all the operations that concern the traffic shape, with no abilities to understand it. These actions hit the quality of service, a class of attacks that aim to lower or even block the service.\\
 	Many traffic shapes operations can be performed on a connection: the simplest and the fastest is on the traffic speed, and it does not need to understand the content at all.\\
 	\bigbreak
-	A demonstration of how a middle node can slow down the data speed that it forwards, is using a Linux package called \lstinline{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
+	A demonstration of how a middle node can slow down the data speed that it forwards, is given using a Linux package called \lstinline{tc} \cite{tc}. It stands for Traffic Control, and it is created and used for service quality analysis.\\
 	With the following command, we instruct the network manager to apply a delay of 500 milliseconds for every packet sent to the interface \lstinline{eth0}.\\
 	
 	\begin{lstlisting}[frame=single]
@@ -463,7 +464,7 @@
 		\item \lstinline{qdisc}: modify the scheduler (also known as queuing discipline)
 		\item \lstinline{add}: add a new rule
 		\item \lstinline{dev eth0}: rules will be applied on device\lstinline{eth0}
-		\item \lstinline{root}: modify the outbound traffic scheduler (aka known as the egress qdisc)
+		\item \lstinline{root}: modify the outbound traffic scheduler (as known as the egress qdisc)
 		\item \lstinline{netem}: use the network emulator to emulate a WAN property
 		\item \lstinline{delay}: the network property that is modified
 		\item \lstinline{500ms}: introduce delay of 500 ms
@@ -475,10 +476,10 @@
 		sudo tc qdisc del dev eth0 root netem
 	\end{lstlisting}
 
-	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose it is a packet path issue and can propose to the network to change one or more middle nodes. 
+	In this simple way, the traffic speed between the consumer and the provider has a poor quality because one or more middle points are performing this slowing down the operation. From the consumer side, the poor connection is a quality agreement breach, and it affects the service provider's reputation. Since the provider can detect the slow speed, he can suppose the issue is given by the packet path and can propose to the network to change one or more middle nodes. 
 
 	\subsubsection{The flow steps}
-	The first and easiest idea to implement to use the system maliciously has already been presented before: the attacker is the consumer, he creates an account in the Mysterium Network having a positive balance to the cryptocurrency wallet, and then he looks for a service proposal. They agree on the service cost and issue a payment promise. If the consumer does not respect the promise, the result will be registered in the blockchain. In the same way, if the producer alters the service agreement. Therefore, the blockchain is the reputation book of the network, where every user, consumers or providers, can check the other users' reputation. The reputation implementation in this kind of network is an open point.
+	The first and easiest idea to implement to use the system maliciously has already been presented in the introduction: the attacker is the consumer, he creates an account in the Mysterium Network having a positive balance to the cryptocurrency wallet, and then he looks for a service proposal. They agree on the service cost and issue a payment promise. If the consumer does not respect the promise, the result will be registered in the blockchain. In the same way, if the producer alters the service agreement. Therefore, the blockchain is the reputation book of the network, where every user, consumers or providers, can check the other users' reputation. The reputation implementation in this kind of network is an open point.
 	
 	\subsubsection{Operations on the passing data}
 
@@ -535,12 +536,10 @@
 	\subsubsection{Side channels attack and particular scenarios}
 	In this section, we discuss the possible scenarios that do not directly regard attacks on specific components, but more on how these harmless operations in Mysterium Network lead to vulnerabilities.\\
 	In Mysterium Network, the billing method is per the amount of transferred data or per time. Considering the first method, if the exit node is able to higher the volume of the traffic to the consumer, it means the exit node earns money without providing an equal service. A well-designed attack can perform the traffic shaping hiding the increase of traffic volume with network inefficiency.\\
-	In the "TCP/UDP" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using TCP and UDP protocols without the need to understand the content. A more refined attack would be modifying the packet specifically for the protocol, forcing a communication error so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
+	In the "TCP/UDP" subsection in the Craftberry tool description, we implemented an attack that uses this technic to make multiple copies of the packets using TCP and UDP protocols without the need to understand the content. A more refined attack would be modifying the packet specifically for the used protocol, forcing a communication error so that the protocol corrects it. In this document, we did not focus on those particular cases which are deeply protocol dependent, but the modification aims to increase the transmitted data because the bill is calculated on that.\\
 	\bigbreak
 
 	A considerable number of informatic attacks aim to collect traffic data and then sell them to third party organizations for aggressive advertisement campaigns \cite{VPNsellData}. In this perspective, the capability of an exit node to be able to sniff the web requests, as we demonstrated in the previous subsection, make the network vulnerable to this attack.\\
-
-
 
 	\newpage
 	\section{Craftberry}
@@ -555,7 +554,7 @@
 	We propose part of the output provided by the application when the help command is used:
 	\begin{itemize}
 		\item \lstinline{-a}: Use the specified action
-		\item  \lstinline{-i}: Use the specified interface,tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
+		\item  \lstinline{-i}: Use the specified interface, tun0 by default. Can be interface name (e.g. eth0) or interface IPv4 address
 		\item  \lstinline{-t}: Use the specified timeout in seconds, if not defined it runs until some external signals stop the execution (e.g. ctrl+c)
 		\item  \lstinline{-l}: Write all the crafted and generated traffic into a \lstinline{pcapng file} having name passed by parameter or, if the parameter is equal to 'default', the name is \lstinline{out_<epoch_ms>.pcapng}
 		\item  \lstinline{-d}: Direction filtering by and perform the crafting {IN, OUT}, default = IN
@@ -571,7 +570,7 @@
 	\bigbreak
 
 	\begin{center}
-		\includegraphics[width=0.7\linewidth]{images/iso_osi_layers.jpg}
+		\includegraphics[width=0.7\linewidth]{images/iso_osi_layers.jpg}\\
 		\small{\textit{The ISO/OSI model}}
 	\end{center}
 
@@ -590,15 +589,19 @@
 	\subsection{nfqueue extension}
 	NFQUEUE is a kernel and user mode module for managing network packets in iptables. It allows writing \lstinline{Netfilter} target modules in userspace. This module is an application that is called by \lstinline{nfqueue} hooks. In the program, the hooks are bounded to a function that is called when the iptables match a rule.\\
 	The function gets the queue details and the packet payload, it can craft the packet, and then send a verdict to the iptables module. 
+	
 	\bigbreak
-
-	FLOW OF THE PACKET (CATCHING, CRAFTING AND THEN VERDICTING IT)
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/nfqueue_flow.png}\\
+		\small{\textit{Flow of the packet}}
+	\end{center}
+	\bigbreak
 
 	\subsection{PcapPlusPlus}
 	It is a multiplatform C++ library for capturing, parsing, and crafting of network packets. As major features, there are that it is designed to be efficient, powerful, and easy to use. It is a wrapper for the most popular packet processing engines making easy decoding and forging a large variety of network protocols.
 
 	\subsection{Software Architecture}
-	Craftberry has an architecture composed of four components: the first one is the \lstinline{main} function that sets up the \lstinline{iptables} rules, register the callback function to get the captured packet, and manages the \lstinline{cli} parameters. The second one is the callback function, the core of the application, that takes the captured packets and calls the corresponding action to execute on it. The third component includes all the methods that implement the attack or defense mechanisms. All of them belong to the \lstinline{Action} namespace. The fourth component is a class, called \lstinline{Configuration}, which includes the functions to collect statistics on the elaborated data, and to manage the \lstinline{tun0} network interface. It also implements auxiliary functions for the application.\\
+	Craftberry has an architecture composed of four components: the first one is the \lstinline{main} function that sets up the \lstinline{iptables} rules, register the callback function to get the captured packet, and manages the \lstinline{cli} parameters. The second one is the callback function, the core of the application, that takes the captured packets and calls the corresponding action to execute on them. The third component includes all the methods that implement the attack or defense mechanisms. All of them belong to the \lstinline{Action} namespace. The fourth component is a class, called \lstinline{Configuration}, which includes the functions to collect statistics on the elaborated data, and to manage the \lstinline{tun0} network interface. It also implements auxiliary functions for the application.\\
 
 	\subsubsection{The main function}
 
@@ -728,7 +731,7 @@
 	The function also collects data for the statistics.
 	\bigbreak
 
-	The \lstinline{Configuration} class also contains the \lstinline{makeIptableCmd} function to add or remove the rule to the \lstinline{iptables} list. It composes the bash command string and then calls the \lstinline{system()}function to execute the command. The function builds the string depending on the adding deleting action passed by the function caller.\\
+	The \lstinline{Configuration} class also contains the \lstinline{makeIptableCmd} function to add or remove the rule to the \lstinline{iptables} list. It composes the bash command string and then calls the \lstinline{system()} function to execute the command. The function builds the string depending on the actions passed by the function caller and the direction of the packets to capture.\\
 	
 	\bigbreak
 
@@ -753,7 +756,7 @@
 	\end{lstlisting}
 	\bigbreak
 
-	In a scenario where Craftberry is executed two times, once capturing the incoming traffic and then capturing the outgoing traffic, we use the \lstinline{--queue-num nfqueue} parameter to bind the queue with the Craftberry execution. Therefore, the queue number is defined by the packet capturing direction.
+	In a scenario where Craftberry is executed two times, once capturing the incoming traffic and once capturing the outgoing traffic, we use the \lstinline{--queue-num nfqueue} parameter to bind the queue with the Craftberry execution. Therefore, the queue number is defined by the packet capturing direction.
 
 	\subsection{Actions}
 
@@ -846,24 +849,13 @@
 	The ultimate goal is to perform aggressive advertisement campaigns.\\
 	\bigbreak
 
-	As further action implementation, we made a web filter. The method checks the HTTP request and drops the packets that match the blocked URL.
-	
-	\begin{itemize}
-		\item http://linux-training.be/networking/ch14.html
-	\end{itemize}
-
-	\begin{verbatim}
-		http://unixwiz.net/techtips/gnu-c-attributes.html
-		https://groups.google.com/forum/#!msg/pcapplusplus-support/e7rN93LfTSg/MFnVEKCNCAAJ
-		https://byt3bl33d3r.github.io/using-nfqueue-with-python-the-right-way.html
-	\end{verbatim}
+	As further action implementation, we made a web filter. The method checks the HTTP request and drops the packets that match the blocked URL. The action in the Craftberry application is called \lstinline{HTTPBLOCK}.
 
 	\subsubsection{Cipher}
 
-	This action is a conceptual proposal of a defense mechanism to protect the traffic. The idea is to use a fast and efficient cipher algorithm, such as Salsa20, to encrypt all the outgoing content and decrypt all the incoming content. The encryption operation is performed on the TCP payload. It expects to dialog with another cipher/decipher entity positioned at the service provider point or on another server that can be reached outside the VPN tunnel.\\
+	This action is a conceptual proposal of a defense mechanism to protect the traffic. The idea is to use a fast and efficient cipher algorithm, such as Salsa20, to encrypt all the outgoing content and decrypt all the incoming content. The encryption operation is performed on the TCP payload. It expects to dialog with another cipher/decipher entity positioned on the service provider point or on another server that can be reached outside the VPN tunnel.\\
 	\bigbreak
-	immagine della connessione di due nodi con uno che cifra e la possibile posizione del decifrante.
-	\bigbreak
+
 	\subsection{Tests}
 		Following, we show a complete example of execution.\\
 		The input specifies the action to block the outgoing HTTP requests.
@@ -947,32 +939,43 @@
 		\bigbreak
 		We implement a prototype of this last solution.\\
 		Currently, Mysterium Network does not support connection to many exit nodes at the same time; only one VPN tunnel is supported. Therefore, we used Docker to run two instances of the Mysterium client mapped on two different ports. Then, using a bash script, we requested the same resource and, once obtained the data, we performed the comparison.\\
-		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used the \lstinline{MD5} function for simplicity. We do not use \lstinline{MD5} for security application, since it has been declared broken \cite{MD5hash}, but only to get a fast fingerprint of the file.\\
+		To simulate the hash function on the exit nodes, we implemented a specific action on Craftberry that transforms the content of a specific resource request to its hash value. We used the \lstinline{MD5} function for simplicity. We do not use \lstinline{MD5} for security application since it has been declared broken \cite{MD5hash}, but only to get a fast fingerprint of the file.\\
+	
 		\bigbreak
-		IMMAGINE DELLA ARCHIETTURA (docker +  multi instance + requests + nodes + hash func + resources)
-		\bigbreak
-		Codice bash
+		\begin{center}
+			\includegraphics[width=0.7\linewidth]{images/comparing_data_architecture.png}\\
+			\small{\textit{Hashes data comparison}}
+		\end{center}
 		\bigbreak
 		
-		As described, the two \lstinline{md5} hashes match: this means the exit node of the main connection did not modify the returned content.
+		As described, if the two \lstinline{md5} hashes match, it means the exit node of the main connection did not modify the returned content, yes otherwise.
 
 	\newpage
 	\section{Conclusions}
 		\subsection{Future development}
 			There are two future development paths the Craftberry application can take: the first one regards the implementation of other attack or defense mechanisms to extend the possible scenario where Craftberry can act. The second one, for us the most interesting, regards the enhancement of specific attacks. For instance, the TCP/UDP packet multiplication could be refined and improved to exploit the end node critical role fully.\\
-			If the Craftberry application becomes popular in the Mysterium Network community, many other scenarios could take place: for instance, a coordinated attack of all node against a specific server or network can lead to distributed denial of service, acting as a botnet.\\
+			If the Craftberry application becomes popular in the Mysterium Network community, many other scenarios could take place: for instance, a coordinated attack of all nodes against a specific server or network can lead to distributed denial of service, acting as a botnet.\\
+			\bigbreak
+			Another branch of future development regards the reputation systems that a network, like Mysterium Network, could integrate to improve the users' management inside the network.
 
 			\subsection{Considerations}
-			At the end of this research, we can say that the Mysterium Network is a promising solution to keep safe our online identities and protect our browsing. Nevertheless, the vulnerabilities we analyzed make the product not mature enough to be used commercially.\\
-			The level of security we currently have to protect us browsing or for online activities is not sufficient. Projects like Mysterium Network are necessary to enhance it. Our motivations behind the study of Mysterium Network are to expose its weak side so they can be patched and the project improved. For this reason, Craftberry wants to be a demonstrative tool, and we do not suggest or encourage its use for any usage apart from the research one.
+			At the end of this research, we can say that the Mysterium Network is a promising solution to keep safe our online identities and protect our browsing. Nevertheless, the vulnerabilities we analyzed make the product not mature enough to be used commercially, in our opinion.\\
+			The level of security we currently have to protect us browsing or for online activities is not sufficient. Projects like Mysterium Network are necessary to enhance it. Our motivations behind the study of Mysterium Network are to expose its weakness so they can be patched for a final improvement of the project. For this reason, Craftberry wants to be a demonstrative tool, and we do not suggest or encourage its use for any usage apart from the research one.
 			
 			\bigbreak
 
-			For what concerns our demonstrative tool, a significant milestone has been reached: the technical solution to use Netfilter Queue Library to capture the inline packets and PcapPlusPlus to parse them. The Craftberry application represents a working example of how the two technologies can work together.
+			For what concerns our demonstrative tool, a significant milestone has been reached: the technical solution to use Netfilter Queue Library to capture the inline packets and PcapPlusPlus to parse them. The Craftberry application represents a working example of how the two technologies can work together.\\
+			Furthermore, Craftberry is the first tool that interacts with the Mysterium Network project in the community, and we hope it can be the starting point for other projects.  
 
 			\bigbreak
 
-			Mysterium Network
+			This research is the result of a long work on the Mysterium Network project. It has changed several times from its born until now, forcing us to adapt to it. Therefore, we can not assure the conclusions we reached here will be valid in the future. For some of them, we hope they will not, meaning the project improved its design.\\
+			In conclusion, we reached most of the goals defined at the beginning of the work. The reputation systems analysis we wanted to include in this research has not been covered because it would have changed the focus of the study.
+
+	\pagebreak
+
+	{\bfseries\Large Thanks}\\
+	to me, myself, and whom I see in the morning when I look at the mirror.
 
 	\pagebreak
 
